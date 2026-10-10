@@ -10,7 +10,7 @@
       "orcid": "0009-0001-2589-347X"
     }
   ],
-  "version": "0.2.7",
+  "version": "0.2.8",
   "language": "eng",
   "description": "Agentic systems that perform delegated work also need a controlled way to change the concepts and capabilities on which that work depends. This paper proposes a reference architecture organized around DEVELOP, OPERATE, and IMPROVE, coordinated by a durable orchestration layer. Its central unit of deployment is an immutable operating bundle binding executable capabilities to a versioned semantic snapshot, authority policy, evaluation suite, and state compatibility contract. Operational observations challenge the approved model through discrepancy reports, candidate ontology branches, capability development, independent validation, and explicit promotion. The architecture specifies lifecycle transitions, typed handoff contracts, semantic impact obligations, and deployment fencing. A worked example shows how an ontology change can broaden an action's eligibility without changing policy text, while an independent action gate blocks the prohibited effect. Drawing on autonomic computing, runtime models, ontology evolution, and governed capability deployment, the paper connects semantic release identity to authority review and distributed action enforcement. A conditional invariant argument characterizes release integrity, action coherence, and proposal isolation under stated trust assumptions. The contribution is an architectural synthesis supported by illustrative schemas and a falsifiable evaluation design; operational effectiveness and the additional value of ontology-based controls remain unevaluated.",
   "keywords": [
@@ -34,7 +34,7 @@
   "rights_status": "Paper licensed under CC BY 4.0; other supplementary material retains the separate rights specified in RIGHTS.md",
   "files": [
     "paper.pdf",
-    "orchestrator-lifecycle-0.2.7-source.zip"
+    "orchestrator-lifecycle-0.2.8-source.zip"
   ],
   "doi": null,
   "format_note": "Manual Zenodo UI field guide, not a deposit API payload",

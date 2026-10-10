@@ -2,7 +2,7 @@
 title: 'The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems'
 author: "Timothy O'Brien"
 orcid: 'https://orcid.org/0009-0001-2589-347X'
-version: '0.2.7'
+version: '0.2.8'
 date: '10 October 2026'
 lang: en-US
 abstract: |
@@ -97,15 +97,25 @@ The maintenance model might define `Machine`, `Location`, and `locatedIn`. The a
 
 ## A semantic snapshot includes its interpretation
 
-Let an identified semantic snapshot be
+An orchestrator must be able to establish which definitions and rules supported an operational decision. In the maintenance example, deciding whether a reset affects one machine or several depends on the model of machines and controllers, imported equipment definitions, and the rules used to identify affected assets. A *semantic snapshot* records these interpretation dependencies as one fixed package:
 
-$$S=(O,I,H,R,M),$$
+$$S=(O,I,H,R,M).$$
 
-where $O$ is the ontology root; $I$ is its transitive, pinned import closure; $H$ is a set of validation shapes; $R$ identifies the entailment regime, reasoner implementation, and configuration; and $M$ contains additional rules, mappings, units, and interpretation conventions needed by consumers. The registry resolves this tuple to immutable bytes and a manifest digest $h_S$. A Git commit of $O$ alone does not identify $S$ if an imported URL resolves differently tomorrow.
+Each component has a specific operational purpose:
 
-A hash identifies bytes, not equivalence of meaning. Two serializations may encode equivalent axioms while producing different byte hashes. Conversely, an unchanged ontology file may yield different answers after a reasoner or mapping change. A reproducible packaging format must fix file identities, ordering, digest algorithms, and import resolution. RDF dataset canonicalization can normalize serialization differences and blank-node identifiers; it does not establish logical equivalence between different axiom sets. The canonicalization algorithm and configuration must themselves be identified. [W3C RDF Dataset Canonicalization](https://www.w3.org/TR/rdf-canon/).
+- **$O$: the main ontology.** This defines the domain concepts and relationships, such as `Machine`, `Controller`, and `controlledBy`. These definitions determine what the system can represent when assessing a maintenance task.
+- **$I$: all imported definitions, at fixed versions.** Suppose the maintenance ontology imports an equipment model, which in turn imports a control-device model. Both dependencies belong in $I$. Following imports until every dependency is included produces the *transitive import closure*; *pinned* means that each dependency is fixed to an identified version and content hash. The orchestrator therefore uses the same definitions that were reviewed with the release.
+- **$H$: validation requirements for represented data.** A validation *shape* specifies conditions that selected records must satisfy. For example, a proposed reset might require a named target and an authorization reference for each asset recorded as affected. These checks help the orchestrator identify incomplete proposals before action admission; the action gateway must still verify that each authorization is valid and sufficient.
+- **$R$: the inference rules and software used to apply them.** An *entailment regime* specifies which conclusions follow from the recorded facts and definitions. If every shared controller is a controller, and C1 is recorded as a shared controller, the system can infer that C1 is a controller. The snapshot identifies the reasoning software and its configuration so that evaluation and operation apply the same inference semantics.
+- **$M$: additional interpretation rules and conventions.** These include mappings from equipment codes to domain concepts, measurement units, and application rules. A rule that treats machines controlled by C1 as potentially affected by resetting C1 belongs here if it is not already expressed in the ontology. Changing that rule changes the scope the orchestrator must assess.
 
-OWL entailment and data validation answer different questions. Under open-world reasoning, missing assertions do not generally establish falsity. Some restrictions allow the existence of an unnamed value without showing a stored field is populated. SHACL checks graph conformance under specified targets, constraints, and an explicit entailment setup; conformance is not proof of domain truth. The bundle must state whether shapes examine asserted data, an inferred graph, or another declared view. Reasoner timeout, unsupported semantics, or unknown outcomes cannot be converted into a successful check. [W3C OWL 2 Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/); [W3C SHACL](https://www.w3.org/TR/shacl/).
+The registry stores the exact files for these components and a *manifest*: an inventory of their identifiers, content hashes, and required configurations. A content hash is a computed fingerprint used to detect changes in a file. The manifest's own hash, $h_S$, identifies the assembled snapshot; evaluation reports and release approvals can refer to this identifier. Keeping the main ontology in Git is insufficient if its dependencies are fetched afresh from changing web addresses. For example, an updated equipment model could classify a previously independent device as a shared controller while the main ontology remains unchanged. Retaining the reviewed dependency files prevents that unreviewed substitution.
+
+File identity and meaning require separate checks. Two files can both state that M17 is controlled by C1, but use different statement ordering or file formats and therefore have different hashes. Conversely, an unchanged model can produce different affected-asset lists if its inference software or equipment-code mapping changes. The package must identify these dependencies and specify how its manifest and hashes are constructed, including any canonicalization algorithm and configuration. RDF dataset canonicalization supplies a standard representation for hashing equivalent graph structures. It does not determine whether different domain rules lead to equivalent operational conclusions; that requires semantic evaluation. [W3C RDF Dataset Canonicalization](https://www.w3.org/TR/rdf-canon/).
+
+Inference and validation also serve different purposes. Under OWL's open-world semantics, the absence of a recorded second machine on C1 does not establish that no second machine exists. Similarly, a model stating that every machine has a controller does not supply the controller's identity in a maintenance record. A SHACL validation shape can require that identity to be present before a reset proposal proceeds. The snapshot must specify whether validation examines directly recorded facts, facts supplemented by inference, or another defined view: a controller classification inferred under $R$ may satisfy a check that would fail on the recorded facts alone. [W3C OWL 2 Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/); [W3C SHACL](https://www.w3.org/TR/shacl/).
+
+For the orchestrator, these distinctions determine whether a proposal has the information required for assessment. Passing validation establishes compliance with the stated data requirements, not that the equipment model is accurate or that the reset is authorized. Evidence assessment and authority checks remain necessary. If required reasoning times out, uses unsupported rules, or returns an unknown result, the affected proposal remains unvalidated and must be held or escalated under the declared policy. A failed check cannot become permission to act.
 
 ## What counts as an unfamiliar situation?
 
@@ -122,7 +132,7 @@ The question "What happens when the system encounters something that cannot be r
 
 Table: Discrepancy classes and their initial operational dispositions.
 
-An unusual value or a failed procedure is not by itself evidence of a missing concept. A suspected conceptual gap is a defeasible diagnosis: bad data, a poor mapping, ambiguous language, or an unavailable procedure can explain the same symptom. OPERATE can detect residual patterns, validation failures, unexplained tool outcomes, and uncertainty, but cannot reliably recognize everything outside its representational vocabulary. Free text and raw evidence therefore remain available alongside typed fields. Reporting channels must allow "unclassified" rather than forcing every challenge into the very categories under challenge.
+An unusual value or a failed procedure is not by itself evidence of a missing concept. A suspected conceptual gap is a provisional explanation that may change as evidence is examined: bad data, a poor mapping, ambiguous language, or an unavailable procedure can explain the same symptom. OPERATE can detect residual patterns, validation failures, unexplained tool outcomes, and uncertainty, but cannot reliably recognize everything outside its representational vocabulary. Free text and raw evidence therefore remain available alongside typed fields. Reporting channels must allow "unclassified" rather than forcing every challenge into the very categories under challenge.
 
 # Governance beyond identity, access control, and workflow
 
