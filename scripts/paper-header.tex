@@ -1,0 +1,10 @@
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
+\usepackage{needspace}
+\definecolor{ink}{gray}{0.15}
+\definecolor{light}{gray}{0.96}
+\setlength{\emergencystretch}{3em}
+\setlength{\LTpre}{6pt}
+\setlength{\LTpost}{6pt}
+\AtBeginEnvironment{longtable}{\footnotesize}
+\tikzset{box/.style={draw=ink,rounded corners=2pt,fill=light,align=center,font=\footnotesize\sffamily,minimum height=10mm,inner sep=5pt},flow/.style={-{Stealth[length=2mm]},thick,draw=ink}}

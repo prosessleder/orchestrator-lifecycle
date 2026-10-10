@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "deployment_id": "deployment-42",
+  "committed_at": "2026-10-10T03:00:00Z",
+  "domain_id": "fantasy-world-a",
+  "bundle": {
+    "sha256": "sha256:eeedfb6e489cb6436f3497f605f637eb2994b07cb0d7bbcd4d5ac92f6fff916e",
+    "locator": "fixtures/operating-bundle-manifest.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "semantic_snapshot": {
+    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "locator": "fixtures/semantic-snapshot.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "deployment_epoch": 7,
+  "state_epoch": 4,
+  "control_revision": 4,
+  "predecessor_bundle_digest": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
+  "predecessor_deployment_epoch": 6,
+  "approval": {
+    "sha256": "sha256:6782aec6715b58447c2a78ae8a3ef0ce40f2e776504a863bd38fc36facdd8de8",
+    "locator": "fixtures/lifecycle-approval.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "state_preparation": {
+    "source_state_epoch": 3,
+    "prepared_state_epoch": 4,
+    "checkpoint": {
+      "sha256": "sha256:37257651805b2b0f504c076212b90a300ee5c1fdc1219fa8f7b3d456a623a764",
+      "locator": "fixture:state-migration-checkpoint",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "migration_evidence": {
+      "sha256": "sha256:51bfe062ab1a17c37fb59e6fac06a8e08f5b3d68f5a7e8b52cef341189b1920c",
+      "locator": "fixture:state-migration-evidence",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "compatible_bundle_digest": "sha256:eeedfb6e489cb6436f3497f605f637eb2994b07cb0d7bbcd4d5ac92f6fff916e",
+    "recovery_conditions": {
+      "sha256": "sha256:e7307b8d3c7d90c5a542ca84365baeb6bc75fa8c9dc61fd3db049d5d945e423e",
+      "locator": "fixture:recovery-conditions",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  },
+  "deployment_kind": "promotion",
+  "fencing_mode": "resource_checked_epoch",
+  "activation_receipts": [
+    {
+      "sha256": "sha256:2e6fa5ca5e43510dbe10359d7d79d0d623b17f6f9036ca831a6837e967644e3e",
+      "locator": "fixture:runtime-readiness-receipt",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "idempotency_key": "deploy-42",
+  "correlation_id": "change-42"
+}

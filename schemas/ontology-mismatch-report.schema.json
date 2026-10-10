@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OntologyMismatchReport",
+  "description": "Operational mismatch report. Classification and optional interpretation are provisional; reporting cannot grant authority or publish a schema change.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "report_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "context": {
+      "$ref": "common.schema.json#/$defs/ExecutionContext"
+    },
+    "observation": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "mismatch_categories": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "missing_fact",
+          "unknown_entity",
+          "contradictory_observation",
+          "constraint_violation",
+          "schema_gap",
+          "procedure_gap",
+          "unclassified"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Provisional diagnostic labels; unclassified preserves a challenge without forcing it into an existing diagnosis. A constraint violation does not itself establish a conceptual gap."
+    },
+    "diagnosis_status": {
+      "const": "provisional"
+    },
+    "failed_concepts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "insufficient_procedure_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "explanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operational_consequence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provisional_interpretation": {
+      "type": "object",
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "statement"
+      ],
+      "additionalProperties": false
+    },
+    "disposition": {
+      "$ref": "common.schema.json#/$defs/OperationalDisposition"
+    },
+    "correlation_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "created_at",
+    "context",
+    "observation",
+    "evidence",
+    "mismatch_categories",
+    "diagnosis_status",
+    "failed_concepts",
+    "insufficient_procedure_refs",
+    "explanation",
+    "operational_consequence",
+    "disposition",
+    "correlation_id"
+  ],
+  "additionalProperties": false
+}

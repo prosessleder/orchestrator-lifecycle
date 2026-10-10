@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OntologyChangeProposal",
+  "description": "Immutable proposal revision based on pinned semantics. It requests investigation/development/promotion; it does not authorize those transitions.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "proposal_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "proposal_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "proposer_principal_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "domain_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "base_bundle": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "base_semantic_snapshot": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "candidate_semantic_snapshot": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "report_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/Identifier"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "semantic_diff": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alternative_explanations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "affected_concepts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "affected_capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "affected_policies": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "affected_datasets": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "dependency_analysis": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "claim": {
+          "enum": [
+            "compatible_within_declared_scope",
+            "incompatible",
+            "undecided"
+          ]
+        },
+        "scope": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/ArtifactRef"
+          },
+          "minItems": 0
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "claim",
+        "scope",
+        "evidence",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "authority_delta": {
+      "$ref": "common.schema.json#/$defs/AuthorityDelta"
+    },
+    "migration_requirements": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "required_evaluation_plan": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "requested_development_scope": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "expected_control_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "correlation_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    }
+  },
+  "required": [
+    "schema_version",
+    "proposal_id",
+    "proposal_revision",
+    "created_at",
+    "proposer_principal_id",
+    "domain_id",
+    "base_bundle",
+    "base_semantic_snapshot",
+    "candidate_semantic_snapshot",
+    "report_ids",
+    "evidence",
+    "semantic_diff",
+    "rationale",
+    "alternative_explanations",
+    "affected_concepts",
+    "affected_capabilities",
+    "affected_policies",
+    "affected_datasets",
+    "dependency_analysis",
+    "compatibility",
+    "authority_delta",
+    "migration_requirements",
+    "required_evaluation_plan",
+    "unresolved_questions",
+    "requested_development_scope",
+    "expected_control_revision",
+    "correlation_id"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,523 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared lifecycle contract definitions",
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "ArtifactRef": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "$ref": "common.schema.json#/$defs/Digest"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Retained retrieval location; a consumer must resolve and verify these bytes rather than trust the locator."
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_commit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retention_until": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "sha256",
+        "locator",
+        "media_type"
+      ],
+      "additionalProperties": false,
+      "description": "Reference to immutable artifact bytes. Version labels are informative; SHA-256 is authoritative."
+    },
+    "ExecutionContext": {
+      "type": "object",
+      "properties": {
+        "domain_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "bundle_digest": {
+          "$ref": "common.schema.json#/$defs/Digest"
+        },
+        "semantic_snapshot_digest": {
+          "$ref": "common.schema.json#/$defs/Digest"
+        },
+        "deployment_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "principal_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "workflow_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "knowledge_read_view": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "knowledge_consistency": {
+          "enum": [
+            "exact_snapshot",
+            "transaction_watermark",
+            "bounded_staleness",
+            "best_effort"
+          ]
+        },
+        "knowledge_freshness_policy": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "context_origin": {
+          "const": "trusted_runtime"
+        },
+        "runtime_instance_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "runtime_attestation": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        }
+      },
+      "required": [
+        "domain_id",
+        "bundle_digest",
+        "semantic_snapshot_digest",
+        "deployment_epoch",
+        "state_epoch",
+        "principal_id",
+        "workflow_id",
+        "knowledge_read_view",
+        "knowledge_consistency",
+        "knowledge_freshness_policy",
+        "context_origin",
+        "runtime_instance_id",
+        "runtime_attestation"
+      ],
+      "additionalProperties": false,
+      "description": "Execution binding supplied/attested by a trusted runtime, independently checked by the gate. LLM-generated or self-reported identifiers are insufficient. The schema can only validate the claim structure."
+    },
+    "OperationalDisposition": {
+      "type": "object",
+      "properties": {
+        "affected_workflow_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "action": {
+          "enum": [
+            "continue_within_existing_authority",
+            "suspend_affected_work",
+            "escalate"
+          ]
+        },
+        "rule": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "affected_workflow_ids",
+        "action",
+        "rule",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "AuthorityDelta": {
+      "type": "object",
+      "properties": {
+        "assessment": {
+          "enum": [
+            "no_expansion_detected_in_scope",
+            "expansion_detected",
+            "undecided"
+          ]
+        },
+        "assessment_artifact": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "comparison_scope": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "new_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "removed_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "undecided_cases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "required_grant_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Identifier"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "assessment",
+        "assessment_artifact",
+        "comparison_scope",
+        "new_permissions",
+        "removed_permissions",
+        "undecided_cases",
+        "required_grant_ids"
+      ],
+      "additionalProperties": false,
+      "description": "A scope-limited semantic comparison, not a complete authorization-set decision."
+    },
+    "KnowledgeInput": {
+      "type": "object",
+      "properties": {
+        "read_view_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "snapshot_artifact": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "consistency": {
+          "enum": [
+            "exact_snapshot",
+            "transaction_watermark",
+            "bounded_staleness",
+            "best_effort"
+          ]
+        },
+        "freshness_policy": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        }
+      },
+      "required": [
+        "read_view_id",
+        "consistency",
+        "freshness_policy"
+      ],
+      "additionalProperties": false
+    },
+    "CheckResult": {
+      "type": "object",
+      "properties": {
+        "check_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "kind": {
+          "enum": [
+            "syntax",
+            "profile",
+            "logical_consistency",
+            "shape_conformance",
+            "semantic_impact",
+            "behavior_regression",
+            "authority_delta",
+            "migration",
+            "recovery",
+            "artifact_integrity",
+            "projection_sufficiency"
+          ]
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result_artifact": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "check_id",
+        "kind",
+        "status",
+        "scope",
+        "result_artifact",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "Grant": {
+      "type": "object",
+      "properties": {
+        "grant_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "issuer_principal_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "grant_artifact": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "domain_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "scope_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "grant_id",
+        "issuer_principal_id",
+        "grant_artifact",
+        "domain_id",
+        "scope_description",
+        "valid_until"
+      ],
+      "additionalProperties": false
+    },
+    "StatePreparation": {
+      "type": "object",
+      "properties": {
+        "source_state_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prepared_state_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "checkpoint": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "migration_evidence": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "compatible_bundle_digest": {
+          "$ref": "common.schema.json#/$defs/Digest"
+        },
+        "recovery_conditions": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        }
+      },
+      "required": [
+        "source_state_epoch",
+        "prepared_state_epoch",
+        "checkpoint",
+        "migration_evidence",
+        "compatible_bundle_digest",
+        "recovery_conditions"
+      ],
+      "additionalProperties": false
+    },
+    "AuthenticationMetadata": {
+      "type": "object",
+      "properties": {
+        "issuer_principal_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "authentication_method": {
+          "enum": [
+            "detached_signature",
+            "authenticated_transport",
+            "trusted_registry_record"
+          ]
+        },
+        "covered_artifact": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "coverage_specification": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "key_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "signature_artifact": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        }
+      },
+      "required": [
+        "issuer_principal_id",
+        "issued_at",
+        "authentication_method",
+        "covered_artifact",
+        "coverage_specification"
+      ],
+      "additionalProperties": false,
+      "description": "Sidecar metadata for exact payload bytes and specified signature/transport coverage. Schema validation does not authenticate the issuer, verify a signature, or establish trust. Coverage is external to avoid self-hashing a signed payload.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "authentication_method": {
+                "const": "detached_signature"
+              }
+            },
+            "required": [
+              "authentication_method"
+            ]
+          },
+          "then": {
+            "required": [
+              "key_id",
+              "signature_artifact"
+            ]
+          }
+        }
+      ]
+    },
+    "AuthenticatedEnvelope": {
+      "type": "object",
+      "properties": {
+        "payload": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "authentication": {
+          "$ref": "common.schema.json#/$defs/AuthenticationMetadata"
+        }
+      },
+      "required": [
+        "payload",
+        "authentication"
+      ],
+      "additionalProperties": false,
+      "description": "Envelope whose covered artifact must equal the payload artifact; binding and cryptographic verification are service obligations."
+    },
+    "EvidenceRead": {
+      "type": "object",
+      "properties": {
+        "evidence": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "read_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "read_view_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "state_revision": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "maximum_staleness_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "retrieval_context": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        }
+      },
+      "required": [
+        "evidence",
+        "read_at",
+        "read_view_id",
+        "state_revision",
+        "maximum_staleness_ms",
+        "retrieval_context"
+      ],
+      "additionalProperties": false,
+      "description": "Actual evidence bytes/read context used by this decision, independent of state-schema compatibility."
+    },
+    "FreshnessRevalidation": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "transactional_resource_check",
+            "resource_reservation_or_bounded_lease",
+            "no_consequential_action"
+          ]
+        },
+        "performed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "read_view_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "state_revision": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "critical_inputs": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "result": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        },
+        "resource_receipt": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        }
+      },
+      "required": [
+        "mode",
+        "performed_at",
+        "read_view_id",
+        "state_revision",
+        "critical_inputs",
+        "result",
+        "resource_receipt"
+      ],
+      "additionalProperties": false,
+      "description": "Action-time critical fact checks or reservation receipt; a compatible state schema alone is insufficient."
+    }
+  }
+}

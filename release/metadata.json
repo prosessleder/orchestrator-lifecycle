@@ -1,0 +1,43 @@
+{
+  "prepared_date": "2026-10-09",
+  "record_status": "not_submitted",
+  "resource_type": "publication-preprint",
+  "title": "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems",
+  "creators": [
+    {
+      "family_name": "O'Brien",
+      "given_name": "Timothy",
+      "orcid": "0009-0001-2589-347X"
+    }
+  ],
+  "version": "0.2.1",
+  "language": "eng",
+  "description": "Agentic systems that perform delegated work also need a controlled way to change the concepts and capabilities on which that work depends. This paper proposes a reference architecture organized around DEVELOP, OPERATE, and IMPROVE, coordinated by a durable orchestration layer. Its central unit of deployment is an immutable operating bundle binding executable capabilities to a versioned semantic snapshot, authority policy, evaluation suite, and state compatibility contract. Operational observations challenge the approved model through discrepancy reports, candidate ontology branches, capability development, independent validation, and explicit promotion. The architecture specifies lifecycle transitions, typed handoff contracts, semantic impact obligations, and deployment fencing. A worked example shows how an ontology change can broaden an action's eligibility without changing policy text, while an independent action gate blocks the prohibited effect. Drawing on autonomic computing, runtime models, ontology evolution, and governed capability deployment, the paper connects semantic release identity to authority review and distributed action enforcement. A conditional invariant argument characterizes release integrity, action coherence, and proposal isolation under stated trust assumptions. The contribution is an architectural synthesis supported by illustrative schemas and a falsifiable evaluation design; operational effectiveness and the additional value of ontology-based controls remain unevaluated.",
+  "keywords": [
+    "agentic systems",
+    "ontology evolution",
+    "self-adaptive systems",
+    "semantic contracts",
+    "delegated intelligence",
+    "lifecycle governance"
+  ],
+  "related_urls": [
+    "https://github.com/prosessleder/orchestrator-lifecycle",
+    "https://readorchestrator.com"
+  ],
+  "license": {
+    "id": "cc-by-4.0",
+    "title": "Creative Commons Attribution 4.0 International",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "scope": "Paper and its original embedded diagrams; supplementary archive contains material with separate rights, as specified in RIGHTS.md"
+  },
+  "rights_status": "Paper licensed under CC BY 4.0; other supplementary material retains the separate rights specified in RIGHTS.md",
+  "files": [
+    "paper.pdf",
+    "orchestrator-lifecycle-0.2.1-source.zip"
+  ],
+  "doi": null,
+  "format_note": "Manual Zenodo UI field guide, not a deposit API payload",
+  "funding_statement": "This research received no external funding.",
+  "competing_interests": "The author writes and publishes The Orchestrator book series, to which this paper is related. The author declares no additional competing interests."
+}

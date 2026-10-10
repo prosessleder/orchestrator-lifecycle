@@ -1,0 +1,32 @@
+{
+  "payload": {
+    "sha256": "sha256:b16018ca26d1d13738ddc49cf8ea5e5a7f1ae2a493080ab4680e629aa0d9cf6c",
+    "locator": "fixtures/decision-record.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "authentication": {
+    "issuer_principal_id": "trusted-action-gateway",
+    "issued_at": "2026-10-10T03:00:00Z",
+    "authentication_method": "detached_signature",
+    "covered_artifact": {
+      "sha256": "sha256:b16018ca26d1d13738ddc49cf8ea5e5a7f1ae2a493080ab4680e629aa0d9cf6c",
+      "locator": "fixtures/decision-record.json",
+      "media_type": "application/json",
+      "display_version": "fixture-1"
+    },
+    "coverage_specification": {
+      "sha256": "sha256:21808b48a1b4f648d603a5cd0b4c3d20031533f1337991f28b04ef3cbd83e747",
+      "locator": "fixture:exact-payload-byte-signing-specification",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "key_id": "fixture-key-1",
+    "signature_artifact": {
+      "sha256": "sha256:dadbc7fb55dc87ee0181af6ddb24471fca78437d91b40296cf88e46f63d809ce",
+      "locator": "fixture:placeholder-detached-signature",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  }
+}

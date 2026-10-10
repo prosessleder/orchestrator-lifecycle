@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeploymentRecord",
+  "description": "Committed per-domain execution binding. Controller verifies exact approval/base, compatible prepared state and monotone epoch. Physical workers can coexist, but old epochs cannot perform consequential actions.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "deployment_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "committed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "domain_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "bundle": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "semantic_snapshot": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "deployment_epoch": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "state_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "control_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "predecessor_bundle_digest": {
+      "$ref": "common.schema.json#/$defs/Digest"
+    },
+    "predecessor_deployment_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "approval": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "state_preparation": {
+      "$ref": "common.schema.json#/$defs/StatePreparation"
+    },
+    "deployment_kind": {
+      "enum": [
+        "promotion",
+        "recovery"
+      ]
+    },
+    "fencing_mode": {
+      "enum": [
+        "resource_checked_epoch",
+        "resource_checked_bounded_lease"
+      ]
+    },
+    "activation_receipts": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "idempotency_key": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "correlation_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    }
+  },
+  "required": [
+    "schema_version",
+    "deployment_id",
+    "committed_at",
+    "domain_id",
+    "bundle",
+    "semantic_snapshot",
+    "deployment_epoch",
+    "state_epoch",
+    "control_revision",
+    "predecessor_bundle_digest",
+    "predecessor_deployment_epoch",
+    "approval",
+    "state_preparation",
+    "deployment_kind",
+    "fencing_mode",
+    "activation_receipts",
+    "idempotency_key",
+    "correlation_id"
+  ],
+  "additionalProperties": false
+}

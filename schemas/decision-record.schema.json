@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DecisionRecord",
+  "description": "Trusted-runtime/gateway decision record including actual evidence read views, state revision, authenticated principal and action-time freshness check. Schemas do not verify attestations, receipts or factual truth.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "decision_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "context": {
+      "$ref": "common.schema.json#/$defs/ExecutionContext"
+    },
+    "authenticated_principal_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "actual_evidence_reads": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/EvidenceRead"
+      },
+      "minItems": 1
+    },
+    "authorization_input": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "policy_evaluation_receipt": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "policy_decision": {
+      "enum": [
+        "permit",
+        "deny",
+        "suspend",
+        "escalate"
+      ]
+    },
+    "action_request": {
+      "type": "object",
+      "properties": {
+        "action_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "target_id": {
+          "$ref": "common.schema.json#/$defs/Identifier"
+        },
+        "parameters": {
+          "$ref": "common.schema.json#/$defs/ArtifactRef"
+        },
+        "consequential": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action_id",
+        "target_id",
+        "parameters",
+        "consequential"
+      ],
+      "additionalProperties": false
+    },
+    "freshness_revalidation": {
+      "$ref": "common.schema.json#/$defs/FreshnessRevalidation"
+    },
+    "model_outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "action_outcome": {
+      "enum": [
+        "not_attempted",
+        "confirmed_success",
+        "confirmed_failure",
+        "uncertain"
+      ]
+    },
+    "outcome_evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "gateway_receipt": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "idempotency_key": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "correlation_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    }
+  },
+  "required": [
+    "schema_version",
+    "decision_id",
+    "recorded_at",
+    "context",
+    "authenticated_principal_id",
+    "observations",
+    "actual_evidence_reads",
+    "authorization_input",
+    "policy_evaluation_receipt",
+    "policy_decision",
+    "action_request",
+    "freshness_revalidation",
+    "model_outputs",
+    "action_outcome",
+    "outcome_evidence",
+    "gateway_receipt",
+    "idempotency_key",
+    "correlation_id"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action_request": {
+            "properties": {
+              "consequential": {
+                "const": true
+              }
+            },
+            "required": [
+              "consequential"
+            ]
+          },
+          "policy_decision": {
+            "const": "permit"
+          }
+        },
+        "required": [
+          "action_request",
+          "policy_decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "freshness_revalidation": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "transactional_resource_check",
+                  "resource_reservation_or_bounded_lease"
+                ]
+              },
+              "result": {
+                "const": "pass"
+              }
+            },
+            "required": [
+              "mode",
+              "result"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "policy_decision": {
+            "enum": [
+              "deny",
+              "suspend",
+              "escalate"
+            ]
+          }
+        },
+        "required": [
+          "policy_decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action_outcome": {
+            "const": "not_attempted"
+          }
+        }
+      }
+    }
+  ]
+}

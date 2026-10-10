@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "approval-42",
+  "approval_kind": "production",
+  "issued_at": "2026-10-10T03:00:00Z",
+  "valid_until": "2099-01-01T00:00:00Z",
+  "issuer_principal_id": "independent-approval-gateway",
+  "domain_id": "fantasy-world-a",
+  "candidate": {
+    "sha256": "sha256:eeedfb6e489cb6436f3497f605f637eb2994b07cb0d7bbcd4d5ac92f6fff916e",
+    "locator": "fixtures/operating-bundle-manifest.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "candidate_kind": "operating_bundle",
+  "base_bundle_digest": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
+  "expected_control_revision": 3,
+  "gate_policy": {
+    "sha256": "sha256:7b1cbcb6b9421f3920ac931bb7919f986883eb0c9af9f1d24bda21b4c54d24dd",
+    "locator": "fixture:independent-gate-policy",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "evidence": [
+    {
+      "sha256": "sha256:1c3d00637edaf18bbfbe554669addac461d306c9c160e8a4eed2d9f2bef68e8f",
+      "locator": "fixtures/validation-evidence.json",
+      "media_type": "application/json",
+      "display_version": "fixture-1"
+    }
+  ],
+  "authority_delta": {
+    "assessment": "expansion_detected",
+    "assessment_artifact": {
+      "sha256": "sha256:a2d49aff0c3efaba27d72d38e96a5b461f8796b17ac5e3cc69ca29483396adc8",
+      "locator": "fixture:authority-impact-analysis",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "comparison_scope": {
+      "sha256": "sha256:8c754ae3f20dc8c745cced73279f6afe7292a15b561661afdfbf5ef384705cc3",
+      "locator": "fixture:bounded-fantasy-target-population",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "new_permissions": [
+      "Use bounded resonance care on an independently granted spirit target."
+    ],
+    "removed_permissions": [],
+    "undecided_cases": [],
+    "required_grant_ids": [
+      "grant-resonance-care"
+    ]
+  },
+  "authorized_grants": [
+    {
+      "grant_id": "grant-resonance-care",
+      "issuer_principal_id": "world-owner",
+      "grant_artifact": {
+        "sha256": "sha256:a52681a363a69e107f734e3d693daf81d4dd769548f7c111bceb6e4a4b03134a",
+        "locator": "fixture:independent-resonance-grant",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      },
+      "domain_id": "fantasy-world-a",
+      "scope_description": "Selected spirit, bounded resonance tool and dosage.",
+      "valid_until": "2099-01-01T00:00:00Z"
+    }
+  ],
+  "scope": {
+    "sha256": "sha256:b122c3be622238087143804114c6cb142e987a8d3c1de0f8bfb8a612f5b706ba",
+    "locator": "fixture:production-approval-scope",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "budget": {
+    "sha256": "sha256:f79c52e0838b2f4f11f977c776179f9c65e1da74d7ce79d35a55d6e0d21c59aa",
+    "locator": "fixture:bounded-action-budget",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "decision": "approved",
+  "decision_record": {
+    "sha256": "sha256:8523d0c767a5b41bc03c32ebd46d2ff182c9ae2ea11acfaa8fba555497a7b533",
+    "locator": "fixture:approval-decision-receipt",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "correlation_id": "change-42"
+}

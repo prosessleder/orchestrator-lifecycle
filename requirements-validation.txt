@@ -1,0 +1,2 @@
+# Document-contract validation; not an architecture implementation.
+jsonschema==4.26.0

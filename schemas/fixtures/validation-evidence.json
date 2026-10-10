@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "evidence_id": "validation-evidence-42",
+  "evaluation_run_id": "run-42",
+  "created_at": "2026-10-10T03:00:00Z",
+  "valid_until": "2099-01-01T00:00:00Z",
+  "evaluator_principal_id": "independent-evaluation-service",
+  "domain_id": "fantasy-world-a",
+  "candidate_bundle": {
+    "sha256": "sha256:eeedfb6e489cb6436f3497f605f637eb2994b07cb0d7bbcd4d5ac92f6fff916e",
+    "locator": "fixtures/operating-bundle-manifest.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "candidate_semantic_snapshot": {
+    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "locator": "fixtures/semantic-snapshot.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "evaluation_plan": {
+    "sha256": "sha256:0027c2fc812e8176ea6238d3aa617dc18fd5cbcf631553f1dd8839d45d5dcce3",
+    "locator": "fixture:evaluation-plan",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "evaluator_build": {
+    "sha256": "sha256:d4ab3f04954e22c67a539c89007e007eba916c7e0b85100100a650ce692fad84",
+    "locator": "fixture:evaluator-build",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "evaluator_configuration": {
+    "sha256": "sha256:bb88a06f013b4c940942ded0a82442777018b9ddaaff3865f5ba4867f7e90fb7",
+    "locator": "fixture:evaluator-configuration",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "environment_specification": {
+    "sha256": "sha256:f19dfdafe78eff8b69fbcd25901f54a0856793eed37384f60c28a61271904cf5",
+    "locator": "fixture:isolated-evaluation-environment",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "knowledge_inputs": [
+    {
+      "read_view_id": "snapshot:800",
+      "snapshot_artifact": {
+        "sha256": "sha256:602eb4e8b4ecf391b2c4a607bf43f94951783f156c7282073f0b6fad2ab07be9",
+        "locator": "fixture:evaluation-knowledge-snapshot",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      },
+      "consistency": "exact_snapshot",
+      "freshness_policy": {
+        "sha256": "sha256:c488e8431e03a174fec388460f57971655579c5527de174f3d7b04828d2bc247",
+        "locator": "fixture:evaluation-freshness-policy",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      }
+    }
+  ],
+  "test_inputs": [
+    {
+      "sha256": "sha256:fa5329f59cc87d675482efe5663fdffc308b79f3e2b07108f80137e83aef70a1",
+      "locator": "fixture:adversarial-spirit-test-input",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "authority-case-42",
+      "kind": "authority_delta",
+      "status": "pass",
+      "scope": "Bounded fantasy target population with independent resonance grant.",
+      "result_artifact": {
+        "sha256": "sha256:2de6306d017488fa0348e65aee328d5dad322f9856b869f966e20f175d9653cf",
+        "locator": "fixture:authority-check-result",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      },
+      "limitations": [
+        "Illustrative fixture only; no test execution claimed."
+      ]
+    }
+  ],
+  "overall_result": "pass_within_declared_scope",
+  "authority_delta": {
+    "assessment": "expansion_detected",
+    "assessment_artifact": {
+      "sha256": "sha256:a2d49aff0c3efaba27d72d38e96a5b461f8796b17ac5e3cc69ca29483396adc8",
+      "locator": "fixture:authority-impact-analysis",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "comparison_scope": {
+      "sha256": "sha256:8c754ae3f20dc8c745cced73279f6afe7292a15b561661afdfbf5ef384705cc3",
+      "locator": "fixture:bounded-fantasy-target-population",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "new_permissions": [
+      "Use bounded resonance care on an independently granted spirit target."
+    ],
+    "removed_permissions": [],
+    "undecided_cases": [],
+    "required_grant_ids": [
+      "grant-resonance-care"
+    ]
+  },
+  "unresolved_findings": [],
+  "limitations": [
+    "Illustrative fixture, not empirical evaluation evidence."
+  ],
+  "report": {
+    "sha256": "sha256:5ada0e24ff735ba1ed2a9bad65e32398a89aec00cf6606262bc0897e9fbe33c0",
+    "locator": "fixture:evaluation-report",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "correlation_id": "change-42"
+}

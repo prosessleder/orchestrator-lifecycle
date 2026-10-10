@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "This repository contains manuscript and research artifacts. Please cite the architectural preprint using preferred-citation; add its published DOI once assigned."
+type: dataset
+title: "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems"
+version: 0.2.1
+authors:
+  - family-names: "O'Brien"
+    given-names: Timothy
+    orcid: "https://orcid.org/0009-0001-2589-347X"
+url: "https://github.com/prosessleder/orchestrator-lifecycle"
+repository-code: "https://github.com/prosessleder/orchestrator-lifecycle"
+keywords:
+  - agentic systems
+  - ontology evolution
+  - semantic contracts
+  - self-adaptive systems
+  - delegated intelligence
+  - lifecycle governance
+preferred-citation:
+  type: article
+  license: CC-BY-4.0
+  title: "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems"
+  authors:
+    - family-names: "O'Brien"
+      given-names: Timothy
+      orcid: "https://orcid.org/0009-0001-2589-347X"
+  year: 2026
+  version: 0.2.1
+  url: "https://github.com/prosessleder/orchestrator-lifecycle"

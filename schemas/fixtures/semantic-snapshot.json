@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "fantasy-semantic-candidate-1",
+  "created_at": "2026-10-10T03:00:00Z",
+  "ontology_root": {
+    "sha256": "sha256:864d1c4de67dd679d3f9d498780ee7e32793e93350fdcf94a9191a35ff50db97",
+    "locator": "fixture:ontology-root-spirits",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "resolved_imports": [
+    {
+      "logical_iri": "https://example.org/fantasy/core",
+      "artifact": {
+        "sha256": "sha256:1955c443711693d5acd6720cdf2f415fa4f1216dfcfe50d0806b19ed350058e5",
+        "locator": "fixture:locked-core-import",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      }
+    }
+  ],
+  "import_lock": {
+    "sha256": "sha256:98d211da972f13334ce086f0ee46aedc2c5b765b97e2c09b4107ff0407ff1561",
+    "locator": "fixture:import-lock",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "shapes": [
+    {
+      "sha256": "sha256:3a3edb934634fcbfaf24f05cc24ab1b72aaab8c9cdf6b327f3d8fed88a233f5e",
+      "locator": "fixture:shapes",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "shape_import_lock": {
+    "sha256": "sha256:50e0b8ad162a9ba7cf0dc72b3bc59abad169748e86f38b0c2d1c5e70a1008e63",
+    "locator": "fixture:shape-import-lock",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "language_profile": "OWL2_RL",
+  "entailment_regime": "OWL2-RL-restricted",
+  "reasoner_build": {
+    "sha256": "sha256:2be42e9a2d8a63c278f44035d499e56cfe825b38188caee0364749ea449058a2",
+    "locator": "fixture:reasoner-build",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "reasoner_configuration": {
+    "sha256": "sha256:08114edd5a2c27f19eb4c53b2c16b2eccaacda4ca95e2a03b85a08502aeed384",
+    "locator": "fixture:reasoner-config",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "rules": [],
+  "mappings": [],
+  "materialization_policy": "precomputed",
+  "semantic_query_adapter": {
+    "sha256": "sha256:dadd3fbc49e00b6a76f89b0f8b957d196cc2a9858cb81db99b505fe5a2e54c5f",
+    "locator": "fixture:query-adapter",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "unsupported_features": [
+    "No unrestricted OWL Full checking"
+  ],
+  "canonicalization_specification": {
+    "sha256": "sha256:a8cd8b8339e1c02bfba5ef37451e03eb9fb66bdb32573eb0fe6c4e7a9bf7940d",
+    "locator": "fixture:raw-bytes-no-graph-canonicalization",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  }
+}

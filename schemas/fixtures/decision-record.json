@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "decision_id": "decision-42",
+  "recorded_at": "2026-10-10T03:00:00Z",
+  "context": {
+    "domain_id": "fantasy-world-a",
+    "bundle_digest": "sha256:eeedfb6e489cb6436f3497f605f637eb2994b07cb0d7bbcd4d5ac92f6fff916e",
+    "semantic_snapshot_digest": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "deployment_epoch": 7,
+    "state_epoch": 4,
+    "principal_id": "healer-runtime",
+    "workflow_id": "care-42",
+    "knowledge_read_view": "transaction:819",
+    "knowledge_consistency": "transaction_watermark",
+    "knowledge_freshness_policy": {
+      "sha256": "sha256:325f9b0419ff60227bb7dfc958548a29ea1bfc236915d16315ccf9f5591351f5",
+      "locator": "fixture:knowledge-freshness-policy",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "context_origin": "trusted_runtime",
+    "runtime_instance_id": "runtime-a-7",
+    "runtime_attestation": {
+      "sha256": "sha256:f81169e8c357e9632fc9be5bb0d20f8a655972be845edcc0971335627e3432c5",
+      "locator": "fixture:trusted-runtime-binding-record",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  },
+  "authenticated_principal_id": "healer-runtime",
+  "observations": [
+    {
+      "sha256": "sha256:c0dd5fe85c6dcd00260b57928369bc1591d273c5e920d24eb34dd6b7bba2bca0",
+      "locator": "fixture:care-observation",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "actual_evidence_reads": [
+    {
+      "evidence": {
+        "sha256": "sha256:fd029d230d0d511850baab6447cba246be5d7aac52f9b40e9f13c68ea86edbb5",
+        "locator": "fixture:current-target-eligibility",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      },
+      "read_at": "2026-10-10T03:00:00Z",
+      "read_view_id": "transaction:819",
+      "state_revision": "819",
+      "maximum_staleness_ms": 0,
+      "retrieval_context": {
+        "sha256": "sha256:ff9dea79aa25fd7189a9c1bb64a82dd2c4bb7b24d88be1af7f759b6850ac7576",
+        "locator": "fixture:evidence-read-receipt",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      }
+    }
+  ],
+  "authorization_input": {
+    "sha256": "sha256:40a5eb7c784bbf3ca3140b58794e32f34750806af49c15ca83c4c4a4d227a534",
+    "locator": "fixture:resolved-authorization-input",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "policy_evaluation_receipt": {
+    "sha256": "sha256:c83ec34f4c5f143073a6e9ee859867446e2e056d8693c8eb28631f82a3a447ce",
+    "locator": "fixture:policy-evaluation-receipt",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "policy_decision": "permit",
+  "action_request": {
+    "action_id": "bounded-resonance-care",
+    "target_id": "echo-spirit-7",
+    "parameters": {
+      "sha256": "sha256:4f3531f0e525176112102263795a69a0a53ec40d5279efd9881a52a0e3f30984",
+      "locator": "fixture:resonance-parameters",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "consequential": true
+  },
+  "freshness_revalidation": {
+    "mode": "transactional_resource_check",
+    "performed_at": "2026-10-10T03:00:00Z",
+    "read_view_id": "transaction:820",
+    "state_revision": "820",
+    "critical_inputs": {
+      "sha256": "sha256:a4a3b69f00435a9238bafcbb3af3afcaef89f99eb9a44d006f9fff86d967a7ce",
+      "locator": "fixture:revalidated-target-eligibility",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "result": "pass",
+    "resource_receipt": {
+      "sha256": "sha256:c048b690b97babad2b521e36bfaec9d5ea851d8a45ef5d7460159543eec02500",
+      "locator": "fixture:resource-freshness-receipt",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  },
+  "model_outputs": [
+    {
+      "sha256": "sha256:f44cd3a2dadb7195dd262043299c2fb6d7f58d2d625319b25eac5bbcfb09092b",
+      "locator": "fixture:actual-model-output",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "action_outcome": "confirmed_success",
+  "outcome_evidence": [
+    {
+      "sha256": "sha256:49383bba087eff6de8f6260c81b768633d86b1eb3108a39e1a4437e9ea29461a",
+      "locator": "fixture:observed-care-result",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "gateway_receipt": {
+    "sha256": "sha256:fef82d71c4268715960eb2ad9b567b90db944fdd42f11ad37348cb39318efc74",
+    "locator": "fixture:accepted-action-receipt",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "idempotency_key": "care-42-step-1",
+  "correlation_id": "change-42"
+}

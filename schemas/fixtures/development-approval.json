@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "development-approval-42",
+  "approval_kind": "development",
+  "issued_at": "2026-10-10T03:00:00Z",
+  "valid_until": "2099-01-01T00:00:00Z",
+  "issuer_principal_id": "independent-approval-gateway",
+  "domain_id": "fantasy-world-a",
+  "candidate": {
+    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "locator": "fixtures/semantic-snapshot.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "candidate_kind": "semantic_snapshot",
+  "base_bundle_digest": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
+  "expected_control_revision": 3,
+  "gate_policy": {
+    "sha256": "sha256:7b1cbcb6b9421f3920ac931bb7919f986883eb0c9af9f1d24bda21b4c54d24dd",
+    "locator": "fixture:independent-gate-policy",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "evidence": [
+    {
+      "sha256": "sha256:caa45c4e1d470c92d1b78af3355ac29aa90921b1bb6e26d7d4e3a43b0f00f657",
+      "locator": "fixtures/ontology-mismatch-report.json",
+      "media_type": "application/json",
+      "display_version": "fixture-1"
+    }
+  ],
+  "authority_delta": {
+    "assessment": "expansion_detected",
+    "assessment_artifact": {
+      "sha256": "sha256:a2d49aff0c3efaba27d72d38e96a5b461f8796b17ac5e3cc69ca29483396adc8",
+      "locator": "fixture:authority-impact-analysis",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "comparison_scope": {
+      "sha256": "sha256:8c754ae3f20dc8c745cced73279f6afe7292a15b561661afdfbf5ef384705cc3",
+      "locator": "fixture:bounded-fantasy-target-population",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "new_permissions": [
+      "Use bounded resonance care on an independently granted spirit target."
+    ],
+    "removed_permissions": [],
+    "undecided_cases": [],
+    "required_grant_ids": [
+      "grant-resonance-care"
+    ]
+  },
+  "authorized_grants": [],
+  "scope": {
+    "sha256": "sha256:08a32307be68f501c0884c5348a2c52436915e99606d36729d74aa8b565c39b8",
+    "locator": "fixture:isolated-development-scope",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "budget": {
+    "sha256": "sha256:f79c52e0838b2f4f11f977c776179f9c65e1da74d7ce79d35a55d6e0d21c59aa",
+    "locator": "fixture:bounded-action-budget",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "decision": "approved",
+  "decision_record": {
+    "sha256": "sha256:8523d0c767a5b41bc03c32ebd46d2ff182c9ae2ea11acfaa8fba555497a7b533",
+    "locator": "fixture:approval-decision-receipt",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "correlation_id": "change-42"
+}

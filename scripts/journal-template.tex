@@ -1,0 +1,58 @@
+% Manuscript frontmatter uses the standard elsarticle class and its public API.
+% Class documentation: https://ctan.org/pkg/elsarticle
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp}
+\else
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+\fi
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{longtable,booktabs,array,calc}
+\usepackage{etoolbox}
+\usepackage{footnotehyper}
+\makesavenoteenv{longtable}
+\usepackage{xurl}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{bookmark}
+\urlstyle{same}
+\setcounter{secnumdepth}{3}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+% Suppress the submission-to-Elsevier footer present in older class releases.
+\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\makeatother
+$for(header-includes)$
+$header-includes$
+$endfor$
+\hypersetup{pdftitle={$title$},pdfauthor={$for(author)$$author$$sep$; $endfor$},
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},pdflang={en-US}}
+\begin{document}
+\begin{frontmatter}
+\title{$title$\tnoteref{preprint}}
+\tnotetext[preprint]{Preprint; not peer reviewed.
+  Version $version$, $date$.}
+$for(author)$
+\author{$author$\fnref{orcid}}
+$endfor$
+\fntext[orcid]{ORCID: \href{$orcid$}{$orcid-id$}.}
+\begin{abstract}
+\small
+$abstract$
+\end{abstract}
+\begin{keyword}
+\small
+$for(keywords)$$keywords$$sep$ \sep $endfor$
+\end{keyword}
+\end{frontmatter}
+\pagestyle{plain}
+$body$
+\end{document}

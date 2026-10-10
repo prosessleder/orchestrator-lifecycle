@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "work_order_id": "development-order-42",
+  "created_at": "2026-10-10T03:00:00Z",
+  "domain_id": "fantasy-world-a",
+  "proposal_id": "proposal-42",
+  "proposal_revision": 1,
+  "candidate_semantic_snapshot": {
+    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "locator": "fixtures/semantic-snapshot.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "base_bundle": {
+    "sha256": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
+    "locator": "fixture:approved-base-bundle",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "development_approval": {
+    "sha256": "sha256:c7f5de536b59a47e9af0aaa980500a979c25aaed893e4a595d2845883dd7d1bb",
+    "locator": "fixtures/development-approval.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "assigned_developer_principal_id": "development-service",
+  "isolated_environment": {
+    "sha256": "sha256:3e499fa9b3f5a91dc8fbbf0c824922385905e8dfc7a98f36e3780ee833a2918b",
+    "locator": "fixture:isolated-build-environment",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "allowed_tools": [
+    {
+      "sha256": "sha256:2507664b6b61ccc530c310dc1c1c05bd307d6c3842c3fb5508ab3fc54762f1b5",
+      "locator": "fixture:build-tool-schema",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "scope": {
+    "sha256": "sha256:08a32307be68f501c0884c5348a2c52436915e99606d36729d74aa8b565c39b8",
+    "locator": "fixture:isolated-development-scope",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "budget": {
+    "sha256": "sha256:71002a81f151e25657828a2c40537f5a8cfc206f2498390c346dd054aaefd588",
+    "locator": "fixture:build-budget",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "required_capability_outputs": [
+    "resonance-care"
+  ],
+  "required_migration_outputs": [
+    "anchor-link-migration"
+  ],
+  "evaluation_plan": {
+    "sha256": "sha256:0027c2fc812e8176ea6238d3aa617dc18fd5cbcf631553f1dd8839d45d5dcce3",
+    "locator": "fixture:evaluation-plan",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "dependency_requirements": {
+    "sha256": "sha256:afabcfddb9fc6cbdb443daab76e5a3535e098e0540722430df6c98af8834bac5",
+    "locator": "fixture:build-dependency-lock",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "valid_until": "2099-01-01T00:00:00Z",
+  "expected_proposal_lifecycle_revision": 3,
+  "correlation_id": "change-42",
+  "idempotency_key": "development-order-42"
+}

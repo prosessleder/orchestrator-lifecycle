@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DevelopmentWorkOrder",
+  "description": "Bounded Improve-to-Develop handoff pinned to an exact candidate and independently issued development-only approval. No production credentials or deployment authority are implied.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "work_order_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "domain_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "proposal_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "proposal_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "candidate_semantic_snapshot": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "base_bundle": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "development_approval": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "assigned_developer_principal_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "isolated_environment": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "allowed_tools": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "scope": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "budget": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "required_capability_outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/Identifier"
+      },
+      "minItems": 1
+    },
+    "required_migration_outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/Identifier"
+      },
+      "minItems": 0
+    },
+    "evaluation_plan": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "dependency_requirements": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expected_proposal_lifecycle_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "correlation_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "idempotency_key": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    }
+  },
+  "required": [
+    "schema_version",
+    "work_order_id",
+    "created_at",
+    "domain_id",
+    "proposal_id",
+    "proposal_revision",
+    "candidate_semantic_snapshot",
+    "base_bundle",
+    "development_approval",
+    "assigned_developer_principal_id",
+    "isolated_environment",
+    "allowed_tools",
+    "scope",
+    "budget",
+    "required_capability_outputs",
+    "required_migration_outputs",
+    "evaluation_plan",
+    "dependency_requirements",
+    "valid_until",
+    "expected_proposal_lifecycle_revision",
+    "correlation_id",
+    "idempotency_key"
+  ],
+  "additionalProperties": false
+}

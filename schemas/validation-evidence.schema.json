@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ValidationEvidence",
+  "description": "Scoped, authenticated evaluation evidence. A consumer verifies issuer, exact candidate/input references, required check coverage, expiry and result semantics independently of schema validation.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "evidence_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "evaluation_run_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evaluator_principal_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "domain_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "candidate_bundle": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "candidate_semantic_snapshot": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "evaluation_plan": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "evaluator_build": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "evaluator_configuration": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "environment_specification": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "knowledge_inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/KnowledgeInput"
+      },
+      "minItems": 0
+    },
+    "test_inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/CheckResult"
+      },
+      "minItems": 1
+    },
+    "overall_result": {
+      "enum": [
+        "pass_within_declared_scope",
+        "fail",
+        "inconclusive"
+      ]
+    },
+    "authority_delta": {
+      "$ref": "common.schema.json#/$defs/AuthorityDelta"
+    },
+    "unresolved_findings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "report": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "correlation_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    }
+  },
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "evaluation_run_id",
+    "created_at",
+    "valid_until",
+    "evaluator_principal_id",
+    "domain_id",
+    "candidate_bundle",
+    "candidate_semantic_snapshot",
+    "evaluation_plan",
+    "evaluator_build",
+    "evaluator_configuration",
+    "environment_specification",
+    "knowledge_inputs",
+    "test_inputs",
+    "checks",
+    "overall_result",
+    "authority_delta",
+    "unresolved_findings",
+    "limitations",
+    "report",
+    "correlation_id"
+  ],
+  "additionalProperties": false
+}

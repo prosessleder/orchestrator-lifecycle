@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OperatingBundleManifest",
+  "description": "Complete operating configuration. Digest this retained manifest externally; do not add a self-referential bundle hash. Semantic snapshot resolves to SemanticSnapshot schema. Provider/model/environment limits prevent a promise of deterministic output replay.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "bundle_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "domain_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "semantic_snapshot": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "source_provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "tool_definitions": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "tool_adapters": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "model_specification": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "model_retention_status": {
+      "enum": [
+        "retrievable_artifact",
+        "provider_version_not_guaranteed",
+        "unversioned_provider"
+      ]
+    },
+    "instructions": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "authority_policy": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "evaluation_suite": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "deployment_configuration": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "state_schema": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "migration_plan": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "recovery_plan": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "knowledge_read_policy": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "semantic_query_adapter": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "external_dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "reconstruction_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "bundle_id",
+    "created_at",
+    "domain_id",
+    "semantic_snapshot",
+    "capabilities",
+    "source_provenance",
+    "tool_definitions",
+    "tool_adapters",
+    "model_specification",
+    "model_retention_status",
+    "instructions",
+    "authority_policy",
+    "evaluation_suite",
+    "deployment_configuration",
+    "state_schema",
+    "migration_plan",
+    "recovery_plan",
+    "knowledge_read_policy",
+    "semantic_query_adapter",
+    "external_dependencies",
+    "reconstruction_limitations"
+  ],
+  "additionalProperties": false
+}

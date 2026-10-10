@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "proposal-42",
+  "proposal_revision": 1,
+  "created_at": "2026-10-10T03:00:00Z",
+  "proposer_principal_id": "improvement-service",
+  "domain_id": "fantasy-world-a",
+  "base_bundle": {
+    "sha256": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
+    "locator": "fixture:approved-base-bundle",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "base_semantic_snapshot": {
+    "sha256": "sha256:5971eeedb0430376d5246404a917f16c0ff9f70e5b62dc6566a9dc32e38d5681",
+    "locator": "fixture:approved-base-semantic-snapshot",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "candidate_semantic_snapshot": {
+    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "locator": "fixtures/semantic-snapshot.json",
+    "media_type": "application/json",
+    "display_version": "fixture-1"
+  },
+  "report_ids": [
+    "mismatch-42"
+  ],
+  "evidence": [
+    {
+      "sha256": "sha256:caa45c4e1d470c92d1b78af3355ac29aa90921b1bb6e26d7d4e3a43b0f00f657",
+      "locator": "fixtures/ontology-mismatch-report.json",
+      "media_type": "application/json",
+      "display_version": "fixture-1"
+    }
+  ],
+  "semantic_diff": {
+    "sha256": "sha256:41767f9a91c77d87e410cb7a6d6da99afbcebea2eaf825f05594947cbf59f27a",
+    "locator": "fixture:semantic-diff",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "rationale": "Model anchored manifestations and a bounded resonance-care capability.",
+  "alternative_explanations": [
+    "Sensor duplication investigated and excluded in illustrative evidence."
+  ],
+  "affected_concepts": [
+    "Spirit",
+    "AnchoredManifestation"
+  ],
+  "affected_capabilities": [
+    {
+      "sha256": "sha256:f289101b49b6019cd0662bfe02178e6d87e2c8c09a923847e7ed1477b5b8bbaa",
+      "locator": "fixture:ordinary-care-procedure",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "affected_policies": [
+    {
+      "sha256": "sha256:af55f1877e94d229513faea5e64fee00c29ff35c433186f690eb2902e14036d9",
+      "locator": "fixture:ordinary-care-policy",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "affected_datasets": [
+    {
+      "sha256": "sha256:a1fabef39352f6a898fdf0579b9cc133cbdb430a8b332ed93b09b8927c857a1b",
+      "locator": "fixture:world-knowledge-snapshot",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "dependency_analysis": {
+    "sha256": "sha256:97f57f373c868e580b1971377e8570112560afbeca040148dbb2972691928516",
+    "locator": "fixture:dependency-analysis",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "compatibility": {
+    "claim": "compatible_within_declared_scope",
+    "scope": {
+      "sha256": "sha256:8079737966817b61f3dc44c32ad6c0efb6265aa509105c90f80b0954ff51aad9",
+      "locator": "fixture:declared-compatibility-scope",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "evidence": [
+      {
+        "sha256": "sha256:069badf746f565edd85804978f2027e8ca4227d3f94153aa93ddcc22a2da6ede",
+        "locator": "fixture:regression-report",
+        "media_type": "application/octet-stream",
+        "display_version": "fixture-1"
+      }
+    ],
+    "limitations": [
+      "Only selected bounded world population covered."
+    ]
+  },
+  "authority_delta": {
+    "assessment": "expansion_detected",
+    "assessment_artifact": {
+      "sha256": "sha256:a2d49aff0c3efaba27d72d38e96a5b461f8796b17ac5e3cc69ca29483396adc8",
+      "locator": "fixture:authority-impact-analysis",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "comparison_scope": {
+      "sha256": "sha256:8c754ae3f20dc8c745cced73279f6afe7292a15b561661afdfbf5ef384705cc3",
+      "locator": "fixture:bounded-fantasy-target-population",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "new_permissions": [
+      "Use bounded resonance care on an independently granted spirit target."
+    ],
+    "removed_permissions": [],
+    "undecided_cases": [],
+    "required_grant_ids": [
+      "grant-resonance-care"
+    ]
+  },
+  "migration_requirements": {
+    "sha256": "sha256:d7de008fb536c7d755261b3056ccc847b930d811ecec627252c42a65ab49aa58",
+    "locator": "fixture:migration-requirements",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "required_evaluation_plan": {
+    "sha256": "sha256:0027c2fc812e8176ea6238d3aa617dc18fd5cbcf631553f1dd8839d45d5dcce3",
+    "locator": "fixture:evaluation-plan",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "unresolved_questions": [],
+  "requested_development_scope": {
+    "sha256": "sha256:08a32307be68f501c0884c5348a2c52436915e99606d36729d74aa8b565c39b8",
+    "locator": "fixture:isolated-development-scope",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "expected_control_revision": 3,
+  "correlation_id": "change-42"
+}

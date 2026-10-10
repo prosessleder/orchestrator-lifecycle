@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "report_id": "unclassified-mismatch-43",
+  "created_at": "2026-10-10T03:00:00Z",
+  "context": {
+    "domain_id": "fantasy-world-a",
+    "bundle_digest": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
+    "semantic_snapshot_digest": "sha256:5971eeedb0430376d5246404a917f16c0ff9f70e5b62dc6566a9dc32e38d5681",
+    "deployment_epoch": 6,
+    "state_epoch": 3,
+    "principal_id": "healer-runtime",
+    "workflow_id": "care-42",
+    "knowledge_read_view": "transaction:819",
+    "knowledge_consistency": "transaction_watermark",
+    "knowledge_freshness_policy": {
+      "sha256": "sha256:325f9b0419ff60227bb7dfc958548a29ea1bfc236915d16315ccf9f5591351f5",
+      "locator": "fixture:knowledge-freshness-policy",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "context_origin": "trusted_runtime",
+    "runtime_instance_id": "runtime-a-7",
+    "runtime_attestation": {
+      "sha256": "sha256:f81169e8c357e9632fc9be5bb0d20f8a655972be845edcc0971335627e3432c5",
+      "locator": "fixture:trusted-runtime-binding-record",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  },
+  "observation": {
+    "sha256": "sha256:3e37930ad2599400b4c4ac8c43aa239f1f9c6807a4df12716672dbaac4ed3a78",
+    "locator": "fixture:raw-two-manifestations-observation",
+    "media_type": "application/octet-stream",
+    "display_version": "fixture-1"
+  },
+  "evidence": [
+    {
+      "sha256": "sha256:7cc3e0f2073d91af2da2e5d147d6aaf80e59e78675cde9bb993f39e909b3b028",
+      "locator": "fixture:sensor-observation-evidence",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    }
+  ],
+  "mismatch_categories": [
+    "unclassified"
+  ],
+  "diagnosis_status": "provisional",
+  "failed_concepts": [],
+  "insufficient_procedure_refs": [],
+  "explanation": "The observation cannot yet be assigned a diagnostic category; preserve the raw evidence without forcing a conceptual or procedural diagnosis.",
+  "operational_consequence": "Affected work is held under the approved uncertainty rule pending investigation.",
+  "disposition": {
+    "affected_workflow_ids": [
+      "care-42"
+    ],
+    "action": "suspend_affected_work",
+    "rule": {
+      "sha256": "sha256:ac20f2793bdea797734b71cb8a3822653fb09896d39bbb9a646dd5fdf738c70d",
+      "locator": "fixture:approved-novelty-disposition-rule",
+      "media_type": "application/octet-stream",
+      "display_version": "fixture-1"
+    },
+    "rationale": "No existing authorized care procedure covers the observation."
+  },
+  "correlation_id": "unclassified-change-43"
+}

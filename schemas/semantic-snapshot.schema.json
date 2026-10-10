@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SemanticSnapshot",
+  "description": "Immutable semantic descriptor. Its artifact reference/digest is carried by consumers, not stored as a self-hash. Imports and shapes are fully resolved and retained; unresolved network retrieval is forbidden at evaluation/execution.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "snapshot_id": {
+      "$ref": "common.schema.json#/$defs/Identifier"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ontology_root": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "resolved_imports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "logical_iri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "artifact": {
+            "$ref": "common.schema.json#/$defs/ArtifactRef"
+          }
+        },
+        "required": [
+          "logical_iri",
+          "artifact"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "import_lock": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "shapes": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 1
+    },
+    "shape_import_lock": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "language_profile": {
+      "enum": [
+        "RDF",
+        "RDFS",
+        "OWL2_EL",
+        "OWL2_QL",
+        "OWL2_RL",
+        "OWL2_DL",
+        "restricted_custom"
+      ]
+    },
+    "entailment_regime": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reasoner_build": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "reasoner_configuration": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ArtifactRef"
+      },
+      "minItems": 0
+    },
+    "materialization_policy": {
+      "enum": [
+        "none",
+        "precomputed",
+        "on_query"
+      ]
+    },
+    "semantic_query_adapter": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    },
+    "unsupported_features": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "canonicalization_specification": {
+      "$ref": "common.schema.json#/$defs/ArtifactRef"
+    }
+  },
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "created_at",
+    "ontology_root",
+    "resolved_imports",
+    "import_lock",
+    "shapes",
+    "shape_import_lock",
+    "language_profile",
+    "entailment_regime",
+    "reasoner_build",
+    "reasoner_configuration",
+    "rules",
+    "mappings",
+    "materialization_policy",
+    "semantic_query_adapter",
+    "unsupported_features",
+    "canonicalization_specification"
+  ],
+  "additionalProperties": false
+}
