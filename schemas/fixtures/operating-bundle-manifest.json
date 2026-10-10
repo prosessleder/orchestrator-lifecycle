@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
-  "bundle_id": "fantasy-resonance-care-1",
+  "bundle_id": "warehouse-returns-specialist-review-1",
   "created_at": "2026-10-10T03:00:00Z",
-  "domain_id": "fantasy-world-a",
+  "domain_id": "warehouse-returns-a",
   "semantic_snapshot": {
-    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "sha256": "sha256:5b7a1e2d35a6d40d76260ff7fa29f271918faacb273297a22824b776b11e2c1c",
     "locator": "fixtures/semantic-snapshot.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
   },
   "capabilities": [
     {
-      "sha256": "sha256:51e7cb41169ce4178ced0818bc4cabff60a8d509e5599af1f933cb1a9797e239",
-      "locator": "fixture:resonance-care-capability",
+      "sha256": "sha256:1301d972c02cbd91ab8dbdc35269dad7cd8bb370b56e4e9df6d2768df6e8a102",
+      "locator": "fixture:specialist-handling-review-capability",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -27,16 +27,16 @@
   ],
   "tool_definitions": [
     {
-      "sha256": "sha256:6dc11e41ac04b0e0ffcf6fbbc551eb5317d808ee516da9a80a86737b76db3b24",
-      "locator": "fixture:resonance-tool-schema",
+      "sha256": "sha256:aab2a4321fd1306b7aa2ff464b5ff89ddb8196b75124e87a9e02d99a13c8b32f",
+      "locator": "fixture:specialist-handling-review-tool-schema",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
   ],
   "tool_adapters": [
     {
-      "sha256": "sha256:33f64d9cda77dbc90079de6e84f757402bb409c9078ded5a2143e7d83f957a96",
-      "locator": "fixture:resonance-tool-adapter",
+      "sha256": "sha256:5fa28859fb9d1021d4e2f9ec1e1161e428c183232d094113c3e39933480f3b94",
+      "locator": "fixture:specialist-handling-review-tool-adapter",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -57,8 +57,8 @@
     }
   ],
   "authority_policy": {
-    "sha256": "sha256:7d495191539a30048516e40fcd1973b0b65c76e713fef901e59dfedab8c1a51a",
-    "locator": "fixture:resonance-authority-policy",
+    "sha256": "sha256:e8a630de4853effee60a5b3990fcee20ef9c86d60c11e1fb30c1c2eb0708d5b2",
+    "locator": "fixture:warehouse-returns-review-authority-policy",
     "media_type": "application/octet-stream",
     "display_version": "fixture-1"
   },

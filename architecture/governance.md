@@ -61,7 +61,7 @@ Budget investigation, build cost, recursive proposal depth and deployment rate. 
 
 ## Authority through semantic closure
 
-Let the current policy authorize targets satisfying `EligibleCreature(x)`. An ontology/rule update can enlarge that predicate's extension while the policy text remains unchanged. Imported ontologies, mappings, identity equivalence, subclass axioms, tool adapters and data transformations can all influence the interpretation that reaches a policy decision.
+Let a routing rule select `ReturnItem(x)` for dispatch preparation, while an independently controlled policy requires handling clearance before dispatch. An ontology/rule update can enlarge routing eligibility under unchanged rules. If permission depends on category membership and no other gate excludes a newly eligible invocation, effective authorization can also expand. In the warehouse example, the independent clearance service still blocks an unassessed exception. Imported ontologies, mappings, identity equivalence, subclass axioms, tool adapters and data transformations can all influence the interpretation that reaches a policy decision.
 
 Assess the **effective** authority delta using the full semantic configuration and bounded candidate cases, including previously denied targets and newly inferred memberships. Compare `A(B0,U)` with `A(B1,U)` and record additions, removals and undecided cases. New permissions require an independently approved grant; unknown cases require the configured conservative disposition. A fixed grant expressed only in the same mutable predicate can suffer the same drift. High-consequence grants may therefore need pinned semantic predicates, explicit target identifiers or independently controlled applicability conditions.
 

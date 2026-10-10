@@ -5,9 +5,9 @@
   "issued_at": "2026-10-10T03:00:00Z",
   "valid_until": "2099-01-01T00:00:00Z",
   "issuer_principal_id": "independent-approval-gateway",
-  "domain_id": "fantasy-world-a",
+  "domain_id": "warehouse-returns-a",
   "candidate": {
-    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "sha256": "sha256:5b7a1e2d35a6d40d76260ff7fa29f271918faacb273297a22824b776b11e2c1c",
     "locator": "fixtures/semantic-snapshot.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
@@ -23,7 +23,7 @@
   },
   "evidence": [
     {
-      "sha256": "sha256:caa45c4e1d470c92d1b78af3355ac29aa90921b1bb6e26d7d4e3a43b0f00f657",
+      "sha256": "sha256:c0c87a9353bc3dc3c462d4ea35414d72bf0bc8cd08a298e93c653a6c871de1aa",
       "locator": "fixtures/ontology-mismatch-report.json",
       "media_type": "application/json",
       "display_version": "fixture-1"
@@ -38,18 +38,18 @@
       "display_version": "fixture-1"
     },
     "comparison_scope": {
-      "sha256": "sha256:8c754ae3f20dc8c745cced73279f6afe7292a15b561661afdfbf5ef384705cc3",
-      "locator": "fixture:bounded-fantasy-target-population",
+      "sha256": "sha256:0958e0e0f9add1bb67a5af277daeda49838e5e580aeb36533805f6770183d1d7",
+      "locator": "fixture:bounded-warehouse-return-population",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
     "new_permissions": [
-      "Use bounded resonance care on an independently granted spirit target."
+      "Route a DamagedBatteryReturn case to specialist handling review under an independent review-workflow grant."
     ],
     "removed_permissions": [],
     "undecided_cases": [],
     "required_grant_ids": [
-      "grant-resonance-care"
+      "grant-specialist-handling-review"
     ]
   },
   "authorized_grants": [],

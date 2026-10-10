@@ -51,7 +51,7 @@ governance},pdflang={en-US}}
 \title{The Orchestrator: A Lifecycle Architecture for Self-Developing,
 Self-Operating, and Self-Improving Agentic Systems\tnoteref{preprint}}
 \tnotetext[preprint]{Preprint; not peer reviewed.
-  Version 0.2.1, 9 October 2026.}
+  Version 0.2.2, 9 October 2026.}
 \author{Timothy O'Brien\fnref{orcid}}
 \fntext[orcid]{ORCID: \href{https://orcid.org/0009-0001-2589-347X}{0009-0001-2589-347X}.}
 \begin{abstract}
@@ -97,16 +97,14 @@ changes. Continuous operation therefore creates a second problem: how to
 evolve the system without making its operating assumptions untraceable
 or allowing its effective authority to expand silently.
 
-Consider a courier in a fantasy library. It transports objects
-classified as library artifacts. A newly encountered lantern speaks,
-chooses its destination, and objects to being packed. The courier's
-model distinguishes artifacts, rooms, and transport procedures, but
-contains no category for an artifact with preferences. Calling the
-encounter simply a failed tool call misses the representational problem.
-Allowing the courier to invent and adopt a new authoritative category
-during the same task risks changing the meaning of its permissions.
-Freezing the model indefinitely leaves the system unable to learn from
-recurring encounters.
+Consider an automated warehouse returns system. It normally routes
+returned electronics for inspection, repair, or resale. An inspection
+report flags a damaged battery, but the system's model describes only
+commercial condition, such as working or defective; it cannot represent
+the separate handling assessment this case requires. The system must
+preserve the report, hold dispatch, and request an appropriate model or
+workflow change. Adding a category for the exception must not, by
+itself, authorize the ordinary dispatch procedure to handle it.
 
 The research question is: \textbf{Can autonomous software systems be
 organized into distinct development, operation, and improvement
@@ -359,11 +357,12 @@ freshness and conflict rules. Routine fact updates need not become
 ontology releases, but they cannot bypass the evidence requirements for
 consequential decisions.
 
-The library model might define \texttt{Artifact}, \texttt{Room}, and
-\texttt{locatedIn}. The assertion that lantern L17 is in the east
-archive is a case fact. A camera image is an observation and evidence
-object. The permission to relocate approved artifacts is policy. The
-packing routine is a capability. A courier's paused workflow is
+The warehouse model might define \texttt{ReturnItem},
+\texttt{StorageLocation}, and \texttt{locatedIn}. The assertion that
+returned device E17 is in receiving bay A is a case fact. An inspection
+report is evidence supporting observations about its condition. The
+requirement for handling clearance before dispatch is policy. The
+dispatch routine is a capability. The return's paused workflow is
 operational state. Collapsing these into one mutable agent memory would
 make it difficult to distinguish a new observation from an approved
 change in meaning.
@@ -443,19 +442,19 @@ Initial disposition
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Missing fact & The lantern's destination is unknown & Seek evidence
+Missing fact & The return's destination is unknown & Seek evidence
 within approved permissions \\
-Unknown entity & A previously unseen lantern fits \texttt{Artifact} &
+Unknown entity & A previously unseen device fits \texttt{ReturnItem} &
 Create a provisional case identity under admission rules \\
 Contradictory evidence & Two sensors report incompatible locations &
 Preserve sources and investigate; do not overwrite the disagreement \\
-Constraint violation & A required transport clearance is missing & Hold
+Constraint violation & A required handling clearance is missing & Hold
 or reject the action under the declared validation policy \\
 Procedure gap & Existing categories fit, but no safe workflow exists &
 Request a capability change without assuming an ontology change \\
-Suspected conceptual gap & An artifact expresses preferences absent from
-the model & Report a model limitation and investigate a candidate
-distinction \\
+Suspected conceptual gap & A handling exception cannot be represented by
+the commercial-condition model & Report a model limitation and
+investigate a candidate distinction \\
 \end{longtable}
 
 An unusual value or a failed procedure is not by itself evidence of a
@@ -844,13 +843,13 @@ complete policy and action-gateway checks for principal \(u\) and
 approved context \(K\). A comparison across changed identifiers requires
 a pinned mapping into this common space.
 
-Suppose a routing rule selects \texttt{relocate(x)} when
-\texttt{Artifact(x)} holds. For a fixture containing only
-\texttt{SentientArtifact(x)}, adding
+Suppose a routing rule selects \texttt{dispatch(x)} when
+\texttt{ReturnItem(x)} holds. For a fixture containing only
+\texttt{DamagedBatteryReturn(x)}, adding
 
-\[\mathrm{SentientArtifact}\sqsubseteq\mathrm{Artifact}\]
+\[\mathrm{DamagedBatteryReturn}\sqsubseteq\mathrm{ReturnItem}\]
 
-makes \texttt{Artifact(x)} derivable and can enlarge \(\mathcal{E}\)
+makes \texttt{ReturnItem(x)} derivable and can enlarge \(\mathcal{E}\)
 without changing the policy file. If no other gate excludes the new
 invocation, \(A\) can also expand: \(P'=P\) does not imply
 \(A(B',K,u)=A(B,K,u)\). If an independent clearance rule rejects it,
@@ -955,9 +954,9 @@ authorized lease, and side effects must be idempotent or reconcilable.
 The service also revalidates decision-bearing facts against their
 admitted revision or an explicitly authorized freshness window when
 consuming the token. State-schema compatibility alone does not establish
-that clearance or consent remains valid. No claim of exactly-once
-effects is made for arbitrary external systems. Where final-effect
-mediation is impossible, that path falls outside the stated guarantee.
+that handling clearance remains valid. No claim of exactly-once effects
+is made for arbitrary external systems. Where final-effect mediation is
+impossible, that path falls outside the stated guarantee.
 
 \subsection{Roles and autonomy tiers}\label{roles-and-autonomy-tiers}
 
@@ -1040,112 +1039,94 @@ and consumer checks. Ontology adequacy, novelty detection, LLM
 truthfulness, liveness under partition, and universal authority
 containment are not established by these invariants.
 
-\section{Worked example: the lantern that refuses the
-crate}\label{worked-example-the-lantern-that-refuses-the-crate}
+\section{Worked example: a return that requires special
+handling}\label{worked-example-a-return-that-requires-special-handling}
 
 \subsection{Encounter and
 investigation}\label{encounter-and-investigation}
 
-The Lantern Library runs bundle \(B_0\). Snapshot \(S_0\), labeled
-1.4.2, describes artifacts, rooms, transport routes, and transport
-conditions. Its ordinary-artifact routine places a cleared object into a
-padded crate and delivers it. The courier's policy permits that work
-within assigned rooms. An independently maintained welfare rule
-prohibits sealing an occupied container; an unresolved indication of a
-living occupant requires a hold. The scenario is illustrative, not a
-reported deployment.
+A warehouse runs bundle \(B_0\). Snapshot \(S_0\), labeled 1.4.2,
+describes returned items, commercial condition, storage locations, and
+dispatch destinations. Its ordinary-return capability prepares dispatch
+after clearance. For this constructed scenario, company policy requires
+an independent handling clearance and a hold whenever a reported
+handling concern remains unresolved. The example describes proposed
+behavior, not an observed deployment.
 
-Lantern L17 speaks when the courier prepares the crate and asks to
-travel beside the courier. The courier stores the utterance and sensor
-evidence. It cannot determine whether the source is a recording, a
-prank, a resident creature, or a new kind of artifact. It emits report
-R17 under \(B_0\), records a suspected conceptual gap and potential
-welfare consequence, marks ``possibly sentient artifact'' as
-provisional, and pauses the packing step. Other deliveries remain within
-their existing authority.
+An inspection report for returned device E17 flags possible battery
+damage. The operational agent stores the report, emits mismatch report
+R17 under \(B_0\), and pauses dispatch. It records a suspected gap in
+the handling model; it does not treat the report as a confirmed
+diagnosis or invent a clearance. Other cleared returns can continue
+through their approved workflows.
 
-IMPROVE gathers additional permitted observations, compares recorded
-speech and responsive behavior, and documents competing explanations. It
-proposes distinguishing a \texttt{SentientArtifact} and an expressed
-\texttt{TravelPreference}, with evidence links and confidence limits.
-The proposal explains why the existing case model and procedure cannot
-capture consent to the journey. It also identifies the transport policy
-and packing routine as dependents. Investigators can recommend continued
-human handling if the evidence does not justify the proposed category.
+IMPROVE checks the report and existing definitions with the responsible
+domain specialist. A wrong report, a missing fact, or a missing
+procedure could explain the problem without requiring an ontology
+change. In this case, investigation establishes that the model can
+describe commercial condition but cannot link a handling exception to
+its required assessment. The proposal adds
+\texttt{DamagedBatteryReturn}, \texttt{HandlingAssessment}, and a
+\texttt{requiresAssessment} relation, with evidence supporting the
+distinction. The dispatch query, clearance adapter, and ordinary-return
+capability are identified as dependents.
 
 \subsection{Candidate development and
 promotion}\label{candidate-development-and-promotion}
 
-A branch from \(S_0\) produces \(S_1\), proposed label 1.5.0. The branch
-adds the new distinction, preference relation, mapping rules, and
-validation shapes for an approved consent record. Its imports and
-interpretation configuration are pinned. The orchestrator issues a
-development work order for \(S_1\) without changing the production
-reference.
+A branch from \(S_0\) produces candidate \(S_1\), proposed label 1.5.0.
+It adds the distinction and assessment relation, mapping rules, and
+validation shapes for assessment records. Imports and interpretation
+settings are pinned. The orchestrator authorizes development against
+\(S_1\) while production continues to use \(B_0\).
 
-DEVELOP produces a transport capability that separates ordinary packing
-from accompanied travel, handles unknown preference by holding, and
-cannot treat an LLM's inferred preference as a clearance. The capability
-manifest binds \(S_1\) and policy \(P_1\). The authority owner defines
-\(P_1\) so that ordinary-artifact packing remains available only after
-an independent clearance, while accompanied travel requires the
-designated authorization. A new conceptual category does not
-automatically grant the old courier additional transport authority.
+DEVELOP creates a capability that routes the affected case and evidence
+to the designated handling-review service and waits for a recorded
+decision. Missing or conflicting evidence keeps the hold in place.
+Policy \(P_1\) grants submission for review within a defined scope;
+dispatch still requires an independently issued clearance for the
+specified item, action, and destination. Neither the new category nor an
+agent's recommendation supplies that clearance.
 
-The required tests include known ordinary artifacts, responsive but
-nonliving recordings, conflicting preference evidence, missing consent,
-expired clearance, the new category, migration of old records, and
-stale-worker invocations. Expected results are specified before release.
-Evaluation checks syntactic structure, declared entailments, shape
-conformance, capability behavior, authority effects, and recovery
-prerequisites. The evaluation agenda below specifies how such checks
-could be assessed in an implemented system.
+Tests cover ordinary returns, erroneous damage reports, confirmed
+exceptions, missing assessments, expired clearances, migration of
+existing records, and stale-worker requests. Expected outcomes are
+defined before release. If validation and authority review pass, an
+independent gateway approves exact bundle \(B_1\). The controller checks
+state compatibility and advances \(Q_{\mathrm{warehouse}}\) from epoch
+42 to 43. Action-boundary enforcement rejects obsolete epoch-42
+requests. E17's case resumes in the approved review workflow; dispatch
+remains blocked until its separate clearance conditions hold. The
+decision record links the original report, model change, and release
+approval.
 
-An independent gateway approves exact bundle \(B_1\) for the library
-scope if the obligations hold. The controller stages workers, checks
-data compatibility, and moves \(Q_{\mathrm{library}}\) from epoch 42 to
-43. Workers acknowledge \(B_1\); effect-boundary enforcement rejects
-unauthorized epoch-42 packing. The courier resumes L17's case under the
-compatible state view and uses the approved accompanied-travel path or
-maintains the hold. The decision record preserves both the original
-failed interpretation and the new approval.
+\subsection{A plausible but incompatible
+candidate}\label{a-plausible-but-incompatible-candidate}
 
-\subsection{Failure that syntactic validation
-misses}\label{failure-that-syntactic-validation-misses}
+A competing branch adds only \texttt{DamagedBatteryReturn} as a subclass
+of \texttt{ReturnItem}, retains the ordinary dispatch capability, and
+calls the change additive. Parsing, logical consistency, and generic
+item shapes can all pass. Yet the new category inherits eligibility for
+the ordinary dispatch routine without the required assessment path. The
+independent clearance guard should still block the effect. That final
+safeguard does not make the candidate workflow compatible.
 
-A competing branch adds only \texttt{SentientArtifact} as a subclass of
-\texttt{Artifact}, retains the old packing capability, and declares the
-change additive. It can be syntactically valid and logically consistent.
-Generic object shapes can also remain satisfied. Yet inference now
-routes the new category into the ordinary-artifact routine, whose
-crate-packing assumption is inappropriate. This broadens category-based
-eligibility and produces a prohibited packing proposal. The independent
-occupant/clearance guard should still prevent an external effect; the
-subclass alone cannot erase that guard. The candidate is incompatible
-even though that last control contains the consequence.
+A differential fixture contains \texttt{DamagedBatteryReturn(x)} without
+an assertion of \texttt{ReturnItem(x)}. Comparing it before and after
+the subclass axiom isolates the newly inferred dispatch eligibility. E17
+is a separate case: it was already a return item, so the new axiom does
+not newly classify that same device. Its regression case instead checks
+that an unresolved handling concern leads to a hold and specialist
+review, rather than an ordinary dispatch proposal.
 
-Semantic impact analysis marks the inherited classification, the
-transport policy, and the packing routine as affected. A differential
-fixture starts with \texttt{SentientArtifact(x)} and no assertion of
-\texttt{Artifact(x)}, then compares eligibility before and after the
-subclass axiom. This separate fixture isolates the entailment change;
-L17 itself was already treated as an artifact, so the added axiom would
-not newly classify that same individual. The occupant/consent regression
-case requires a hold, while the candidate's old packing path proposes
-proceeding. The gate rejects the branch because additive syntax has not
-established behavioral or authority compatibility. If an implementation
-incorrectly treats category membership as sufficient clearance, or lets
-the routine bypass the independent guard, the fault can become an actual
-welfare violation; that implementation violates the stated enforcement
-assumptions. If the analyzer cannot establish the required authority
-obligation, the automatic path refuses promotion.
-
-This example illustrates the required reasoning, not measured detection
-accuracy. A deficient dependency graph or inadequate fixture set could
-miss the fault. Tests over a single known lantern cannot establish
-safety for every future sentient artifact. That limitation is why the
-gate combines explicit envelope checks, independent clearance, and
-runtime mediation with regression evidence.
+The release gate rejects the incomplete candidate. If an implementation
+incorrectly treats category membership as clearance or bypasses the
+action guard, the proposal could become an unauthorized dispatch; that
+implementation violates the stated enforcement assumptions. If the
+required authority obligation cannot be established, automatic promotion
+is refused. These are analytical checks, not measured detection results.
+One device and one fault do not establish coverage of every future
+handling exception.
 
 \section{Failure modes, tradeoffs, and
 boundaries}\label{failure-modes-tradeoffs-and-boundaries}
@@ -1346,7 +1327,7 @@ bundles are routinely unreconstructible, semantic impact review misses
 important policy consequences, state compatibility cannot be enforced,
 gateways permit revoked actions, or validation cost prevents timely
 adaptation. An adequate evaluation must expose those failure conditions
-rather than merely demonstrate a successful lantern delivery.
+rather than merely demonstrate successful processing of one return.
 
 \section{Relationship to The Orchestrator
 books}\label{relationship-to-the-orchestrator-books}

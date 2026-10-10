@@ -65,7 +65,7 @@ RDF and OWL can express relationships more general than trees. OWL import closur
 
 ## Domain-scoped consistency
 
-A **domain** is an explicitly governed consistency scope, such as one simulation world, course, facility, or tenant. For each domain `d`, the authoritative deployment record is:
+A **domain** is an explicitly governed consistency scope, such as one warehouse, course, facility, or tenant. For each domain `d`, the authoritative deployment record is:
 
 `P_d = (bundle_digest, deployment_epoch, state_epoch, lifecycle_revision)`.
 

@@ -16,6 +16,10 @@ qa.mkdir(parents=True,exist_ok=True)
 renderer=shutil.which('pdftoppm')
 if not renderer:
     raise SystemExit('pdftoppm is required on PATH for visual QA')
+# Remove prior generated previews so a shorter revision has no stale pages.
+for pattern in ['page-*.png', 'contact-*.jpg']:
+    for previous in qa.glob(pattern):
+        previous.unlink()
 subprocess.run([renderer,'-scale-to','1400','-png',str(pdf),str(qa/'page')],check=True)
 paths=sorted(qa.glob('page-*.png'))
 for group_start in range(0,len(paths),6):

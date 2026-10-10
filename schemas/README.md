@@ -4,6 +4,8 @@ The eleven JSON Schema files specify payload structure using Draft 2020-12. The 
 
 Fixtures in `fixtures/` are illustrative documents. Some artifact references identify other fixture files by their actual byte digest; evidence, capabilities, runtime attestations and signatures otherwise use explicit `fixture:` placeholders. They are not proof that a build, evaluation, approval, deployment or action happened. No fixture is suitable for production authorization.
 
+The fixtures follow a warehouse returns scenario in `warehouse-returns-a`. An ordinary `ReturnItem` workflow proposes dispatch, while an independent handling-clearance rule holds unassessed exceptions. The candidate adds `DamagedBatteryReturn` and a capability that routes the case to specialist handling review. The permitted action in `decision-record.json` is a review referral; dispatch still requires independent clearance. These company policies are illustrative and specify no shipping or packing procedures.
+
 `test_contracts.py` checks meta-schema validity, representative payloads and meaningful structural rejection cases. It also demonstrates that well-formed changed candidate digests and expired approval timestamps remain structurally valid and require independent runtime checks. An attestation field or authenticated envelope must be authenticated and bound to the consumed payload by the receiving service; an LLM can invent syntactically valid claims.
 
 Reports include an explicit `unclassified` route when the current diagnosis taxonomy cannot adequately label an observation. The targeted fixture preserves raw evidence without requiring a failed concept, failed procedure or invented interpretation. `constraint_violation` separately identifies failures such as a missing required clearance; it does not force the conclusion that the ontology lacks a concept. All report diagnoses remain provisional.
@@ -14,7 +16,7 @@ Run with a Python environment containing `jsonschema`:
 python3 schemas/test_contracts.py
 ```
 
-The documented check used `jsonschema==4.26.0`, pinned in `requirements-contracts.txt` and installed in a temporary validation directory. These checks concern document contracts and fixture-byte integrity only; they are not architecture implementation or empirical validation.
+The dependency is pinned to `jsonschema==4.26.0` in `requirements-contracts.txt`. These checks concern document contracts and fixture-byte integrity only; they are not architecture implementation or empirical validation.
 
 For review, distinguish these obligations:
 

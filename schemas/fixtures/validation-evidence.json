@@ -5,15 +5,15 @@
   "created_at": "2026-10-10T03:00:00Z",
   "valid_until": "2099-01-01T00:00:00Z",
   "evaluator_principal_id": "independent-evaluation-service",
-  "domain_id": "fantasy-world-a",
+  "domain_id": "warehouse-returns-a",
   "candidate_bundle": {
-    "sha256": "sha256:eeedfb6e489cb6436f3497f605f637eb2994b07cb0d7bbcd4d5ac92f6fff916e",
+    "sha256": "sha256:b92a41ebe64e37d87a74099d74c893196499bca36b1d4b53b1ff88348f3b80d6",
     "locator": "fixtures/operating-bundle-manifest.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
   },
   "candidate_semantic_snapshot": {
-    "sha256": "sha256:d0218a6d5ea5b4b9ea2570e89554cea9d9a361a9d44a0de41480c9d8087506a8",
+    "sha256": "sha256:5b7a1e2d35a6d40d76260ff7fa29f271918faacb273297a22824b776b11e2c1c",
     "locator": "fixtures/semantic-snapshot.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
@@ -62,8 +62,8 @@
   ],
   "test_inputs": [
     {
-      "sha256": "sha256:fa5329f59cc87d675482efe5663fdffc308b79f3e2b07108f80137e83aef70a1",
-      "locator": "fixture:adversarial-spirit-test-input",
+      "sha256": "sha256:0986eb9c4b68c4389cc49896be7da546e8ff36ae52de6446a0378b4824a8a672",
+      "locator": "fixture:damaged-battery-return-dispatch-counterexample",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -73,7 +73,7 @@
       "check_id": "authority-case-42",
       "kind": "authority_delta",
       "status": "pass",
-      "scope": "Bounded fantasy target population with independent resonance grant.",
+      "scope": "Selected warehouse returns; the specialist handling review grant does not waive independent dispatch clearance.",
       "result_artifact": {
         "sha256": "sha256:2de6306d017488fa0348e65aee328d5dad322f9856b869f966e20f175d9653cf",
         "locator": "fixture:authority-check-result",
@@ -95,18 +95,18 @@
       "display_version": "fixture-1"
     },
     "comparison_scope": {
-      "sha256": "sha256:8c754ae3f20dc8c745cced73279f6afe7292a15b561661afdfbf5ef384705cc3",
-      "locator": "fixture:bounded-fantasy-target-population",
+      "sha256": "sha256:0958e0e0f9add1bb67a5af277daeda49838e5e580aeb36533805f6770183d1d7",
+      "locator": "fixture:bounded-warehouse-return-population",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
     "new_permissions": [
-      "Use bounded resonance care on an independently granted spirit target."
+      "Route a DamagedBatteryReturn case to specialist handling review under an independent review-workflow grant."
     ],
     "removed_permissions": [],
     "undecided_cases": [],
     "required_grant_ids": [
-      "grant-resonance-care"
+      "grant-specialist-handling-review"
     ]
   },
   "unresolved_findings": [],
