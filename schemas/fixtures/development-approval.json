@@ -5,9 +5,9 @@
   "issued_at": "2026-10-10T03:00:00Z",
   "valid_until": "2099-01-01T00:00:00Z",
   "issuer_principal_id": "independent-approval-gateway",
-  "domain_id": "warehouse-returns-a",
+  "domain_id": "factory-maintenance-a",
   "candidate": {
-    "sha256": "sha256:5b7a1e2d35a6d40d76260ff7fa29f271918faacb273297a22824b776b11e2c1c",
+    "sha256": "sha256:90c569fc180b660cae3ab2f3ca57a6390008e1bf827d3d3c6d5e8726a225d6f4",
     "locator": "fixtures/semantic-snapshot.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
@@ -23,7 +23,7 @@
   },
   "evidence": [
     {
-      "sha256": "sha256:c0c87a9353bc3dc3c462d4ea35414d72bf0bc8cd08a298e93c653a6c871de1aa",
+      "sha256": "sha256:cb3d57f813cfef6b153af028848a7c803a6afcac29cc235314339f7900b61b20",
       "locator": "fixtures/ontology-mismatch-report.json",
       "media_type": "application/json",
       "display_version": "fixture-1"
@@ -39,17 +39,17 @@
     },
     "comparison_scope": {
       "sha256": "sha256:0958e0e0f9add1bb67a5af277daeda49838e5e580aeb36533805f6770183d1d7",
-      "locator": "fixture:bounded-warehouse-return-population",
+      "locator": "fixture:bounded-maintenance-asset-population",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
     "new_permissions": [
-      "Route a DamagedBatteryReturn case to specialist handling review under an independent review-workflow grant."
+      "Read diagnostic records for M17, M18, and controller C4 under a scoped grant; no reset or interruption permission is added."
     ],
     "removed_permissions": [],
     "undecided_cases": [],
     "required_grant_ids": [
-      "grant-specialist-handling-review"
+      "grant-coordinated-diagnostic-read"
     ]
   },
   "authorized_grants": [],

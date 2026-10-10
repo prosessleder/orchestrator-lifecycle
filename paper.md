@@ -2,8 +2,8 @@
 title: 'The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems'
 author: "Timothy O'Brien"
 orcid: 'https://orcid.org/0009-0001-2589-347X'
-version: '0.2.2'
-date: '9 October 2026'
+version: '0.2.3'
+date: '10 October 2026'
 lang: en-US
 abstract: |
   Agentic systems that perform delegated work also need a controlled way to change the concepts and capabilities on which that work depends. This paper proposes a reference architecture organized around DEVELOP, OPERATE, and IMPROVE, coordinated by a durable orchestration layer. Its central unit of deployment is an immutable operating bundle binding executable capabilities to a versioned semantic snapshot, authority policy, evaluation suite, and state compatibility contract. Operational observations challenge the approved model through discrepancy reports, candidate ontology branches, capability development, independent validation, and explicit promotion. The architecture specifies lifecycle transitions, typed handoff contracts, semantic impact obligations, and deployment fencing. A worked example shows how an ontology change can broaden an action's eligibility without changing policy text, while an independent action gate blocks the prohibited effect. Drawing on autonomic computing, runtime models, ontology evolution, and governed capability deployment, the paper connects semantic release identity to authority review and distributed action enforcement. A conditional invariant argument characterizes release integrity, action coherence, and proposal isolation under stated trust assumptions. The contribution is an architectural synthesis supported by illustrative schemas and a falsifiable evaluation design; operational effectiveness and the additional value of ontology-based controls remain unevaluated.
@@ -20,7 +20,7 @@ keywords:
 
 An agent that can complete a task is not necessarily a system that can maintain the capability to complete that task over time. Procedures become inadequate, observations challenge existing categories, tools change, and the interpretation of a policy may shift when its vocabulary changes. Continuous operation therefore creates a second problem: how to evolve the system without making its operating assumptions untraceable or allowing its effective authority to expand silently.
 
-Consider an automated warehouse returns system. It normally routes returned electronics for inspection, repair, or resale. An inspection report flags a damaged battery, but the system's model describes only commercial condition, such as working or defective; it cannot represent the separate handling assessment this case requires. The system must preserve the report, hold dispatch, and request an appropriate model or workflow change. Adding a category for the exception must not, by itself, authorize the ordinary dispatch procedure to handle it.
+Consider an automated maintenance system authorized to diagnose faults and perform approved resets on individual machines. It receives a report that two machines repeatedly fail together. Its model treats machines independently, and its diagnostic procedures cannot explain their joint behavior. Investigation reveals a shared controller, requiring the system to extend its ontology with that dependency and develop a coordinated diagnostic capability. Using that capability also requires an explicitly approved scope covering both machines and the controller. The system must preserve the evidence and suspend affected resets while these changes are developed, evaluated, and approved. Learning that the machines share a controller must not, by itself, grant permission to reset that controller or interrupt the other machine.
 
 The research question is: **Can autonomous software systems be organized into distinct development, operation, and improvement functions, coordinated through a shared, versioned ontology, to support continuous evolution while preserving semantic consistency, configuration reproducibility, and controlled authority?** This paper gives a reference architecture and a qualified answer: such a separation can specify enforceable release and action boundaries, provided that the semantic dependencies are actually pinned and the boundaries are mediated by trusted services. It cannot ensure that the model describes the world correctly or that an agent recognizes every unfamiliar situation.
 
@@ -87,7 +87,7 @@ These distinctions concern responsibility and meaning, not physical storage. An 
 
 Fact admission also requires controls. An agent that cannot edit the ontology may still change effective permissions by asserting a decision-bearing classification or relationship. The knowledge service therefore authenticates writes, preserves supporting evidence, separates provisional from approved assertions, and applies policy-specific freshness and conflict rules. Routine fact updates need not become ontology releases, but they cannot bypass the evidence requirements for consequential decisions.
 
-The warehouse model might define `ReturnItem`, `StorageLocation`, and `locatedIn`. The assertion that returned device E17 is in receiving bay A is a case fact. An inspection report is evidence supporting observations about its condition. The requirement for handling clearance before dispatch is policy. The dispatch routine is a capability. The return's paused workflow is operational state. Collapsing these into one mutable agent memory would make it difficult to distinguish a new observation from an approved change in meaning.
+The maintenance model might define `Machine`, `Location`, and `locatedIn`. The assertion that machine M17 is in production bay A is a case fact. A maintenance report is evidence supporting observations about its behavior. The requirement for authorization covering every affected asset before a reset is policy. The diagnostic routine is a capability. The paused maintenance case is operational state. Collapsing these into one mutable agent memory would make it difficult to distinguish a new observation from an approved change in meaning.
 
 ## A semantic snapshot includes its interpretation
 
@@ -107,12 +107,12 @@ The question "What happens when the system encounters something that cannot be r
 
 | Discrepancy | Example | Initial disposition |
 |---|---|---|
-| Missing fact | The return's destination is unknown | Seek evidence within approved permissions |
-| Unknown entity | A previously unseen device fits `ReturnItem` | Create a provisional case identity under admission rules |
+| Missing fact | The machine's installed firmware version is unknown | Seek evidence within approved permissions |
+| Unknown entity | A previously unseen asset fits `Machine` | Create a provisional case identity under admission rules |
 | Contradictory evidence | Two sensors report incompatible locations | Preserve sources and investigate; do not overwrite the disagreement |
-| Constraint violation | A required handling clearance is missing | Hold or reject the action under the declared validation policy |
+| Constraint violation | Authorization for an affected asset is missing | Hold or reject the action under the declared validation policy |
 | Procedure gap | Existing categories fit, but no safe workflow exists | Request a capability change without assuming an ontology change |
-| Suspected conceptual gap | A handling exception cannot be represented by the commercial-condition model | Report a model limitation and investigate a candidate distinction |
+| Suspected conceptual gap | A shared-control dependency cannot be represented by the independent-machine model | Report a model limitation and investigate a candidate distinction |
 
 Table: Discrepancy classes and their initial operational dispositions.
 
@@ -248,11 +248,11 @@ A declared dependency graph can be incomplete, especially when prompts or dynami
 
 Let $\Omega_d$ be a governance-defined set of fully specified invocations in domain $d$, identifying each operation, target, and parameter set independently of the candidate ontology. Let $\mathcal{E}(B,K,u)\subseteq\Omega_d$ be the invocations eligible under classification and procedure-routing rules, and let $A(B,K,u)\subseteq\mathcal{E}(B,K,u)$ be those admitted after the complete policy and action-gateway checks for principal $u$ and approved context $K$. A comparison across changed identifiers requires a pinned mapping into this common space.
 
-Suppose a routing rule selects `dispatch(x)` when `ReturnItem(x)` holds. For a fixture containing only `DamagedBatteryReturn(x)`, adding
+Suppose a routing rule selects `reset(x)` when `Machine(x)` holds. For a fixture containing only `CoupledMachine(x)`, adding
 
-$$\mathrm{DamagedBatteryReturn}\sqsubseteq\mathrm{ReturnItem}$$
+$$\mathrm{CoupledMachine}\sqsubseteq\mathrm{Machine}$$
 
-makes `ReturnItem(x)` derivable and can enlarge $\mathcal{E}$ without changing the policy file. If no other gate excludes the new invocation, $A$ can also expand: $P'=P$ does not imply $A(B',K,u)=A(B,K,u)$. If an independent clearance rule rejects it, routing eligibility expands while the action remains inadmissible. The worked example below distinguishes these outcomes.
+makes `Machine(x)` derivable and can enlarge $\mathcal{E}$ without changing the policy file. If no other gate excludes the new invocation, $A$ can also expand: $P'=P$ does not imply $A(B',K,u)=A(B,K,u)$. If an independent affected-asset authorization rule rejects it, routing eligibility expands while the action remains inadmissible. The worked example below distinguishes these outcomes.
 
 For automatically promoted changes intended to preserve an existing authority envelope $G(u)$, the release obligation is
 
@@ -282,7 +282,7 @@ Workers verify and load a complete bundle. Each consequential invocation carries
 
 Logical atomicity applies to the admission boundary, not simultaneous replacement of every distributed process. The companion specifies a base protocol in which only the current bundle epoch admits consequential actions. Retained leases are an optional coexistence extension for rolling deployment: the gateway admits a named, independently authorized lease only while its bundle, scope, expiry, state compatibility, and revocation status remain valid. Deactivation removes an epoch from the default reference; full revocation also invalidates its retained leases. Cached possession of a lease is insufficient. Offline leases would require an expressly accepted revocation-delay bound and cannot provide immediate revocation during disconnection.
 
-The gateway must be at, or trusted by, the effect-producing service. A preflight check followed by an uncontrolled delay is vulnerable to revocation between authorization and execution. An effect token should be consumed under the authoritative epoch or a bounded, expressly authorized lease, and side effects must be idempotent or reconcilable. The service also revalidates decision-bearing facts against their admitted revision or an explicitly authorized freshness window when consuming the token. State-schema compatibility alone does not establish that handling clearance remains valid. No claim of exactly-once effects is made for arbitrary external systems. Where final-effect mediation is impossible, that path falls outside the stated guarantee.
+The gateway must be at, or trusted by, the effect-producing service. A preflight check followed by an uncontrolled delay is vulnerable to revocation between authorization and execution. An effect token should be consumed under the authoritative epoch or a bounded, expressly authorized lease, and side effects must be idempotent or reconcilable. The service also revalidates decision-bearing facts against their admitted revision or an explicitly authorized freshness window when consuming the token. State-schema compatibility alone does not establish that affected-asset authorization remains valid. No claim of exactly-once effects is made for arbitrary external systems. Where final-effect mediation is impossible, that path falls outside the stated guarantee.
 
 ## Roles and autonomy tiers
 
@@ -306,31 +306,31 @@ A transition argument starts from an approved initial reference. Candidate trans
 
 This is a conditional invariant argument over the abstract contract. It is not a machine-checked proof, a guarantee against a faulty gate, or a proof that approved behavior is safe in the world. It excludes unmanaged credentials, unmediated tools, forged state bindings, and uncertain external execution. Semantic consistency is scoped to declared logical and consumer checks. Ontology adequacy, novelty detection, LLM truthfulness, liveness under partition, and universal authority containment are not established by these invariants.
 
-# Worked example: a return that requires special handling
+# Worked example: an unexpected dependency between machines
 
 ## Encounter and investigation
 
-A warehouse runs bundle $B_0$. Snapshot $S_0$, labeled 1.4.2, describes returned items, commercial condition, storage locations, and dispatch destinations. Its ordinary-return capability prepares dispatch after clearance. For this constructed scenario, company policy requires an independent handling clearance and a hold whenever a reported handling concern remains unresolved. The example describes proposed behavior, not an observed deployment.
+A maintenance system runs bundle $B_0$. Snapshot $S_0$, labeled 1.4.2, represents machines, locations, fault codes, and maintenance cases. Its diagnostic capability assumes that each case concerns one independently controlled machine. For this constructed scenario, company policy requires authorization covering every affected asset before a reset; unresolved impact requires a hold. The example describes proposed behavior, not an observed deployment.
 
-An inspection report for returned device E17 flags possible battery damage. The operational agent stores the report, emits mismatch report R17 under $B_0$, and pauses dispatch. It records a suspected gap in the handling model; it does not treat the report as a confirmed diagnosis or invent a clearance. Other cleared returns can continue through their approved workflows.
+A maintenance report states that machines M17 and M18 repeatedly fault at the same time. OPERATE preserves the report, emits mismatch report R17 under $B_0$, and suspends the affected reset workflow. Correlation alone does not establish a shared cause or a missing concept. Other work can continue only where its independence and existing authorization remain established.
 
-IMPROVE checks the report and existing definitions with the responsible domain specialist. A wrong report, a missing fact, or a missing procedure could explain the problem without requiring an ontology change. In this case, investigation establishes that the model can describe commercial condition but cannot link a handling exception to its required assessment. The proposal adds `DamagedBatteryReturn`, `HandlingAssessment`, and a `requiresAssessment` relation, with evidence supporting the distinction. The dispatch query, clearance adapter, and ordinary-return capability are identified as dependents.
+IMPROVE investigates with the responsible engineer. Incorrect timestamps, a common power disturbance, missing case facts, or a deficient diagnostic procedure could explain the report. In this case, investigation establishes that M17 and M18 share controller C4 and that the approved model cannot express shared control or its maintenance consequences. If that relationship were already expressible, admitting supported facts could suffice without changing the ontology. Here the proposal adds `Controller`, `controlledBy`, and `CoupledMachine`, and identifies the affected diagnostic queries, reset procedures, and authority checks.
 
 ## Candidate development and promotion
 
-A branch from $S_0$ produces candidate $S_1$, proposed label 1.5.0. It adds the distinction and assessment relation, mapping rules, and validation shapes for assessment records. Imports and interpretation settings are pinned. The orchestrator authorizes development against $S_1$ while production continues to use $B_0$.
+A branch from $S_0$ produces candidate $S_1$, proposed label 1.5.0. It adds the shared-control relationship, classification rules, and validation shapes for dependency evidence. The statement that M17 and M18 use C4 is admitted as a supported case fact under the new vocabulary. Imports and interpretation settings are pinned. Development is authorized against $S_1$ while production retains $B_0$.
 
-DEVELOP creates a capability that routes the affected case and evidence to the designated handling-review service and waits for a recorded decision. Missing or conflicting evidence keeps the hold in place. Policy $P_1$ grants submission for review within a defined scope; dispatch still requires an independently issued clearance for the specified item, action, and destination. Neither the new category nor an agent's recommendation supplies that clearance.
+DEVELOP builds a coordinated diagnostic capability that correlates records from both machines and their controller, checks the proposed dependency, and produces a maintenance recommendation. This extends the earlier single-machine procedure; adding vocabulary alone does not implement it. The proposed operating scope names M17, M18, and C4. Policy $P_1$ requires an independently issued grant for the additional diagnostic reads. That grant permits neither controller reset nor interruption of either machine. Any such intervention needs its own authority decision covering the affected assets; the capability cannot grant it to itself.
 
-Tests cover ordinary returns, erroneous damage reports, confirmed exceptions, missing assessments, expired clearances, migration of existing records, and stale-worker requests. Expected outcomes are defined before release. If validation and authority review pass, an independent gateway approves exact bundle $B_1$. The controller checks state compatibility and advances $Q_{\mathrm{warehouse}}$ from epoch 42 to 43. Action-boundary enforcement rejects obsolete epoch-42 requests. E17's case resumes in the approved review workflow; dispatch remains blocked until its separate clearance conditions hold. The decision record links the original report, model change, and release approval.
+Tests cover independent machines, coincidental simultaneous faults, confirmed shared control, incomplete dependency evidence, out-of-scope diagnostic access, expired grants, state migration, and stale-worker requests. Expected outcomes precede release. If validation and authority review pass, the independent gateway approves exact bundle $B_1$. The deployment controller checks state compatibility and advances $Q_{\mathrm{maintenance}}$ from epoch 42 to 43. Action-boundary enforcement rejects obsolete epoch-42 requests. The case resumes with coordinated diagnosis within the granted scope, while resets remain blocked unless separately authorized. The decision record links the anomaly, ontology extension, new capability, scope, and grants.
 
 ## A plausible but incompatible candidate
 
-A competing branch adds only `DamagedBatteryReturn` as a subclass of `ReturnItem`, retains the ordinary dispatch capability, and calls the change additive. Parsing, logical consistency, and generic item shapes can all pass. Yet the new category inherits eligibility for the ordinary dispatch routine without the required assessment path. The independent clearance guard should still block the effect. That final safeguard does not make the candidate workflow compatible.
+A competing branch adds only `CoupledMachine` as a subclass of `Machine`, retains the single-machine reset procedure, and calls the change additive. Parsing, logical consistency, and generic machine shapes can all pass. Yet the new category inherits reset eligibility under a procedure that assumes an independent target. The affected-asset authorization guard should still block an intervention whose impact or authority is unresolved. That safeguard does not make the candidate procedure compatible.
 
-A differential fixture contains `DamagedBatteryReturn(x)` without an assertion of `ReturnItem(x)`. Comparing it before and after the subclass axiom isolates the newly inferred dispatch eligibility. E17 is a separate case: it was already a return item, so the new axiom does not newly classify that same device. Its regression case instead checks that an unresolved handling concern leads to a hold and specialist review, rather than an ordinary dispatch proposal.
+A differential fixture contains `CoupledMachine(x)` without an assertion of `Machine(x)`. Comparing it before and after the subclass axiom isolates newly inferred reset eligibility. M17 and M18 are separate regression cases: both were already machines, so the new axiom does not newly classify those same assets. Their cases check that shared control invalidates the independent-reset assumption and requires coordinated diagnosis and an explicit authority review.
 
-The release gate rejects the incomplete candidate. If an implementation incorrectly treats category membership as clearance or bypasses the action guard, the proposal could become an unauthorized dispatch; that implementation violates the stated enforcement assumptions. If the required authority obligation cannot be established, automatic promotion is refused. These are analytical checks, not measured detection results. One device and one fault do not establish coverage of every future handling exception.
+The release gate rejects the incomplete candidate. Treating category membership as permission to reset the controller, or checking only the named machine while ignoring affected assets, would violate the stated enforcement assumptions. An unestablished authority obligation prevents automatic promotion. These are analytical checks, not measured detection results; one constructed dependency does not establish coverage of every future anomaly.
 
 # Failure modes, tradeoffs, and boundaries
 

@@ -5,9 +5,9 @@
   "issued_at": "2026-10-10T03:00:00Z",
   "valid_until": "2099-01-01T00:00:00Z",
   "issuer_principal_id": "independent-approval-gateway",
-  "domain_id": "warehouse-returns-a",
+  "domain_id": "factory-maintenance-a",
   "candidate": {
-    "sha256": "sha256:b92a41ebe64e37d87a74099d74c893196499bca36b1d4b53b1ff88348f3b80d6",
+    "sha256": "sha256:c538170f890a70d04758c214d748eec06abd67c730b2efc3c49ea5f8b3100e06",
     "locator": "fixtures/operating-bundle-manifest.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
@@ -23,7 +23,7 @@
   },
   "evidence": [
     {
-      "sha256": "sha256:9bf69508ac72889cba20fb1f1ebb18c871c108fe2ba69432e2622afe8e2734eb",
+      "sha256": "sha256:2700b1e00c68783ed67f20d09f528430670f5c8de1a308209c1a802791762739",
       "locator": "fixtures/validation-evidence.json",
       "media_type": "application/json",
       "display_version": "fixture-1"
@@ -39,31 +39,31 @@
     },
     "comparison_scope": {
       "sha256": "sha256:0958e0e0f9add1bb67a5af277daeda49838e5e580aeb36533805f6770183d1d7",
-      "locator": "fixture:bounded-warehouse-return-population",
+      "locator": "fixture:bounded-maintenance-asset-population",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
     "new_permissions": [
-      "Route a DamagedBatteryReturn case to specialist handling review under an independent review-workflow grant."
+      "Read diagnostic records for M17, M18, and controller C4 under a scoped grant; no reset or interruption permission is added."
     ],
     "removed_permissions": [],
     "undecided_cases": [],
     "required_grant_ids": [
-      "grant-specialist-handling-review"
+      "grant-coordinated-diagnostic-read"
     ]
   },
   "authorized_grants": [
     {
-      "grant_id": "grant-specialist-handling-review",
-      "issuer_principal_id": "warehouse-policy-owner",
+      "grant_id": "grant-coordinated-diagnostic-read",
+      "issuer_principal_id": "maintenance-policy-owner",
       "grant_artifact": {
         "sha256": "sha256:ae3f943fe7752554dd7dcfcfc978bd318d7cddd517fbb77a9478b558b3eaaf05",
-        "locator": "fixture:independent-specialist-handling-review-grant",
+        "locator": "fixture:independent-coordinated-diagnostic-read-grant",
         "media_type": "application/octet-stream",
         "display_version": "fixture-1"
       },
-      "domain_id": "warehouse-returns-a",
-      "scope_description": "Route selected damaged-battery returns to specialist handling review; ordinary dispatch remains subject to independent handling clearance.",
+      "domain_id": "factory-maintenance-a",
+      "scope_description": "Read diagnostic records for M17, M18, and C4; resets and interruptions require separate authorization covering affected assets.",
       "valid_until": "2099-01-01T00:00:00Z"
     }
   ],

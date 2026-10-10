@@ -3,13 +3,13 @@
   "report_id": "unclassified-mismatch-43",
   "created_at": "2026-10-10T03:00:00Z",
   "context": {
-    "domain_id": "warehouse-returns-a",
+    "domain_id": "factory-maintenance-a",
     "bundle_digest": "sha256:0c0e274d2c2d34804415f343b9cd444f643288289f6d734be92911b6ef125ca2",
     "semantic_snapshot_digest": "sha256:5971eeedb0430376d5246404a917f16c0ff9f70e5b62dc6566a9dc32e38d5681",
     "deployment_epoch": 6,
     "state_epoch": 3,
-    "principal_id": "returns-runtime",
-    "workflow_id": "return-42",
+    "principal_id": "maintenance-runtime",
+    "workflow_id": "maintenance-42",
     "knowledge_read_view": "transaction:819",
     "knowledge_consistency": "transaction_watermark",
     "knowledge_freshness_policy": {
@@ -29,14 +29,14 @@
   },
   "observation": {
     "sha256": "sha256:b8020e96ab591cee07518024c246aefd0682e8da5c2b43d1340bb4d3756856b0",
-    "locator": "fixture:damaged-battery-return-observation",
+    "locator": "fixture:correlated-machine-fault-observation",
     "media_type": "application/octet-stream",
     "display_version": "fixture-1"
   },
   "evidence": [
     {
       "sha256": "sha256:0c5ea609549bf4ed98fa2e337933f4c7d1ed9d8671d181d3cc52c08c09907cff",
-      "locator": "fixture:return-inspection-evidence",
+      "locator": "fixture:maintenance-report-evidence",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -48,19 +48,19 @@
   "failed_concepts": [],
   "insufficient_procedure_refs": [],
   "explanation": "The observation cannot yet be assigned a diagnostic category; preserve the raw evidence without forcing a conceptual or procedural diagnosis.",
-  "operational_consequence": "Ordinary dispatch for return-42 is held under the independent handling-clearance rule pending investigation.",
+  "operational_consequence": "Affected resets for maintenance-42 are held under the affected-asset authorization rule pending investigation.",
   "disposition": {
     "affected_workflow_ids": [
-      "return-42"
+      "maintenance-42"
     ],
     "action": "suspend_affected_work",
     "rule": {
       "sha256": "sha256:587e3499ab7b2f94737cfdcad0e5c12e76ba2f91ea96a96da3b62fa40dbd43ed",
-      "locator": "fixture:independent-handling-clearance-rule",
+      "locator": "fixture:affected-asset-authorization-rule",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
-    "rationale": "The independent handling-clearance rule blocks dispatch until the exception is assessed."
+    "rationale": "The affected-asset authorization rule blocks resets while impact or authority remains unresolved."
   },
   "correlation_id": "unclassified-change-43"
 }

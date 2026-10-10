@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "bundle_id": "warehouse-returns-specialist-review-1",
+  "bundle_id": "maintenance-coordinated-diagnosis-1",
   "created_at": "2026-10-10T03:00:00Z",
-  "domain_id": "warehouse-returns-a",
+  "domain_id": "factory-maintenance-a",
   "semantic_snapshot": {
-    "sha256": "sha256:5b7a1e2d35a6d40d76260ff7fa29f271918faacb273297a22824b776b11e2c1c",
+    "sha256": "sha256:90c569fc180b660cae3ab2f3ca57a6390008e1bf827d3d3c6d5e8726a225d6f4",
     "locator": "fixtures/semantic-snapshot.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
@@ -12,7 +12,7 @@
   "capabilities": [
     {
       "sha256": "sha256:1301d972c02cbd91ab8dbdc35269dad7cd8bb370b56e4e9df6d2768df6e8a102",
-      "locator": "fixture:specialist-handling-review-capability",
+      "locator": "fixture:coordinated-diagnostic-read-capability",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -28,7 +28,7 @@
   "tool_definitions": [
     {
       "sha256": "sha256:aab2a4321fd1306b7aa2ff464b5ff89ddb8196b75124e87a9e02d99a13c8b32f",
-      "locator": "fixture:specialist-handling-review-tool-schema",
+      "locator": "fixture:coordinated-diagnostic-read-tool-schema",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -36,7 +36,7 @@
   "tool_adapters": [
     {
       "sha256": "sha256:5fa28859fb9d1021d4e2f9ec1e1161e428c183232d094113c3e39933480f3b94",
-      "locator": "fixture:specialist-handling-review-tool-adapter",
+      "locator": "fixture:coordinated-diagnostic-read-tool-adapter",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -58,7 +58,7 @@
   ],
   "authority_policy": {
     "sha256": "sha256:e8a630de4853effee60a5b3990fcee20ef9c86d60c11e1fb30c1c2eb0708d5b2",
-    "locator": "fixture:warehouse-returns-review-authority-policy",
+    "locator": "fixture:maintenance-diagnostic-authority-policy",
     "media_type": "application/octet-stream",
     "display_version": "fixture-1"
   },

@@ -120,7 +120,7 @@ class ContractTests(unittest.TestCase):
         value = fixture("ontology-mismatch-report.json")
         value["mismatch_categories"] = ["constraint_violation"]
         value["failed_concepts"] = []
-        value["explanation"] = "A required handling-clearance field is absent."
+        value["explanation"] = "Required affected-asset authorization is absent."
         validator("ontology-mismatch-report.schema.json").validate(value)
 
     def test_permitted_consequential_action_requires_freshness_receipt(self):

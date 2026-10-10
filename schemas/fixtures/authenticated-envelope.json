@@ -1,6 +1,6 @@
 {
   "payload": {
-    "sha256": "sha256:b6bac63a79e79e9b5174b30d3477c8e19cbf4130e0e292932ee92604f3d2809e",
+    "sha256": "sha256:606ea730d902611b41271b800d58cbf3f215d214a1c56bece2365185f1e12a51",
     "locator": "fixtures/decision-record.json",
     "media_type": "application/json",
     "display_version": "fixture-1"
@@ -10,7 +10,7 @@
     "issued_at": "2026-10-10T03:00:00Z",
     "authentication_method": "detached_signature",
     "covered_artifact": {
-      "sha256": "sha256:b6bac63a79e79e9b5174b30d3477c8e19cbf4130e0e292932ee92604f3d2809e",
+      "sha256": "sha256:606ea730d902611b41271b800d58cbf3f215d214a1c56bece2365185f1e12a51",
       "locator": "fixtures/decision-record.json",
       "media_type": "application/json",
       "display_version": "fixture-1"

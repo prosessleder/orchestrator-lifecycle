@@ -3,13 +3,13 @@
   "decision_id": "decision-42",
   "recorded_at": "2026-10-10T03:00:00Z",
   "context": {
-    "domain_id": "warehouse-returns-a",
-    "bundle_digest": "sha256:b92a41ebe64e37d87a74099d74c893196499bca36b1d4b53b1ff88348f3b80d6",
-    "semantic_snapshot_digest": "sha256:5b7a1e2d35a6d40d76260ff7fa29f271918faacb273297a22824b776b11e2c1c",
+    "domain_id": "factory-maintenance-a",
+    "bundle_digest": "sha256:c538170f890a70d04758c214d748eec06abd67c730b2efc3c49ea5f8b3100e06",
+    "semantic_snapshot_digest": "sha256:90c569fc180b660cae3ab2f3ca57a6390008e1bf827d3d3c6d5e8726a225d6f4",
     "deployment_epoch": 7,
     "state_epoch": 4,
-    "principal_id": "returns-runtime",
-    "workflow_id": "return-42",
+    "principal_id": "maintenance-runtime",
+    "workflow_id": "maintenance-42",
     "knowledge_read_view": "transaction:819",
     "knowledge_consistency": "transaction_watermark",
     "knowledge_freshness_policy": {
@@ -27,11 +27,11 @@
       "display_version": "fixture-1"
     }
   },
-  "authenticated_principal_id": "returns-runtime",
+  "authenticated_principal_id": "maintenance-runtime",
   "observations": [
     {
       "sha256": "sha256:b8020e96ab591cee07518024c246aefd0682e8da5c2b43d1340bb4d3756856b0",
-      "locator": "fixture:damaged-battery-return-observation",
+      "locator": "fixture:correlated-machine-fault-observation",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
@@ -40,7 +40,7 @@
     {
       "evidence": {
         "sha256": "sha256:eda4aae8abf8c4668985f4126ada3a419e76257cb476898559d1c2ef0137fa5f",
-        "locator": "fixture:current-specialist-review-eligibility",
+        "locator": "fixture:current-diagnostic-read-authorization",
         "media_type": "application/octet-stream",
         "display_version": "fixture-1"
       },
@@ -70,11 +70,11 @@
   },
   "policy_decision": "permit",
   "action_request": {
-    "action_id": "route-to-specialist-handling-review",
-    "target_id": "return-42",
+    "action_id": "read-coordinated-diagnostics",
+    "target_id": "C4",
     "parameters": {
       "sha256": "sha256:e28d532bfbb1eca2ed42c8d8a6f02c5b709c5534e5afe73f6d460523d90a9044",
-      "locator": "fixture:specialist-handling-review-parameters",
+      "locator": "fixture:coordinated-diagnostic-read-parameters",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
@@ -87,7 +87,7 @@
     "state_revision": "820",
     "critical_inputs": {
       "sha256": "sha256:37be970a9561a623a5acae2aca19b0b354be4cac0e01a6019b5ddbfdca72a6fd",
-      "locator": "fixture:revalidated-specialist-review-eligibility",
+      "locator": "fixture:revalidated-diagnostic-read-authorization",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     },
@@ -111,17 +111,17 @@
   "outcome_evidence": [
     {
       "sha256": "sha256:1ae194fd139d70f848499181dc342c93960e41df7d14381e73f80db0d4d16736",
-      "locator": "fixture:confirmed-specialist-review-referral",
+      "locator": "fixture:confirmed-diagnostic-read",
       "media_type": "application/octet-stream",
       "display_version": "fixture-1"
     }
   ],
   "gateway_receipt": {
     "sha256": "sha256:7bbef27435d0cbad99a8e0188ff8dc297ff2a6560f49dd8c3f5ce5e673855e78",
-    "locator": "fixture:accepted-specialist-review-receipt",
+    "locator": "fixture:accepted-diagnostic-read-receipt",
     "media_type": "application/octet-stream",
     "display_version": "fixture-1"
   },
-  "idempotency_key": "return-42-review-1",
+  "idempotency_key": "maintenance-42-diagnosis-1",
   "correlation_id": "change-42"
 }

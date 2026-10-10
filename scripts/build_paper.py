@@ -72,7 +72,7 @@ def main():
     source = source.replace('# References {.unnumbered}',
         '# References {.unnumbered}\n\n```{=latex}\n\\begingroup\n'
         '\\small\n\\setlength{\\parindent}{-1.5em}\n'
-        '\\setlength{\\leftskip}{1.5em}\n\\setlength{\\parskip}{6pt}\n```')
+        '\\setlength{\\leftskip}{1.5em}\n\\setlength{\\parskip}{4pt}\n```')
     source += '\n\n```{=latex}\n\\endgroup\n```\n'
     figures = iter(FIGURES)
     def render_figure(match):
