@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "This repository contains manuscript and research artifacts. Please cite the architectural preprint using preferred-citation; add its published DOI once assigned."
 type: dataset
 title: "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems"
-version: 0.2.5
+version: 0.2.6
 authors:
   - family-names: "O'Brien"
     given-names: Timothy
@@ -25,5 +25,5 @@ preferred-citation:
       given-names: Timothy
       orcid: "https://orcid.org/0009-0001-2589-347X"
   year: 2026
-  version: 0.2.5
+  version: 0.2.6
   url: "https://github.com/prosessleder/orchestrator-lifecycle"

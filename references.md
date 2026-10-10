@@ -1,6 +1,6 @@
 # References
 
-Bibliographic and access checks were conducted on **9 October 2026, America/Los_Angeles**. The keys below are stable manuscript identifiers. A primary abstract supports the claims it explicitly makes; it does not establish that an unmentioned mechanism is absent from the full paper. arXiv records are version-pinned where inspected. No DOI has been assigned to this manuscript.
+Bibliographic and access checks were conducted on **9 October 2026, America/Los_Angeles**. A focused security and governance follow-up was conducted on **10 October 2026** and is identified separately below. The keys below are stable manuscript identifiers. A primary abstract supports the claims it explicitly makes; it does not establish that an unmentioned mechanism is absent from the full paper. arXiv records are version-pinned where inspected. No DOI has been assigned to this manuscript.
 
 ## Architectural foundations
 
@@ -63,3 +63,12 @@ These are primary author/project documents, not equivalent to peer-reviewed rese
 - **[stardog]** Stardog. *Stardog Documentation*. [Primary documentation](https://docs.stardog.com/). Accessed 9 October 2026; implementation candidate, no verified integration claimed.
 - **[protege]** Stanford Center for Biomedical Informatics Research. *Protégé and WebProtégé*. [Primary project page](https://protege.stanford.edu/software). Accessed 9 October 2026; collaborative authoring is distinct from deployment governance.
 - **[temporal]** Temporal. *Workflow Execution Overview*. [Primary documentation](https://docs.temporal.io/workflow-execution). Accessed 9 October 2026; durable history is distinct from nondeterministic task replay and effect authorization.
+
+## Security, workflow, and scope governance (follow-up: 10 October 2026)
+
+- **[zero_trust2020]** Scott Rose, Oliver Borchert, Stu Mitchell, and Sean Connelly. *Zero Trust Architecture*. NIST SP 800-207, August 2020. [Official publication](https://doi.org/10.6028/NIST.SP.800-207). Primary record and PDF section 2 inspected.
+- **[abac2014]** Vincent Hu, David Ferraiolo, Richard Kuhn, Adam Schnitzer, Kenneth Sandlin, Robert Miller, and Karen Scarfone. *Guide to Attribute Based Access Control (ABAC) Definition and Considerations*. NIST SP 800-162, January 2014, updated 2 August 2019. [Official publication](https://doi.org/10.6028/NIST.SP.800-162). Primary record and definitions inspected.
+- **[bpmn202]** Object Management Group. *Business Process Model and Notation*, version 2.0.2, formal/2013-12-09. [Normative PDF](https://www.omg.org/spec/BPMN/2.0.2/PDF); [version catalog](https://www.omg.org/spec/BPMN/2.0.2/About-BPMN/). The PDF is dated December 2013; the catalog lists January 2014. The manuscript cites the document date. Clauses 1, 10, and 13 were inspected for scope and process/execution semantics; the complete 532-page standard was not reviewed.
+- **[ai_rmf2023]** National Institute of Standards and Technology. *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1, January 2023. [Official PDF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf). MAP 1.1, 2.1, and 2.2 inspected. This is a version-specific citation, not a claim about the status of subsequent revisions.
+- **[excessive_agency2025]** OWASP. *LLM06:2025 Excessive Agency*. [Primary risk guidance](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/). Causes, consequences, and mitigation sections inspected on 10 October 2026; living web guidance bearing the 2025 taxonomy identifier.
+- **[task_shield2024]** Feiran Jia, Tong Wu, Xin Qin, and Anna Squicciarini. *The Task Shield: Enforcing Task Alignment to Defend Against Indirect Prompt Injection in LLM Agents*. Preprint, 21 December 2024. [Versioned record](https://arxiv.org/abs/2412.16682v1); [primary full text](https://arxiv.org/html/2412.16682v1). Author list and sections 3-4 inspected. Its task-alignment objective is an antecedent; its reported experimental results were not independently reproduced here.

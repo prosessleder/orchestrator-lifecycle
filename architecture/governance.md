@@ -2,6 +2,18 @@
 
 The governance objective is controlled lifecycle evolution. Agents may suggest and implement changes without thereby acquiring authority to approve those changes, rewrite their approval rules, or issue production actions outside their existing grants.
 
+## Governing interpretation and scope
+
+Authentication and resource authorization remain necessary. This contract also requires governance of the interpretation used to select and justify an action:
+
+- Semantic and ontological scope identifies the approved vocabulary, relationships, mappings, and inference configuration for the domain.
+- Epistemic scope identifies applicable domains, admissible evidence, claim-admission requirements, and the handling of uncertainty. A generated hypothesis is not automatically an approved decision input.
+- Task and action scope identifies delegated purposes, named systems and targets, permitted effects, budgets, and approval conditions.
+
+Bind these constraints to identified instructions, snapshots, evidence policies, grants, and evaluation artifacts. Treat proposed extensions as candidate changes and assess their authority consequences independently. Additional diagnostic relevance does not grant additional intervention authority. Enforce the resulting boundary at the receiving resource; prompts and ontology labels alone cannot contain an overprivileged tool.
+
+This is complementary governance, not a claim that established security research ignores context or task purpose. See the paper's section "Governance beyond identity, access control, and workflow" for the comparison with NIST zero trust and ABAC, BPMN, the AI RMF, OWASP excessive-agency guidance, and Task Shield.
+
 ## Responsibilities and credentials
 
 | Responsibility | Permitted by default in this model | Independently governed boundary |

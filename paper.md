@@ -2,7 +2,7 @@
 title: 'The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems'
 author: "Timothy O'Brien"
 orcid: 'https://orcid.org/0009-0001-2589-347X'
-version: '0.2.5'
+version: '0.2.6'
 date: '10 October 2026'
 lang: en-US
 abstract: |
@@ -25,6 +25,8 @@ Consider an automated maintenance system authorized to diagnose faults and perfo
 The research question is: **Can autonomous software systems be organized into distinct development, operation, and improvement functions, coordinated through a shared, versioned ontology, to support continuous evolution while preserving semantic consistency, configuration reproducibility, and controlled authority?** This paper gives a reference architecture and a qualified answer: such a separation can specify enforceable release and action boundaries, provided that the semantic dependencies are actually pinned and the boundaries are mediated by trusted services. It cannot ensure that the model describes the world correctly or that an agent recognizes every unfamiliar situation.
 
 We call the three functions DEVELOP, OPERATE, and IMPROVE. OPERATE performs delegated work using approved capabilities, monitors execution and outcomes, and flags situations that may require intervention by IMPROVE or DEVELOP. IMPROVE investigates operational deficiencies and situations that challenge the current ontology, evaluates new concepts and alternative ontologies, and proposes governed changes to the system's model, capabilities, scope, and permissions. DEVELOP implements and tests executable capabilities against an identified semantic snapshot. An orchestrator coordinates their transitions and invokes independent release controls. These are responsibilities, not a requirement to run exactly three language models.
+
+In this usage, orchestration includes governance of the semantic models, evidential claims, and task scope through which agents interpret their mandates.
 
 The paper makes four contributions as an architectural synthesis:
 
@@ -73,7 +75,7 @@ GitOps supplies a complementary release discipline: declarative desired state, i
 
 The design proceeds in five steps: decompose the lifecycle into responsibilities and trust boundaries; compare those responsibilities with prior architectures; define release identities and transition contracts; challenge the contracts with semantic-change and stale-worker counterexamples; and derive conditional invariants with falsifiable evaluation criteria. The resulting artifacts are a reference architecture, illustrative interface schemas, and an evaluation design. Literature comparisons establish the design context; the examples and invariant argument provide analytical assessment. They do not substitute for an implementation study.
 
-The supplementary search log records 43 primary discovery queries and nine additional queries submitted on 9 October 2026, sources inspected, access limitations, and a claim-by-claim assessment. Searches covered autonomic computing, ontology evolution, runtime models, knowledge-graph versioning, self-evolving agents, lifecycle governance, and semantic security impact. Close matches were sought deliberately. Foundational studies and recent agent preprints were compared by architectural feature rather than by terminology alone.
+The supplementary search log records 43 primary discovery queries and nine additional queries submitted on 9 October 2026, sources inspected, access limitations, and a claim-by-claim assessment. Searches covered autonomic computing, ontology evolution, runtime models, knowledge-graph versioning, self-evolving agents, lifecycle governance, and semantic security impact. Close matches were sought deliberately. Foundational studies and recent agent preprints were compared by architectural feature rather than by terminology alone. A focused follow-up on 10 October 2026 examined identity and access control, business-process modeling, AI risk governance, excessive agency, and task alignment; its queries and source-access record appear separately in the search log.
 
 This is a targeted adversarial literature study, not a systematic review with a registered protocol, comprehensive database coverage, or an exhaustive patent search. Search indexing, inaccessible full texts, rapidly revised preprints, and differences between terminology and implementation limit coverage. A feature not observed in an inspected description is recorded as unestablished, not absent. The novelty assessment concludes that the broad thesis is anticipated and that originality of the integrated reference contract remains unestablished. The paper can be evaluated as a design contribution without converting that uncertainty into a claim of discovery.
 
@@ -117,6 +119,32 @@ The question "What happens when the system encounters something that cannot be r
 Table: Discrepancy classes and their initial operational dispositions.
 
 An unusual value or a failed procedure is not by itself evidence of a missing concept. A suspected conceptual gap is a defeasible diagnosis: bad data, a poor mapping, ambiguous language, or an unavailable procedure can explain the same symptom. OPERATE can detect residual patterns, validation failures, unexplained tool outcomes, and uncertainty, but cannot reliably recognize everything outside its representational vocabulary. Free text and raw evidence therefore remain available alongside typed fields. Reporting channels must allow "unclassified" rather than forcing every challenge into the very categories under challenge.
+
+# Governance beyond identity, access control, and workflow
+
+## Complementary control objectives
+
+Established security and business-process approaches provide important foundations for agentic systems. Zero trust emphasizes authenticated, explicitly authorized access to resources under contextual policies. Attribute-based access control (ABAC) evaluates subject, resource, operation, and environmental attributes against policy. Business Process Model and Notation (BPMN) specifies process structure, coordination, and execution semantics. These traditions address complementary control objectives; they do not form an exhaustive partition of agentic-system research. [Rose et al. (2020)](https://doi.org/10.6028/NIST.SP.800-207); [Hu et al. (2014, updated 2019)](https://doi.org/10.6028/NIST.SP.800-162); [Object Management Group (2013)](https://www.omg.org/spec/BPMN/2.0.2/PDF).
+
+The architectural distinction drawn here concerns the interpretation supplied to these controls. A valid identity and a permitted tool invocation do not, by themselves, establish that the invocation serves the delegated purpose, that its supporting claims are warranted, or that its target belongs within the intended domain. ABAC can incorporate contextual relationships, and BPMN already has execution semantics. The additional obligation is to govern the domain concepts, evidential assumptions, and scope interpretations on which an agent's selection and justification of actions depend, including changes to those inputs over time.
+
+## Semantic, epistemic, and operational scope
+
+Orchestration in this paper includes maintaining an explicit relationship among three boundaries:
+
+- **Semantic and ontological scope:** the approved entity kinds, relationships, constraints, mappings, and inference rules through which the system interprets its environment. These determine, for example, what counts as a machine, a dependency, or a completed maintenance task, and which physical or digital systems those terms denote.
+- **Epistemic scope:** the domains and conditions within which claims may support decisions, the admissible evidence sources, and the requirements for accepting or revising those claims. An observation, a model-generated hypothesis, and a verified fact can warrant different uses. Missing evidence or an unfamiliar situation may require deferral rather than an unsupported inference that expands the task.
+- **Task and action scope:** the delegated objectives, named systems and targets, permitted operations, and applicable budgets, time limits, and approval conditions. Establishing a relationship between two assets does not itself extend a delegation to both assets.
+
+These boundaries operationalize concerns already present in AI risk governance. NIST's AI Risk Management Framework calls for documenting intended purposes and deployment contexts (MAP 1.1), supported tasks (MAP 2.1), and knowledge limits and human oversight (MAP 2.2). The proposed architecture binds such constraints to identified instructions, semantic snapshots, evidence-admission policies, grants, and evaluation criteria. Epistemic scope here governs which claims may justify decisions; it neither establishes the truth of every admitted claim nor directly constrains every internal computation of a language model. [NIST (2023)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf).
+
+## Scope expansion as a security concern
+
+An agent may widen its interpretation of a task without acquiring a new credential. In the maintenance example, evidence that two machines share a controller may lead the agent to reinterpret diagnosis of one machine as permission to intervene in the coupled system. If available tools have broader privileges than the delegation, or policy decisions depend on classifications the agent can change without independent review, that expansion can produce unauthorized disclosure, modification, or disruption. The failure concerns the relationship between the delegated purpose and effective action scope; it does not imply that an agent can bypass a correctly enforced resource restriction. OWASP's excessive-agency guidance identifies excessive functionality, permissions, and autonomy as contributing conditions and recommends constrained tools and downstream authorization. [OWASP (2025)](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/).
+
+Existing agent-security research also addresses this problem beyond identity checks. Task Shield evaluates whether instructions and tool calls contribute to user-defined goals, while ontology-driven security evolution examines security consequences of semantic change. These are direct antecedents, not omissions claimed for prior work. [Jia et al. (2024)](https://arxiv.org/abs/2412.16682v1); [Peldszus et al. (2021)](https://doi.org/10.1016/j.datak.2021.101907).
+
+The Orchestrator's proposed contribution is to connect these concerns across development, operation, and improvement: changes to meaning, evidence requirements, capabilities, or operating scope become inspectable candidates whose authority consequences require independent assessment. Approved extensions are bound to a release, while consequential actions remain subject to resource-level enforcement. This governance complements authentication, identity management, access control, and workflow coordination. Its benefit is a design hypothesis requiring comparative evaluation; an ontology or an orchestration layer alone is not a security guarantee.
 
 # Lifecycle responsibilities and the operating bundle
 
@@ -433,7 +461,11 @@ Garlan, D., Cheng, S.-W., Huang, A.-C., Schmerl, B., and Steenkiste, P. (2004). 
 
 Graphwise/ONTOTEXT. *GraphDB 11.5 documentation*. [Product documentation](https://graphdb.ontotext.com/documentation/11.5/). Accessed 9 October 2026.
 
+Hu, V., Ferraiolo, D., Kuhn, R., Schnitzer, A., Sandlin, K., Miller, R., and Scarfone, K. (2014, updated 2019). *Guide to Attribute Based Access Control (ABAC) Definition and Considerations*. NIST SP 800-162. <https://doi.org/10.6028/NIST.SP.800-162>.
+
 IBM (2005). *An Architectural Blueprint for Autonomic Computing*, third edition, June. [Primary white paper](https://users.cs.fiu.edu/~sadjadi/Teaching/Autonomic%20Grid%20Computing/CIS-6612-Summer-2006/AC-Blueprint-WhitePaper-V7.pdf).
+
+Jia, F., Wu, T., Qin, X., and Squicciarini, A. (2024). The Task Shield: Enforcing Task Alignment to Defend Against Indirect Prompt Injection in LLM Agents. Preprint, 21 December. [arXiv:2412.16682v1](https://arxiv.org/abs/2412.16682v1).
 
 Jørgensen, B. N., and Ma, Z. G. (2026). Governing Agentic AI in Enterprise Workflows: A Bounded-Autonomy Framework for Delegated Authority and Controlled Execution. *Information*, 17(9), 923. <https://doi.org/10.3390/info17090923>.
 
@@ -441,13 +473,21 @@ Kamburjan, E., Bencomo, N., Johnsen, E. B., and Tapia Tarifa, S. L. (2026). Decl
 
 Kephart, J. O., and Chess, D. M. (2003). The Vision of Autonomic Computing. *Computer*, 36(1), 41-50. <https://doi.org/10.1109/MC.2003.1160055>.
 
+National Institute of Standards and Technology (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1, January. [Official framework](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf).
+
 O'Brien, T. (2026). *The Orchestrator Series*: Orchestrator: Your Next Job Title; Delegated Intelligence; Orchestrating Organizations. Discursive. [Series reader](https://readorchestrator.com). Manuscript working copies consulted for integration.
 
+Object Management Group (2013). *Business Process Model and Notation (BPMN)*, version 2.0.2. Document formal/2013-12-09, December. [Specification](https://www.omg.org/spec/BPMN/2.0.2/PDF).
+
 OpenGitOps. *GitOps Principles*. CNCF project. [Project documentation](https://opengitops.dev/). Accessed 9 October 2026.
+
+OWASP (2025). *LLM06:2025 Excessive Agency*. Gen AI Security Project. [Risk guidance](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/). Accessed 10 October 2026.
 
 Peldszus, S., Bürger, J., Kehrer, T., and Jürjens, J. (2021). Ontology-Driven Evolution of Software Security. *Data & Knowledge Engineering*, 134, 101907. <https://doi.org/10.1016/j.datak.2021.101907>.
 
 Qin, X., Luan, S., See, J., Boukhers, Z., Yang, C., and Li, Z. (2026). Governed Capability Evolution: Lifecycle-Time Compatibility Checking and Rollback for AI-Component-Based Systems, with a Proof-of-Concept Evaluation on Embodied Agents. *Information and Software Technology*, 200, 108337, forthcoming December 2026. <https://doi.org/10.1016/j.infsof.2026.108337>. Accepted manuscript available 29 September 2026: [arXiv:2604.08059v6](https://arxiv.org/abs/2604.08059v6).
+
+Rose, S., Borchert, O., Mitchell, S., and Connelly, S. (2020). *Zero Trust Architecture*. NIST SP 800-207, August. <https://doi.org/10.6028/NIST.SP.800-207>.
 
 SLSA. *Provenance*, specification v1.0. [Specification](https://slsa.dev/spec/v1.0/provenance). Accessed 9 October 2026.
 

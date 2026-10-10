@@ -1,6 +1,6 @@
 # Literature search and source-access record
 
-Search date: **9 October 2026, America/Los_Angeles**. Search strings below were submitted for this study, followed by targeted primary-source inspection and bibliographic checks. This is a reconstructible record of a targeted literature study, not a preregistered systematic review; no exhaustive coverage or search-result denominator is claimed.
+Initial search date: **9 October 2026, America/Los_Angeles**. A focused follow-up dated 10 October is recorded at the end of this document. Search strings below were submitted for this study, followed by targeted primary-source inspection and bibliographic checks. This is a reconstructible record of a targeted literature study, not a preregistered systematic review; no exhaustive coverage or search-result denominator is claimed.
 
 ## Scope and screening rule
 
@@ -167,3 +167,20 @@ site:help.zenodo.org "Create a new version"
 ```
 
 These checks also identified EvoOntology and the software-security co-evolution paper, supported the OWL/SHACL distinctions, and supplied current publication-metadata guidance. Direct official pages were inspected for RDF Dataset Canonicalization, SLSA v1.0 provenance, Apache Jena, GraphDB 11.5, Stardog, Protégé/WebProtégé, Temporal workflow execution, Zenodo quick start, rights/licensing, and version management. The direct MDPI page returned 429 and Fraunhofer returned an access challenge; neither was treated as a successfully read full text. The verified Zenodo version-management page was `/docs/deposit/manage-versions/`.
+
+## Focused follow-up: security, workflow, and scope governance
+
+Date: **10 October 2026, America/Los_Angeles**. These six exact queries were submitted separately from the earlier search:
+
+```text
+site.nist.gov zero trust architecture resource access authentication authorization scope policy SP 800-207
+site.owasp.org agentic AI excessive agency scope permissions goals semantics
+site.nist.gov AI RMF map context intended purpose knowledge limits system boundaries
+site.omg.org spec BPMN 2.0.2 PDF business process execution semantics
+site.nist.gov AI RMF 1.0 MAP 1.1 intended purpose context knowledge limits 2.2
+site.arxiv.org AgentDojo benchmark prompt injection attacks defenses 2024
+```
+
+Direct primary-source inspection covered NIST SP 800-207 section 2, SP 800-162 definitions, BPMN 2.0.2 clauses 1, 10, and 13, AI RMF 1.0 MAP 1.1/2.1/2.2, OWASP LLM06:2025 causes and mitigations, and Task Shield v1 sections 3-4. The AgentDojo record was a discovery lead; no new reproduction or quantitative comparison was performed. Bibliographic details, URLs, and access limits are recorded in [references.md](../references.md).
+
+The comparison supports distinguishing resource authorization, workflow coordination, and governance of decision-bearing interpretation. It does not support a quantitative claim that most research neglects semantics or an absence claim about prior task-scope controls. ABAC incorporates context and relationships; BPMN has execution semantics; the AI RMF addresses purpose and knowledge limits; Task Shield explicitly examines task alignment. These findings reinforce the paper's position as an architectural synthesis with unestablished exact-combination originality.

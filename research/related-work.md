@@ -58,6 +58,12 @@ OpenGitOps supplies declarative, immutable, pulled, reconciled deployment; MLflo
 
 Current primary project documents also describe governed semantic artifacts, ontology edit ledgers, and evolution/operation planes [inferal_draft, agent_utilities, self_evolving_software]. Their archival chronology has not been established; their content is a lead for follow-up, not a dated priority proof. [Inferal draft](https://ontosome.com/modules/artifact-evolution/spec/), [ontology system](https://github.com/Knuckles-Team/agent-utilities/blob/main/docs/architecture/ontology_system.md), [self-evolving software](https://github.com/douglas-grishen/self-evolving-software).
 
+## Security and workflow scope (10 October 2026 follow-up)
+
+Resource authorization and process coordination are established foundations, represented here by [NIST zero trust](https://doi.org/10.6028/NIST.SP.800-207), [ABAC](https://doi.org/10.6028/NIST.SP.800-162), and [BPMN 2.0.2](https://www.omg.org/spec/BPMN/2.0.2/PDF). Their existing contextual and execution semantics preclude a categorical claim that earlier controls lack meaning or scope.
+
+The [AI RMF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) addresses intended use and knowledge limits. [OWASP excessive-agency guidance](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) addresses excessive tool functionality, privileges, and autonomy. [Task Shield](https://arxiv.org/abs/2412.16682v1) supplies a direct task-alignment antecedent. The lifecycle contract adds an explicit integration obligation for versioned interpretation, evidence requirements, candidate changes, and independently assessed action scope; its incremental benefit remains to be measured.
+
 ## Contribution scope
 
 The contribution is an **architectural synthesis and explicit reference contract**: one inspectable path from an operational mismatch to a candidate semantic change, dependent capability development, independent promotion, and state-aware rollback. Originality of that exact combination remains unestablished. The contract specifies joint obligations, failure boundaries, and a way to evaluate their interaction. A new algorithm, empirical improvement, formal global safety guarantee, or first-of-kind system is not established by this study. The [contribution assessment](contribution-assessment.md) relates those limits to proposed evaluation hypotheses.

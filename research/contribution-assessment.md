@@ -1,6 +1,6 @@
 # Contribution scope and evaluation hypotheses
 
-Assessment date: **9 October 2026, America/Los_Angeles**.
+Initial assessment: **9 October 2026, America/Los_Angeles**. Security and scope comparison updated **10 October 2026**.
 
 The architecture combines substantially anticipated ingredients into an explicit reference contract and a falsifiable research agenda. The literature study does **not** establish originality or priority of the exact combination. No complete operational implementation or empirical validation is reported.
 
@@ -19,6 +19,7 @@ The evidence and access levels are in [related-work.md](related-work.md), [searc
 | Semantic change analysis for security and dependent systems | Peldszus et al. | Established security co-evolution concern |
 | Ontology as a semantic contract for bounded delegated authority | Jørgensen and Ma; Symbolic Separation | Direct semantic/authority-contract precedents |
 | Versioned evidence for reconstructable release decisions | PROV-O, in-toto, MLflow, EIO-Agents | Established provenance and evaluation mechanisms |
+| Purpose, knowledge limits, and task alignment | NIST AI RMF; Task Shield; OWASP excessive-agency guidance | Established governance/security concerns; lifecycle integration is the proposed contribution |
 | Joint contract connecting semantic mismatch, dependencies, authority effects, deployment epochs, and state rollback | Combined antecedents above | Proposed specification and integration; exact-combination originality unestablished |
 
 Sources: [IBM](https://users.cs.fiu.edu/~sadjadi/Teaching/Autonomic%20Grid%20Computing/CIS-6612-Summer-2006/AC-Blueprint-WhitePaper-V7.pdf), [Klein–Noy](https://ceur-ws.org/Vol-71/Klein.pdf), [EvoOntology](https://arxiv.org/html/2609.15779v1), [Governed Capability Evolution](https://arxiv.org/html/2604.08059v6), [Peldszus et al.](https://researcher.itu.dk/p/en/research-outputs/ontology-driven-evolution-of-software-security), [Jørgensen–Ma](https://doi.org/10.3390/info17090923), [EIO-Agents](https://arxiv.org/abs/2610.07675v1).
@@ -57,3 +58,7 @@ A prospective evaluation includes adversarial semantic changes, taxonomy additio
 ## Limits of the study
 
 This was an English-language, targeted web search with backward/adjacent leads and current primary documentation. It did not systematically search every publisher index, all languages, patents, unpublished work, commercial deployments, or every repository history. Primary abstracts were used where full texts were inaccessible; those cannot support negative absence claims. Recent preprints may change and should be rechecked before release. A novelty guarantee cannot follow from this search, and the evidence actively argues against broad novelty.
+
+## Security comparison qualification
+
+The 10 October follow-up supports a distinction among control objectives, not a claim that identity, access control, or business processes exhaust prior research. The added manuscript section defines semantic, epistemic, and task/action scope and explains a conditional risk: overbroad tools or mutable decision inputs can allow an agent's expanded task interpretation to produce effects beyond its delegation. Correctly enforced resource restrictions remain effective. The ontology and orchestration mechanisms require comparative evaluation against context-aware policy and task-alignment baselines; no security advantage is established by terminology alone.
