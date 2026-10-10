@@ -2,7 +2,7 @@
 title: 'The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems'
 author: "Timothy O'Brien"
 orcid: 'https://orcid.org/0009-0001-2589-347X'
-version: '0.2.4'
+version: '0.2.5'
 date: '10 October 2026'
 lang: en-US
 abstract: |
@@ -24,7 +24,7 @@ Consider an automated maintenance system authorized to diagnose faults and perfo
 
 The research question is: **Can autonomous software systems be organized into distinct development, operation, and improvement functions, coordinated through a shared, versioned ontology, to support continuous evolution while preserving semantic consistency, configuration reproducibility, and controlled authority?** This paper gives a reference architecture and a qualified answer: such a separation can specify enforceable release and action boundaries, provided that the semantic dependencies are actually pinned and the boundaries are mediated by trusted services. It cannot ensure that the model describes the world correctly or that an agent recognizes every unfamiliar situation.
 
-We call the three functions DEVELOP, OPERATE, and IMPROVE. OPERATE performs delegated work using approved capabilities. IMPROVE investigates operational deficiencies and situations that challenge the current ontology, evaluates new concepts and alternative ontologies, and proposes governed changes to the system's model, capabilities, scope, and permissions. DEVELOP implements and tests executable capabilities against an identified semantic snapshot. An orchestrator coordinates their transitions and invokes independent release controls. These are responsibilities, not a requirement to run exactly three language models.
+We call the three functions DEVELOP, OPERATE, and IMPROVE. OPERATE performs delegated work using approved capabilities, monitors execution and outcomes, and flags situations that may require intervention by IMPROVE or DEVELOP. IMPROVE investigates operational deficiencies and situations that challenge the current ontology, evaluates new concepts and alternative ontologies, and proposes governed changes to the system's model, capabilities, scope, and permissions. DEVELOP implements and tests executable capabilities against an identified semantic snapshot. An orchestrator coordinates their transitions and invokes independent release controls. These are responsibilities, not a requirement to run exactly three language models.
 
 The paper makes four contributions as an architectural synthesis:
 
@@ -122,7 +122,7 @@ An unusual value or a failed procedure is not by itself evidence of a missing co
 
 ## Three functions and one coordination responsibility
 
-OPERATE accepts work, interprets observations under an approved $S$, invokes capabilities, and records outcomes. It may update permitted case facts and operational state. It cannot overwrite the authoritative semantic snapshot or obtain a release approval merely by declaring that a new interpretation is useful. Its response to uncertainty is configurable: continue unaffected work, invoke a bounded fallback, pause the affected case, or escalate.
+OPERATE accepts work, interprets observations under an approved $S$, invokes capabilities, and records outcomes. It monitors execution and outcomes, preserves relevant evidence, and flags anomalies or capability gaps that may require IMPROVE's assessment or authorized development by DEVELOP through the orchestrator. It may update permitted case facts and operational state. It cannot overwrite the authoritative semantic snapshot or obtain a release approval merely by declaring that a new interpretation is useful. Its response to uncertainty is configurable: continue unaffected work, invoke a bounded fallback, pause the affected case, or escalate.
 
 IMPROVE assesses operational performance, unfamiliar situations, and candidate extensions or alternatives to the current ontology. It checks competing explanations, gathers permitted evidence, and proposes ontology, mapping, policy, capability, or evaluation changes. It can create a candidate branch and describe a provisional interpretation. Its credentials give it access to a proposal space, not the production reference. It may recommend no change or reject a misleading report.
 
