@@ -72,7 +72,8 @@ def main():
     source = source.replace('# References {.unnumbered}',
         '# References {.unnumbered}\n\n```{=latex}\n\\begingroup\n'
         '\\small\n\\setlength{\\parindent}{-1.5em}\n'
-        '\\setlength{\\leftskip}{1.5em}\n\\setlength{\\parskip}{3pt}\n```')
+        '\\setlength{\\leftskip}{1.5em}\n\\setlength{\\parskip}{3pt}\n'
+        '\\interlinepenalty=10000\n```')
     source += '\n\n```{=latex}\n\\endgroup\n```\n'
     figures = iter(FIGURES)
     def render_figure(match):
@@ -105,6 +106,28 @@ def main():
                     '-V', 'orcid-id=' + orcid.rsplit('/', 1)[-1],
                     '--include-in-header=' + str(ROOT / 'scripts/paper-header.tex'),
                     '-o', str(release / 'paper.tex')], check=True)
+    # These short prose tables fit on one page; floats prevent orphaned rows.
+    tex_path = release / 'paper.tex'
+    tex = tex_path.read_text()
+    table_number = 0
+    def keep_table_together(match):
+        nonlocal table_number
+        table_number += 1
+        table = match[0]
+        caption_start = table.index(r'\caption{')
+        caption_end = table.index(r'\tabularnewline', caption_start)
+        preamble = table[:caption_start].replace(r'\begin{longtable}[]', r'\begin{tabular}')
+        caption = table[caption_start:caption_end]
+        header = table[table.index(r'\toprule'):table.index(r'\endfirsthead')]
+        body = table[table.index(r'\endlastfoot') + len(r'\endlastfoot'):table.index(r'\end{longtable}')]
+        gap = '7pt' if table_number == 1 else '4pt'
+        body = body.replace(r'\\', r'\\' + '\n' + r'\addlinespace[' + gap + ']')
+        return ('\n' + r'\begin{table}[!htbp]\centering\footnotesize' + '\n'
+                + caption + '\n' + r'\medskip' + '\n' + preamble + header + body
+                + r'\bottomrule' + '\n' + r'\end{tabular}' + '\n' + r'\end{table}' + '\n')
+    tex = re.sub(r'\\begin\{longtable\}.*?\\end\{longtable\}',
+                 keep_table_together, tex, flags=re.S)
+    tex_path.write_text(tex)
     if args.pdf:
         subprocess.run(['tectonic', '--outdir', str(release), '--keep-logs', str(release / 'paper.tex')], check=True)
     print(release / ('paper.pdf' if args.pdf else 'paper.tex'))

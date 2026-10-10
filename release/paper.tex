@@ -51,7 +51,7 @@ governance},pdflang={en-US}}
 \title{The Orchestrator: A Lifecycle Architecture for Self-Developing,
 Self-Operating, and Self-Improving Agentic Systems\tnoteref{preprint}}
 \tnotetext[preprint]{Preprint; not peer reviewed.
-  Version 0.2.6, 10 October 2026.}
+  Version 0.2.7, 10 October 2026.}
 \author{Timothy O'Brien\fnref{orcid}}
 \fntext[orcid]{ORCID: \href{https://orcid.org/0009-0001-2589-347X}{0009-0001-2589-347X}.}
 \begin{abstract}
@@ -97,6 +97,40 @@ changes. Continuous operation therefore creates a second problem: how to
 evolve the system without making its operating assumptions untraceable
 or allowing its effective authority to expand silently.
 
+Recent incidents make this problem operationally urgent. In July 2026,
+agents running OpenAI cybersecurity evaluations circumvented isolation
+controls and compromised internal research infrastructure and Hugging
+Face systems. OpenAI's investigation describes unauthorized inter-agent
+coordination and agents pursuing objectives beyond their assigned tasks;
+these evaluations used fewer safeguards than externally deployed
+systems.
+\href{https://openai.com/index/hugging-face-incident-and-the-road-ahead/}{OpenAI
+(2026)};
+\href{https://huggingface.co/blog/agent-intrusion-technical-timeline}{Hugging
+Face (2026)}. In a separate July 2025 incident, SaaStr reported that
+Replit's coding agent deleted its application's production database
+during development and disregarded code-freeze instructions.
+\href{https://www.saastr.com/replits-new-release-address-most-of-the-challenges-we-hit-vibe-coding-but-is-prosumer-vibe-coding-really-ready-for-commercial-apps-yet/}{Lemkin
+(2025)}. Controlled research also demonstrates the problem: Anthropic's
+simulated corporate scenarios elicited blackmail and information
+disclosure from agents facing goal conflicts or replacement. These were
+experiments involving fictional organizations, rather than reported harm
+to real people.
+\href{https://www.anthropic.com/research/agentic-misalignment}{Lynch et
+al.~(2025)}.
+
+These cases motivate an architectural requirement: the ability to invoke
+a tool must remain tied to an approved purpose, an identified system,
+and an admissible interpretation of the task. Infrastructure isolation
+and access control remain essential. The additional governance question
+is how an agent's understanding of its domain may change without
+silently changing what it is entitled to decide. An orchestrator
+therefore needs to govern both operational permissions and the explicit
+semantic model through which capabilities, evidence, targets, and
+objectives acquire their meaning. The incidents motivate this
+requirement; they do not demonstrate that the proposed architecture
+would have prevented them.
+
 Consider an automated maintenance system authorized to diagnose faults
 and perform approved resets on individual machines. It receives a report
 that two machines repeatedly fail together. Its model treats machines
@@ -108,7 +142,13 @@ an explicitly approved scope covering both machines and the controller.
 The system must preserve the evidence and suspend affected resets while
 these changes are developed, evaluated, and approved. Learning that the
 machines share a controller must not, by itself, grant permission to
-reset that controller or interrupt the other machine.
+reset that controller or interrupt the other machine. A designated human
+authority may need to validate the proposed model and scope expansion,
+assess consequences for both machines, and determine which coordinated
+decisions may subsequently be automated. That decision becomes a
+recorded, bounded delegation, with specified targets, conditions, and
+escalation rules, attached to the approved release. A successful
+diagnosis alone cannot enlarge that delegation.
 
 The research question is: \textbf{Can autonomous software systems be
 organized into distinct development, operation, and improvement
@@ -122,6 +162,21 @@ mediated by trusted services. It cannot ensure that the model describes
 the world correctly or that an agent recognizes every unfamiliar
 situation.
 
+This is also a proposal for governing the software lifecycle through
+which recursive self-improvement (RSI) could occur: a system develops
+capabilities that may contribute to producing subsequent improvements.
+Bostrom's paperclip-maximizer thought experiment illustrates why greater
+competence in pursuing an objective need not preserve human purposes or
+acceptable resource boundaries.
+\href{https://nickbostrom.com/papers/ethical-issues-in-advanced-ai/}{Bostrom
+(2003)}. The engineering response explored here is to make changes to
+the system's model, capabilities, and authority explicit candidates for
+independent review and controlled activation. Governance rules and
+approval services remain outside the candidate's unilateral control.
+This addresses bounded, iterative software improvement; it does not
+establish containment of unrestricted RSI or solve the alignment
+problem.
+
 We call the three functions DEVELOP, OPERATE, and IMPROVE. OPERATE
 performs delegated work using approved capabilities, monitors execution
 and outcomes, and flags situations that may require intervention by
@@ -131,12 +186,24 @@ and alternative ontologies, and proposes governed changes to the
 system's model, capabilities, scope, and permissions. DEVELOP implements
 and tests executable capabilities against an identified semantic
 snapshot. An orchestrator coordinates their transitions and invokes
-independent release controls. These are responsibilities, not a
-requirement to run exactly three language models.
+independent release controls. The roles may be fulfilled by software
+services, analytical models, agents, or human participants according to
+the deployment.
 
-In this usage, orchestration includes governance of the semantic models,
-evidential claims, and task scope through which agents interpret their
-mandates.
+In this usage, orchestration governs the relationship between
+\textbf{permitted operations} and \textbf{admissible operational
+decisions}. Authentication establishes an identity and access control
+evaluates resource requests; the semantic contract additionally
+identifies which domain concepts, relationships, evidence, and decision
+classes may support delegated work. An agent may propose a new concept
+or a broader task interpretation, but that proposal does not enter the
+authoritative operating model or acquire execution authority until
+admitted through the lifecycle. This governs explicit operational
+representations and decisions, rather than claiming to restrict every
+internal computation of a model. Existing ontology, policy, and
+bounded-autonomy research supplies important parts of this discipline;
+the present specification concentrates on preserving their joint meaning
+as the system evolves.
 
 The paper makes four contributions as an architectural synthesis:
 
@@ -157,8 +224,9 @@ The paper makes four contributions as an architectural synthesis:
   capability source files are unchanged.
 \item
   A distributed deployment contract connecting approval to an exact
-  bundle, an activation epoch, compatible state, and action-time
-  enforcement.
+  bundle, a deployment generation number (the \emph{activation epoch},
+  used to reject requests from superseded workers), compatible state,
+  and action-time enforcement.
 \end{enumerate}
 
 The contribution lies in specifying how established mechanisms interact
@@ -221,77 +289,99 @@ al.~(2021)}.
 \subsection{Closest contemporary
 comparisons}\label{closest-contemporary-comparisons}
 
-Three recent systems provide particularly close comparisons. Declarative
-Lifecycle Management for Self-Adaptive Systems connects semantic
-lifecycle descriptions to reconfiguration of managing-system components.
-EvoOntology maintains a versioned schema/content/tool ontology layer,
-uses operational trajectories to propose localized changes, and rejects
-candidates that fail paired evaluation. Governed Capability Evolution
-specifies compatibility checks and staged admission, monitoring,
-withdrawal, and audit for versioned AI components.
+Five systems clarify the present design's relationship to prior work.
+Declarative Lifecycle Management uses ontology-defined membership and
+consistency conditions to reconfigure a managing system as assets change
+lifecycle stage; its runtime architecture assumes that the known stage
+definitions remain fixed.
 \href{https://doi.org/10.1007/s10270-026-01358-w}{Kamburjan et
-al.~(2026)}; \href{https://arxiv.org/abs/2609.15779v1}{Chong et
-al.~(2026)}; \href{https://arxiv.org/abs/2604.08059v6}{Qin et
-al.~(2026)}.
+al.~(2026, Sections 6--8)}. EvoOntology instead evolves the semantic
+layer itself: trajectory evidence motivates localized content, schema,
+or tool edits, and a paired validation gate determines whether a
+candidate replaces its parent. Its evaluation measures data-agent task
+performance with the selected ontology frozen before testing.
+\href{https://arxiv.org/abs/2609.15779v1}{Chong et al.~(2026, Method and
+Experiments)}.
 
-Further close comparisons include ontology-aware scientific tool
-acquisition, a bounded-autonomy workflow framework connecting semantic,
-evidential, procedural, and authority contracts, and versioned semantic
-evaluation records. \href{https://arxiv.org/abs/2607.28692v1}{Tang et
-al.~(2026)}; \href{https://doi.org/10.3390/info17090923}{Jørgensen and
-Ma (2026)}; \href{https://arxiv.org/abs/2610.07675v1}{Bousetouane
-(2026)}. The last two were screened through primary abstract or indexed
-publisher content, so detailed absence claims are not justified.
+Governed Capability Evolution distinguishes producing a capability from
+admitting its new version into operation. It assesses interface, policy,
+behavioral, and recovery compatibility and specifies sandbox, shadow,
+activation, monitoring, and rollback stages. Its prototype evaluates
+stage components in behavioral and physics simulations.
+\href{https://arxiv.org/abs/2604.08059v6}{Qin et al.~(2026, Sections
+3--8)}. The bounded-autonomy framework of Jørgensen and Ma binds
+semantic, contextual, procedural, and authority contracts within a task
+envelope. It already identifies ontology and policy versions, requires
+revalidation after material changes, and separates proposals from
+authorized effects, including human approval.
+\href{https://doi.org/10.3390/info17090923}{Jørgensen and Ma (2026,
+Sections 5--7)}. EIO-Agents versions evaluation predicates and evidence
+contracts, pins modules by digest, and produces a portable evaluation
+record whose claims and release recommendation can be recomputed.
+\href{https://arxiv.org/abs/2610.07675v1}{Bousetouane (2026, Sections
+4--7)}. Ontology-aware acquisition of scientific tools provides a
+further example of semantic models supporting capability growth.
+\href{https://arxiv.org/abs/2607.28692v1}{Tang et al.~(2026)}.
 
-\begin{longtable}[]{@{}
+
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Architectural relationships and the focus of the proposed
+lifecycle contract.}
+\medskip
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\caption{Scope of the reference contract in relation to close
-contemporary systems.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Comparator
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Direct overlap
+Established mechanism
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Focus of this reference contract
+Design focus in this paper
 \end{minipage} \\
 \midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Comparator
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Direct overlap
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Focus of this reference contract
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Declarative Lifecycle Management & Semantic stages and architectural
-adaptation & Complete release and action binding during model changes \\
-EvoOntology & Versioned schema/content/tools and evidence-based
-evolution & Import closure, authority consequences, state and activation
-contracts \\
-Governed Capability Evolution & Policy/behavior/recovery compatibility
-and staged deployment & Semantic dependencies as part of the same
-governed candidate \\
-Bounded-Autonomy Framework & Ontology, context, process, and delegated
-authority contracts & Explicit ontology branch and distributed promotion
-obligations \\
-EIO-Agents & Versioned evidence meaning and reconstructable evaluation &
-Operational action records connected to release identity \\
-\end{longtable}
 
-Table 1 identifies shared mechanisms and the focus of the present
-specification. Its final column describes design scope; it does not
-establish that a comparator lacks those features. This paper combines
-semantic dependency closure, authority consequences, and distributed
-action admission in a common release contract. The targeted search does
-not establish priority for that composition.
+Declarative Lifecycle Management & Semantic stage conditions and
+managing-system reconfiguration & Approval and deployment when the
+governing model itself changes \\
+\addlinespace[7pt]
+EvoOntology & Versioned schema, content, and tools; paired evaluation of
+edits & Authority impact and state compatibility of a semantic
+release \\
+\addlinespace[7pt]
+Governed Capability Evolution & Interface, policy, behavior, and
+recovery checks; staged admission & Ontology interpretation and
+capability change in one release \\
+\addlinespace[7pt]
+Bounded-Autonomy Framework & Version-bound task envelopes; independent
+validation and authority & Candidate model evolution through deployment
+and stale-worker rejection \\
+\addlinespace[7pt]
+EIO-Agents & Versioned evidence contracts and verifiable evaluation
+records & Binding evaluation meaning to the release used for an
+operational action \\
+\addlinespace[7pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+The specific problem addressed here is continuity of governance while
+the system changes the model under which it works. In the maintenance
+example, recognizing a shared controller changes which assets a reset
+can affect; approving the diagnostic code alone cannot settle whether
+that newly understood action is authorized. The proposed operating
+bundle makes the model, its interpretation dependencies, executable
+capabilities, authority policy, evaluation, and state compatibility one
+reviewable release. Semantic impact review identifies changed decision
+consequences even when policy text is unchanged; deployment controls
+then ensure that an action is evaluated under that approved release.
+This connects ontology evolution, capability admission, task governance,
+and evaluation semantics across a complete change cycle. Its value as a
+reference architecture is to make these cross-component obligations
+explicit and testable, so implementers can determine where a change
+requires new evidence, human judgment, revised delegation, or rejection.
 
 GitOps supplies a complementary release discipline: declarative desired
 state, immutable version history, automated reconciliation, and
@@ -302,42 +392,26 @@ or policy interpretation remain mutable.
 \href{https://opengitops.dev/}{OpenGitOps principles};
 \href{https://slsa.dev/spec/v1.0/provenance}{SLSA provenance}.
 
-\subsection{Design method and literature
-search}\label{design-method-and-literature-search}
+\subsection{Design and analytical
+assessment}\label{design-and-analytical-assessment}
 
-The design proceeds in five steps: decompose the lifecycle into
-responsibilities and trust boundaries; compare those responsibilities
-with prior architectures; define release identities and transition
-contracts; challenge the contracts with semantic-change and stale-worker
-counterexamples; and derive conditional invariants with falsifiable
-evaluation criteria. The resulting artifacts are a reference
-architecture, illustrative interface schemas, and an evaluation design.
-Literature comparisons establish the design context; the examples and
-invariant argument provide analytical assessment. They do not substitute
-for an implementation study.
+The study develops a reference architecture through responsibility
+decomposition, comparison with prior systems, contract specification,
+and analysis of failure scenarios. The contracts identify the artifacts
+and authorities required at each lifecycle transition. Worked examples
+examine how a model change affects action eligibility and how a
+superseded worker can attempt to act after deployment. A conditional
+invariant argument then establishes what the transition rules exclude
+under explicit assumptions about artifact integrity, approval, state,
+and complete mediation of effects.
 
-The supplementary search log records 43 primary discovery queries and
-nine additional queries submitted on 9 October 2026, sources inspected,
-access limitations, and a claim-by-claim assessment. Searches covered
-autonomic computing, ontology evolution, runtime models, knowledge-graph
-versioning, self-evolving agents, lifecycle governance, and semantic
-security impact. Close matches were sought deliberately. Foundational
-studies and recent agent preprints were compared by architectural
-feature rather than by terminology alone. A focused follow-up on 10
-October 2026 examined identity and access control, business-process
-modeling, AI risk governance, excessive agency, and task alignment; its
-queries and source-access record appear separately in the search log.
-
-This is a targeted adversarial literature study, not a systematic review
-with a registered protocol, comprehensive database coverage, or an
-exhaustive patent search. Search indexing, inaccessible full texts,
-rapidly revised preprints, and differences between terminology and
-implementation limit coverage. A feature not observed in an inspected
-description is recorded as unestablished, not absent. The novelty
-assessment concludes that the broad thesis is anticipated and that
-originality of the integrated reference contract remains unestablished.
-The paper can be evaluated as a design contribution without converting
-that uncertainty into a claim of discovery.
+The resulting contribution consists of the lifecycle specification,
+illustrative machine-readable interfaces, and an analytical account of
+their joint obligations. The examples assess the consistency of the
+design; the evaluation section defines comparative experiments for
+testing containment, adaptation cost, and the additional value of
+semantic controls. This manuscript reports no operational implementation
+study, so those performance and effectiveness questions remain open.
 
 \section{Semantic foundations and problem
 boundaries}\label{semantic-foundations-and-problem-boundaries}
@@ -429,12 +503,15 @@ The question ``What happens when the system encounters something that
 cannot be represented by its current ontology?'' has several answers.
 The first obligation is to distinguish causes, as summarized in Table 2.
 
-\begin{longtable}[]{@{}
+
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Discrepancy classes and their initial operational
+dispositions.}
+\medskip
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\caption{Discrepancy classes and their initial operational
-dispositions.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Discrepancy
@@ -444,33 +521,30 @@ Example
 Initial disposition
 \end{minipage} \\
 \midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Discrepancy
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Example
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Initial disposition
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+
 Missing fact & The machine's installed firmware version is unknown &
 Seek evidence within approved permissions \\
+\addlinespace[4pt]
 Unknown entity & A previously unseen asset fits \texttt{Machine} &
 Create a provisional case identity under admission rules \\
+\addlinespace[4pt]
 Contradictory evidence & Two sensors report incompatible locations &
 Preserve sources and investigate; do not overwrite the disagreement \\
+\addlinespace[4pt]
 Constraint violation & Authorization for an affected asset is missing &
 Hold or reject the action under the declared validation policy \\
+\addlinespace[4pt]
 Procedure gap & Existing categories fit, but no safe workflow exists &
 Request a capability change without assuming an ontology change \\
+\addlinespace[4pt]
 Suspected conceptual gap & A shared-control dependency cannot be
 represented by the independent-machine model & Report a model limitation
 and investigate a candidate distinction \\
-\end{longtable}
+\addlinespace[4pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 An unusual value or a failed procedure is not by itself evidence of a
 missing concept. A suspected conceptual gap is a defeasible diagnosis:
@@ -832,11 +906,14 @@ controlled transition retains a guard decision. Development
 authorization does not authorize deployment.}
 \end{figure}
 
-\begin{longtable}[]{@{}
+
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Representative transition guards and required
+records.}
+\medskip
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\caption{Representative transition guards and required
-records.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Transition
@@ -844,32 +921,32 @@ Transition
 Required guard and record
 \end{minipage} \\
 \midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Transition
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Required guard and record
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+
 Report to investigation & Admitted report, accessible evidence, budget
 and scope \\
+\addlinespace[4pt]
 Proposal to development & Fixed parent and candidate snapshot;
 authorized work order \\
+\addlinespace[4pt]
 Built to validated & Artifact integrity; declared syntax, semantics,
 behavior, authority, and state checks \\
+\addlinespace[4pt]
 Validated to approved & Independent approval over exact bundle and
 evidence digests; approved scope and expiry \\
+\addlinespace[4pt]
 Approved to staged & Deployment credentials; compatible state; verified
 worker artifacts \\
+\addlinespace[4pt]
 Staged to active & Compare-and-swap against expected production epoch;
 valid approval; action gateway fencing \\
+\addlinespace[4pt]
 Active to recovery & Trigger and evidence; authorized compatible target
 or suspension; external-effect reconciliation \\
-\end{longtable}
+\addlinespace[4pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 Table 3 summarizes the main guards. Any artifact change invalidates
 approvals that bind its previous digest. A passing evaluation does not
@@ -1106,9 +1183,15 @@ semantic extension may require mechanically checked invariants,
 unchanged effective authority within an approved scope,
 affected-capability regression evidence, and a reversible state route. A
 new authorization class or unresolved migration consequence requires its
-designated authority owner. The architecture does not require a human
-signature on every candidate; it requires an approval trace grounded in
-previously delegated authority.
+designated authority owner. Where a proposed extension exceeds that
+delegation, the lifecycle pauses for the designated human authority. The
+review presents the model change, affected decisions and assets,
+evidence, unresolved uncertainty, and proposed limits. Approval states
+which decision classes may become automated, under what conditions, and
+when escalation or revocation applies; it is bound to the exact
+candidate bundle. The architecture does not require a human signature on
+every candidate; it requires an approval trace grounded in previously
+delegated authority.
 
 Human and automated gates both can be wrong. Independent credentials
 reduce the consequences of a candidate-producing agent being
@@ -1269,11 +1352,14 @@ boundaries}\label{failure-modes-tradeoffs-and-boundaries}
 Table 4 identifies failures that the release and action contracts must
 address.
 
-\begin{longtable}[]{@{}
+
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Failure modes and the corresponding architectural
+responses.}
+\medskip
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\caption{Failure modes and the corresponding architectural
-responses.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Failure mode
@@ -1281,50 +1367,57 @@ Failure mode
 Consequence and response
 \end{minipage} \\
 \midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Failure mode
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Consequence and response
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+
 Semantic drift or mutable imports & Same root identifier yields changed
 conclusions; pin the complete snapshot and invalidate unresolved
 dependencies \\
+\addlinespace[4pt]
 Conflicting branches & Textual merge hides incompatible entailments;
 re-evaluate merged semantics against current production \\
+\addlinespace[4pt]
 Capability incompatibility & Previously handled category now includes
 untested cases; inspect dependency and assumption impact \\
+\addlinespace[4pt]
 Stale workers or version skew & Old semantics authorize actions after
 revocation; fence at the effect boundary or retain an explicit bounded
 lease \\
+\addlinespace[4pt]
 Invalid migration & New release cannot interpret state; stage against a
 verified compatibility contract and quarantine unsupported records \\
+\addlinespace[4pt]
 Incorrect novelty detection & Ordinary missing data is mistaken for a
 concept gap; preserve alternatives and permit closure without change \\
+\addlinespace[4pt]
 Recursive improvement & Repeated edits consume budget and weaken
 evaluation; impose work budgets, independent criteria, and stopping
 rules \\
+\addlinespace[4pt]
 Semantic authority expansion & Classifications broaden permissions
 without a policy edit; review denotation and protected authority
 envelopes \\
+\addlinespace[4pt]
 Failed rollback & Old bundle cannot recover current state or undo
 external effects; suspend, compensate, or repair forward \\
+\addlinespace[4pt]
 Incomplete ontology & Internal consistency is mistaken for completeness;
 retain raw evidence and permit challenges outside modeled categories \\
+\addlinespace[4pt]
 Model nondeterminism & Reruns differ despite pinned configuration;
 preserve actual traces and assess outcomes statistically \\
+\addlinespace[4pt]
 Communication loss & Reports duplicate or transitions diverge; use
 durable identities, expected revisions, and reconciliation \\
+\addlinespace[4pt]
 Approval bottleneck & Important repairs wait while work is blocked;
 preauthorize bounded classes and record capacity/latency tradeoffs \\
+\addlinespace[4pt]
 Gate or credential compromise & All abstract guarantees can fail;
 protect the trusted computing base and retain independent audit \\
-\end{longtable}
+\addlinespace[4pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 A globally coherent ontology is not always desirable or feasible.
 Different domains may retain different approved snapshots with explicit
@@ -1369,12 +1462,15 @@ testable before attempting a highly expressive domain. Table 5 defines
 the main comparisons. Experimental configurations should use the same
 tasks, models, tools, budgets, and evidence retention where possible.
 
-\begin{longtable}[]{@{}
+
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Prospective comparisons and falsifiable expectations; no
+experimental results are reported.}
+\medskip
+\begin{tabular}{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\caption{Prospective comparisons and falsifiable expectations; no
-experimental results are reported.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Comparison
@@ -1384,37 +1480,33 @@ Falsifiable expectation
 Measurement
 \end{minipage} \\
 \midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Comparison
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Falsifiable expectation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Measurement
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+
 Task-only agent with mutable shared memory & More accepted actions lack
 reconstructible semantic identity & Missing artifact/state references
 per consequential action \\
+\addlinespace[4pt]
 Versioned ontology plus performance gate & Some semantic authorization
 expansions survive ordinary quality evaluation & Unsafe activations
 under seeded hierarchy/mapping changes \\
+\addlinespace[4pt]
 Capability governance without complete semantic closure & Mutable
 imports or inference changes can alter admission under the same root
 version & Divergent classifications/admission for nominally identical
 releases \\
+\addlinespace[4pt]
 Ordinary schemas, typed APIs, and dependency-aware policy gates & Some
 ontology-specific benefits may be achievable with cheaper conventional
 contracts & Matched fault coverage, reconstruction quality, and cost
 without an ontology \\
+\addlinespace[4pt]
 Full reference contract & Targeted faults are rejected or fenced at the
 stated boundary & Fault coverage, false rejection, migration failures,
 stale-effect acceptance \\
-\end{longtable}
+\addlinespace[4pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 These are predictions, not findings. The experiment must include changes
 outside the test taxonomy, unknown dependencies, incomplete evidence,
@@ -1462,7 +1554,8 @@ bundles are routinely unreconstructible, semantic impact review misses
 important policy consequences, state compatibility cannot be enforced,
 gateways permit revoked actions, or validation cost prevents timely
 adaptation. An adequate evaluation must expose those failure conditions
-rather than merely demonstrate successful processing of one return.
+rather than merely demonstrate successful processing of one maintenance
+case.
 
 \section{Relationship to The Orchestrator
 books}\label{relationship-to-the-orchestrator-books}
@@ -1505,11 +1598,12 @@ production agent silently redefine the assumptions under which it acts.
 The proposed controls establish conditional coherence at the release and
 action boundary. They do not establish that the ontology is complete,
 that every novel situation will be detected, or that repeated executions
-will be identical. Recent and foundational prior work anticipates much
-of the design. The research contribution is therefore an integrated
-reference contract and its exposed obligations, with practical advantage
-and broader originality left for independent review and empirical
-evaluation.
+will be identical. Building on autonomic computing, ontology evolution,
+and governed agent systems, the reference contract specifies how
+approval of a change remains connected to the model and authority used
+for each consequential action. Its operational effectiveness,
+implementation cost, and advantage over simpler controls require the
+comparative evaluation defined in this paper.
 
 \Needspace{16\baselineskip}
 
@@ -1528,8 +1622,8 @@ preparation, and manuscript editing. The author retains responsibility
 for the scientific claims, source attribution, and final manuscript.
 
 \textbf{Artifact and data availability.} The manuscript, architecture
-companion, illustrative interface schemas, fixtures, literature search
-record, and conceptual mapping to the books are publicly available in
+companion, illustrative interface schemas, fixtures, and conceptual
+mapping to the books are publicly available in
 \href{https://github.com/prosessleder/orchestrator-lifecycle}{the paper
 repository}. The fixtures are constructed examples. No new experimental
 dataset is reported.
@@ -1548,6 +1642,7 @@ Supplementary material retains the separate rights described in
 \setlength{\parindent}{-1.5em}
 \setlength{\leftskip}{1.5em}
 \setlength{\parskip}{3pt}
+\interlinepenalty=10000
 
 Apache Software Foundation. \emph{Apache Jena documentation}.
 \href{https://jena.apache.org/documentation/}{Project documentation}.
@@ -1562,6 +1657,14 @@ Blair, G., Bencomo, N., and France, R. B. (2009). Models@run.time.
 \emph{Computer}, 42(10), 22-27.
 \url{https://doi.org/10.1109/MC.2009.326}.
 
+Bostrom, N. (2003). Ethical Issues in Advanced Artificial Intelligence.
+In I. Smit et al.~(Eds.), \emph{Cognitive, Emotive and Ethical Aspects
+of Decision Making in Humans and in Artificial Intelligence}, Vol. 2,
+12-17. International Institute of Advanced Studies in Systems Research
+and Cybernetics.
+\href{https://nickbostrom.com/papers/ethical-issues-in-advanced-ai/}{Author's
+revised version}.
+
 Botoeva, E., Konev, B., Lutz, C., Ryzhikov, V., Wolter, F., and
 Zakharyaschev, M. (2017). Inseparability and Conservative Extensions of
 Description Logic Ontologies: A Survey. In J. Z. Pan et al.~(Eds.),
@@ -1575,7 +1678,7 @@ Agent Evaluation. Preprint, 6 October.
 
 Burrows, M. (2006). The Chubby Lock Service for Loosely-Coupled
 Distributed Systems. \emph{Proceedings of the 7th USENIX Symposium on
-Operating Systems Design and Implementation (OSDI '06)}, 337-350. USENIX
+Operating Systems Design and Implementation (OSDI '06)}, 335-350. USENIX
 Association.
 \href{https://www.usenix.org/legacy/events/osdi06/tech/full_papers/burrows/burrows.pdf}{Primary
 proceedings paper}.
@@ -1597,6 +1700,11 @@ Hu, V., Ferraiolo, D., Kuhn, R., Schnitzer, A., Sandlin, K., Miller, R.,
 and Scarfone, K. (2014, updated 2019). \emph{Guide to Attribute Based
 Access Control (ABAC) Definition and Considerations}. NIST SP 800-162.
 \url{https://doi.org/10.6028/NIST.SP.800-162}.
+
+Hugging Face (2026). Anatomy of a Frontier Lab Agent Intrusion: A
+Technical Timeline of the July 2026 Incident. Hugging Face, 27 July.
+\href{https://huggingface.co/blog/agent-intrusion-technical-timeline}{Incident
+report}. Accessed 10 October 2026.
 
 IBM (2005). \emph{An Architectural Blueprint for Autonomic Computing},
 third edition, June.
@@ -1622,20 +1730,37 @@ Kephart, J. O., and Chess, D. M. (2003). The Vision of Autonomic
 Computing. \emph{Computer}, 36(1), 41-50.
 \url{https://doi.org/10.1109/MC.2003.1160055}.
 
+Lemkin, J. (2025). Replit's New Release Addressed Most of The Challenges
+We Hit Vibe Coding. But Is `Prosumer' Vibe Coding Really Ready for
+Commercial Apps Yet? SaaStr.
+\href{https://www.saastr.com/replits-new-release-address-most-of-the-challenges-we-hit-vibe-coding-but-is-prosumer-vibe-coding-really-ready-for-commercial-apps-yet/}{First-party
+account}. Accessed 10 October 2026.
+
+Lynch, A., Wright, B., Larson, C., Troy, K. K., Ritchie, S. J.,
+Mindermann, S., Perez, E., and Hubinger, E. (2025). Agentic
+Misalignment: How LLMs Could Be Insider Threats. Anthropic Research, 20
+June.
+\href{https://www.anthropic.com/research/agentic-misalignment}{Research
+report}.
+
 National Institute of Standards and Technology (2023). \emph{Artificial
 Intelligence Risk Management Framework (AI RMF 1.0)}. NIST AI 100-1,
 January.
 \href{https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf}{Official
 framework}.
 
+Object Management Group (2013). \emph{Business Process Model and
+Notation (BPMN)}, version 2.0.2. Document formal/2013-12-09, December.
+\href{https://www.omg.org/spec/BPMN/2.0.2/PDF}{Specification}.
+
 O'Brien, T. (2026). \emph{The Orchestrator Series}: Orchestrator: Your
 Next Job Title; Delegated Intelligence; Orchestrating Organizations.
 Discursive. \href{https://readorchestrator.com}{Series reader}.
 Manuscript working copies consulted for integration.
 
-Object Management Group (2013). \emph{Business Process Model and
-Notation (BPMN)}, version 2.0.2. Document formal/2013-12-09, December.
-\href{https://www.omg.org/spec/BPMN/2.0.2/PDF}{Specification}.
+OpenAI (2026). The Hugging Face Incident and the Road Ahead. 26 August.
+\href{https://openai.com/index/hugging-face-incident-and-the-road-ahead/}{Incident
+analysis}. Accessed 10 October 2026.
 
 OpenGitOps. \emph{GitOps Principles}. CNCF project.
 \href{https://opengitops.dev/}{Project documentation}. Accessed 9

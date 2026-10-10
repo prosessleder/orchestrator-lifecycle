@@ -2,7 +2,7 @@
 
 Prepared 10 October 2026 for **manual author upload**. No record was created, no DOI was reserved, and no Zenodo publication occurred.
 
-Upload `paper.pdf` as the primary article, licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**. Optionally upload `orchestrator-lifecycle-0.2.6-source.zip` as supplementary source. The source archive contains the manuscript, standalone LaTeX, literature search record, architecture documents, schemas, build scripts, and conceptual mapping to the books; `RIGHTS.md` specifies the paper license and the separate rights of other material, as described in that rights statement. Preserve that scope notice in the record description if uploading the archive. `SHA256SUMS` identifies the primary PDF and source archive.
+Upload `paper.pdf` as the primary article, licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**. Optionally upload `orchestrator-lifecycle-0.2.7-source.zip` as supplementary source. The source archive contains the manuscript, standalone LaTeX, architecture documents, schemas, build scripts, and conceptual mapping to the books; `RIGHTS.md` specifies the paper license and the separate rights of other material, as described in that rights statement. Preserve that scope notice in the record description if uploading the archive. `SHA256SUMS` identifies the primary PDF and source archive.
 
 ## Record fields
 
@@ -12,7 +12,7 @@ Upload `paper.pdf` as the primary article, licensed under **Creative Commons Att
 | Title | The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems |
 | Creator | O'Brien, Timothy |
 | Publication date | 2026-10-10 (change if the public release uses another date) |
-| Version | 0.2.6 |
+| Version | 0.2.7 |
 | Language | English |
 | Description | Use the abstract in `metadata.json` or `paper.md` |
 | Keywords | Agentic systems; ontology evolution; self-adaptive systems; semantic contracts; delegated intelligence; lifecycle governance |

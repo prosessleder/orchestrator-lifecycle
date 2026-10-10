@@ -2,13 +2,13 @@
 
 **The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems**
 
-Timothy O'Brien · [ORCID](https://orcid.org/0009-0001-2589-347X) · Version 0.2.6 · 10 October 2026
+Timothy O'Brien · [ORCID](https://orcid.org/0009-0001-2589-347X) · Version 0.2.7 · 10 October 2026
 
-[Read the manuscript](paper.md) · [Download the PDF](release/paper.pdf) · [Download supplementary source](release/orchestrator-lifecycle-0.2.6-source.zip)
+[Read the manuscript](paper.md) · [Download the PDF](release/paper.pdf) · [Download supplementary source](release/orchestrator-lifecycle-0.2.7-source.zip)
 
 This architectural preprint proposes DEVELOP, OPERATE, and IMPROVE as responsibilities connected by durable orchestration and an immutable operating bundle. The bundle binds semantic interpretation, capabilities, authority, evaluation, and state compatibility. Observations can challenge the approved model through a governed change process.
 
-The contribution is an architectural synthesis supported by illustrative contracts and a falsifiable evaluation design. Operational effectiveness and the additional value of ontology-based controls remain unevaluated. The paper explains its relationship to autonomic computing, ontology evolution, and recent governed agent systems, and makes no claim of established priority.
+The contribution is an architectural synthesis supported by illustrative contracts and a falsifiable evaluation design. Operational effectiveness and the additional value of ontology-based controls remain unevaluated. The paper explains how ontology evolution, capability admission, task governance, and evaluation semantics connect through one approved release and its operational action boundary.
 
 ## Repository scope
 
@@ -25,10 +25,6 @@ The PDF uses the standard [Elsevier `elsarticle` manuscript class](https://www.e
 | [paper.md](paper.md) | Manuscript, bibliography, and declarations |
 | [release/paper.pdf](release/paper.pdf) | Typeset preprint |
 | [release/paper.tex](release/paper.tex) | Standalone LaTeX source with embedded vector diagrams |
-| [research/related-work.md](research/related-work.md) | Primary-source comparison and feature matrix |
-| [research/search-log.md](research/search-log.md) | Literature search queries, screening scope, and access limits |
-| [research/contribution-assessment.md](research/contribution-assessment.md) | Contribution boundaries and comparative evidence |
-| [references.md](references.md) | Annotated bibliography |
 | [architecture/](architecture/) | Components, lifecycle, semantics, governance, interfaces, and failure modes |
 | [schemas/](schemas/) | Illustrative interface schemas, fixtures, and validation checks |
 | [integration/books.md](integration/books.md) | Conceptual relationship to the three Orchestrator books |

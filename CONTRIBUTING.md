@@ -4,7 +4,7 @@ This public repository contains the manuscript and supporting publication artifa
 
 Use the private repository for working discussions, plans, draft reviews, initial research code, exploratory experiments, raw results, and material that is not yet selected for publication. Its Issues track tasks; its Discussions support open questions and research conversations.
 
-A public change should improve the paper or provide a specific supporting artifact, such as a specification, source comparison, illustrative fixture, or reproducibility package. Internal review logs and general prototype development remain private. The existing public literature search record and contribution assessment are publication supplements.
+A public change should improve the paper or provide a specific supporting artifact, such as a specification, source comparison, illustrative fixture, or reproducibility package. Internal review logs and general prototype development remain private. Search logs, access records, annotated screening notes, and contribution assessments are retained in the private companion. The manuscript contains the reader-facing literature comparison and bibliography.
 
 ## Moving a result into the public repository
 
