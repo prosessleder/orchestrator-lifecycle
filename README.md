@@ -10,6 +10,10 @@ This architectural preprint proposes DEVELOP, OPERATE, and IMPROVE as responsibi
 
 The contribution is an architectural synthesis supported by illustrative contracts and a falsifiable evaluation design. Operational effectiveness and the additional value of ontology-based controls remain unevaluated. The paper explains its relationship to autonomic computing, ontology evolution, and recent governed agent systems, and makes no claim of established priority.
 
+## Repository scope
+
+This repository publishes the paper and its supporting artifacts. Internal discussion, planning, preliminary code, and exploratory research belong in the [private companion repository](https://github.com/prosessleder/orchestrator-lifecycle-internal). See [the contribution workflow](CONTRIBUTING.md) for moving selected results into this publication repository.
+
 ## Manuscript format
 
 The PDF uses the standard [Elsevier `elsarticle` manuscript class](https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions) in single-column preprint mode: 12-point serif text, native title and abstract, keywords, numbered sections, and author-year citations. It is an independent preprint; use of this class does not indicate submission to or acceptance by a journal. ORCID and preprint status appear in first-page notes.
@@ -44,9 +48,10 @@ python3 scripts/build_paper.py       # generate release/paper.tex
 python3 scripts/build_paper.py --pdf # also export the PDF
 python3 schemas/test_contracts.py   # validate illustrative contracts and fixtures
 python3 scripts/package_release.py  # rebuild source archive and checksums
+python3 scripts/check_publication_scope.py # check public inventory and archive
 ```
 
-Edit `paper.md` and regenerate the LaTeX/PDF. `scripts/journal-template.tex` supplies the manuscript frontmatter through the standard class interfaces. The generator converts the two Mermaid figures to embedded TikZ diagrams.
+Edit `paper.md` and regenerate the LaTeX/PDF. `scripts/journal-template.tex` supplies the manuscript frontmatter through the standard class interfaces. The generator converts the two Mermaid figures to embedded TikZ diagrams. `publication-files.json` explicitly lists source-package inputs; files added beside them are not included automatically.
 
 ## Related books and license
 

@@ -1,0 +1,18 @@
+name: Publication scope
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  publication-scope:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out publication artifacts
+        # actions/checkout v4.2.2, verified against the official release commit.
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Audit declared files and release bytes
+        run: python3 scripts/check_publication_scope.py

@@ -24,7 +24,7 @@ A SHACL failure alone is not proof of a missing concept. OWL's open-world interp
 |---|---|---|---|
 | Ontology drift | Unlocked remote import changes while root commit stays fixed | Retain and pin full closure; reject unresolved imports | Artifact correctness and conceptual adequacy remain unknown |
 | Conflicting branches | Two extensions introduce incompatible identity/constraint assumptions | Compare against current base; rebase/merge; rerun affected checks and approval | Semantic merges need domain judgment |
-| Incompatible capability | New subtype enters a broad handler that assumes ordinary physiology | Analyze inferred membership and procedure dependencies; add adversarial category cases | Tests cannot cover every future instance |
+| Incompatible capability | New subtype enters a broad handler that assumes ordinary return handling | Analyze inferred membership and procedure dependencies; add adversarial category cases | Tests cannot cover every future instance |
 | Stale operational agent | Worker resumes old history after promotion | Enforce epoch/lease at receiving action resource | Unmanaged credentials invalidate fencing |
 | Invalid knowledge migration | Multiple identities collapse and cannot be separated afterward | Check transformations, checkpoints, invariants and recovery conditions | Lossy migrations may permit only forward repair |
 | Incorrect novelty diagnosis | A missing product-model fact is reported as a missing ontology class | Triage categories, alternative explanations and provenance | False positives add cost; false negatives may suppress needed change |
