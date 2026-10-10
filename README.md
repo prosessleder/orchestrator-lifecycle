@@ -2,9 +2,9 @@
 
 **The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems**
 
-Timothy O'Brien · [ORCID](https://orcid.org/0009-0001-2589-347X) · Version 0.2.3 · 10 October 2026
+Timothy O'Brien · [ORCID](https://orcid.org/0009-0001-2589-347X) · Version 0.2.4 · 10 October 2026
 
-[Read the manuscript](paper.md) · [Download the PDF](release/paper.pdf) · [Download supplementary source](release/orchestrator-lifecycle-0.2.3-source.zip)
+[Read the manuscript](paper.md) · [Download the PDF](release/paper.pdf) · [Download supplementary source](release/orchestrator-lifecycle-0.2.4-source.zip)
 
 This architectural preprint proposes DEVELOP, OPERATE, and IMPROVE as responsibilities connected by durable orchestration and an immutable operating bundle. The bundle binds semantic interpretation, capabilities, authority, evaluation, and state compatibility. Observations can challenge the approved model through a governed change process.
 

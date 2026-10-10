@@ -51,7 +51,7 @@ governance},pdflang={en-US}}
 \title{The Orchestrator: A Lifecycle Architecture for Self-Developing,
 Self-Operating, and Self-Improving Agentic Systems\tnoteref{preprint}}
 \tnotetext[preprint]{Preprint; not peer reviewed.
-  Version 0.2.3, 10 October 2026.}
+  Version 0.2.4, 10 October 2026.}
 \author{Timothy O'Brien\fnref{orcid}}
 \fntext[orcid]{ORCID: \href{https://orcid.org/0009-0001-2589-347X}{0009-0001-2589-347X}.}
 \begin{abstract}
@@ -124,11 +124,14 @@ situation.
 
 We call the three functions DEVELOP, OPERATE, and IMPROVE. OPERATE
 performs delegated work using approved capabilities. IMPROVE
-investigates deficiencies and proposes changes. DEVELOP implements and
-tests executable capabilities against an identified semantic snapshot.
-An orchestrator coordinates their transitions and invokes independent
-release controls. These are responsibilities, not a requirement to run
-exactly three language models.
+investigates operational deficiencies and situations that challenge the
+current ontology, evaluates new concepts and alternative ontologies, and
+proposes governed changes to the system's model, capabilities, scope,
+and permissions. DEVELOP implements and tests executable capabilities
+against an identified semantic snapshot. An orchestrator coordinates
+their transitions and invokes independent release controls. These are
+responsibilities, not a requirement to run exactly three language
+models.
 
 The paper makes four contributions as an architectural synthesis:
 
@@ -486,10 +489,11 @@ a new interpretation is useful. Its response to uncertainty is
 configurable: continue unaffected work, invoke a bounded fallback, pause
 the affected case, or escalate.
 
-IMPROVE investigates reports and recurring failures. It checks competing
-explanations, gathers permitted evidence, and proposes ontology,
-mapping, policy, capability, or evaluation changes. It can create a
-candidate branch and describe a provisional interpretation. Its
+IMPROVE assesses operational performance, unfamiliar situations, and
+candidate extensions or alternatives to the current ontology. It checks
+competing explanations, gathers permitted evidence, and proposes
+ontology, mapping, policy, capability, or evaluation changes. It can
+create a candidate branch and describe a provisional interpretation. Its
 credentials give it access to a proposal space, not the production
 reference. It may recommend no change or reject a misleading report.
 
