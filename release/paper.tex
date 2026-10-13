@@ -51,7 +51,7 @@ governance},pdflang={en-US}}
 \title{The Orchestrator: A Lifecycle Architecture for Self-Developing,
 Self-Operating, and Self-Improving Agentic Systems\tnoteref{preprint}}
 \tnotetext[preprint]{Preprint; not peer reviewed.
-  Version 0.2.8, 10 October 2026.}
+  Version 0.2.9, 12 October 2026.}
 \author{Timothy O'Brien\fnref{orcid}}
 \fntext[orcid]{ORCID: \href{https://orcid.org/0009-0001-2589-347X}{0009-0001-2589-347X}.}
 \begin{abstract}
@@ -419,11 +419,13 @@ boundaries}\label{semantic-foundations-and-problem-boundaries}
 \subsection{Distinct artifacts}\label{distinct-artifacts}
 
 An \textbf{ontology} describes concepts, entity kinds, relations, and
-applicable axioms. It can be a graph or logical theory; it need not be a
-tree. A \textbf{knowledge base} holds assertions about entities under
-that vocabulary. \textbf{Operational state} records workflow progress,
-pending actions, leases, and deployed versions. \textbf{Observations}
-are incoming measurements or reports, potentially incomplete or false.
+formal statements about them, called \emph{axioms}. For example, an
+axiom can state that every shared controller is a controller. It can be
+a graph or logical theory; it need not be a tree. A \textbf{knowledge
+base} holds assertions about entities under that vocabulary.
+\textbf{Operational state} records workflow progress, pending actions,
+leases, and deployed versions. \textbf{Observations} are incoming
+measurements or reports, potentially incomplete or false.
 \textbf{Evidence} preserves sources, retrieval context, and support for
 claims. \textbf{Policies} determine permitted actions and approval
 conditions. \textbf{Capabilities} are executable procedures or services.
@@ -900,7 +902,7 @@ revision history nor a database backup alone identifies the complete
 operational interpretation.
 \href{https://graphdb.ontotext.com/documentation/11.5/}{GraphDB
 documentation}; \href{https://docs.stardog.com/}{Stardog documentation};
-\href{https://protege.stanford.edu/software.php}{WebProtégé project};
+\href{https://protege.stanford.edu/software}{WebProtégé project};
 \href{https://arxiv.org/abs/1805.03721}{Arndt et al.~(2019)}.
 
 A durable workflow engine such as Temporal can coordinate long-running
@@ -1196,6 +1198,15 @@ complete semantic operating bundle.
 \href{https://www.usenix.org/legacy/events/osdi06/tech/full_papers/burrows/burrows_html/index.html}{Burrows
 (2006)}.
 
+State preparation must also account for writes made by the old
+deployment. The controller must either suspend affected writes during
+migration or capture and apply intervening changes before verifying the
+final state revision. If the state service and production-reference
+store cannot commit together, affected actions remain blocked until a
+durable checkpoint establishes the compatible state and bundle binding.
+A failed cutover resumes through that recorded checkpoint or enters
+recovery; changing the bundle pointer alone is insufficient.
+
 Workers verify and load a complete bundle. Each consequential invocation
 carries its domain, \(h_B\), activation epoch, case-state revision,
 authenticated principal, and idempotency key. The action gateway
@@ -1268,6 +1279,18 @@ as independent validation.
 
 \subsection{Conditional safety
 argument}\label{conditional-safety-argument}
+
+The threat model includes faulty or compromised operational and
+candidate-producing agents, misleading evidence, replayed requests,
+stale workers, and concurrent controllers. Such actors may submit
+proposals or requests under their assigned credentials. The trusted
+boundary comprises the registries, knowledge-admission service, approval
+rules and service, deployment controller, runtime binding mechanism, and
+effect-producing services that enforce authorization. Candidate-authored
+annotations, evidence, and test descriptions remain untrusted inputs;
+they cannot change the rules or credentials used to admit their own
+release. Compromise of this trusted boundary is outside the following
+argument and remains a deployment risk.
 
 Assume: (a) artifacts identified by digest are immutable and
 retrievable; (b) authenticated role boundaries and approval integrity
@@ -1370,10 +1393,11 @@ interruption of either machine. Any such intervention needs its own
 authority decision covering the affected assets; the capability cannot
 grant it to itself.
 
-Tests cover independent machines, coincidental simultaneous faults,
-confirmed shared control, incomplete dependency evidence, out-of-scope
-diagnostic access, expired grants, state migration, and stale-worker
-requests. Expected outcomes precede release. If validation and authority
+The proposed validation plan covers independent machines, coincidental
+simultaneous faults, confirmed shared control, incomplete dependency
+evidence, out-of-scope diagnostic access, expired grants, state
+migration, and stale-worker requests. Expected outcomes must be
+specified before evaluating the candidate. If validation and authority
 review pass, the independent gateway approves exact bundle \(B_1\). The
 deployment controller checks state compatibility and advances
 \(Q_{\mathrm{maintenance}}\) from epoch 42 to 43. Action-boundary
