@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "This repository contains manuscript and research artifacts. Please cite the architectural preprint using preferred-citation; add its published DOI once assigned."
+message: "This repository contains manuscript and research artifacts. Please cite the published architectural preprint using preferred-citation."
 type: dataset
 title: "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems"
 version: 0.2.9
@@ -25,5 +25,7 @@ preferred-citation:
       given-names: Timothy
       orcid: "https://orcid.org/0009-0001-2589-347X"
   year: 2026
+  date-published: 2026-10-12
+  doi: 10.5281/zenodo.23332590
   version: 0.2.9
-  url: "https://github.com/prosessleder/orchestrator-lifecycle"
+  url: "https://zenodo.org/records/23332590"

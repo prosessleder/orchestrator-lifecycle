@@ -4,7 +4,7 @@
 
 Timothy O'Brien · [ORCID](https://orcid.org/0009-0001-2589-347X) · Version 0.2.9 · 12 October 2026
 
-[Read the manuscript](paper.md) · [Download the PDF](release/paper.pdf) · [Download supplementary source](release/orchestrator-lifecycle-0.2.9-source.zip)
+[Published preprint on Zenodo](https://zenodo.org/records/23332590) · [Read the manuscript](paper.md) · [Download the PDF](release/paper.pdf) · [Download supplementary source](release/orchestrator-lifecycle-0.2.9-source.zip)
 
 This architectural preprint proposes DEVELOP, OPERATE, and IMPROVE as responsibilities connected by durable orchestration and an immutable operating bundle. The bundle binds semantic interpretation, capabilities, authority, evaluation, and state compatibility. Observations can challenge the approved model through a governed change process.
 
@@ -53,4 +53,4 @@ Edit `paper.md` and regenerate the LaTeX/PDF. `scripts/journal-template.tex` sup
 
 The [Orchestrator series](https://readorchestrator.com) develops the professional, engineering, and organizational implications of delegated intelligence. Its [canonical book source](https://github.com/prosessleder/orchestrator) is maintained separately.
 
-Copyright 2026 Timothy O'Brien. The paper and its original embedded diagrams are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [RIGHTS.md](RIGHTS.md) specifies the paper-only scope and separate rights in other supplementary material. This public repository provides the manuscript and supporting artifacts; no Zenodo DOI has been assigned.
+Copyright 2026 Timothy O'Brien. The paper and its original embedded diagrams are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [RIGHTS.md](RIGHTS.md) specifies the paper-only scope and separate rights in other supplementary material. Version 0.2.9 is published on Zenodo: [DOI 10.5281/zenodo.23332590](https://doi.org/10.5281/zenodo.23332590). The deposit contains the paper PDF; supplementary source remains available here. The [all-versions DOI](https://doi.org/10.5281/zenodo.23332589) identifies the evolving work.

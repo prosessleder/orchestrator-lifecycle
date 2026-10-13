@@ -8,4 +8,4 @@ This grant covers `paper.md`, `release/paper.tex`, `release/paper.pdf`, and the 
 
 The supplementary archive contains material with different rights. This paper license does not grant a new license to other repository files or third-party material. The separately published book manuscripts retain the books' existing rights. Referenced papers, standards, and documentation retain their respective rights. All rights in other original repository material remain reserved unless separately stated.
 
-The repository is public. The license selection and public repository access do not create a Zenodo deposit or assign a DOI.
+The repository is public. Zenodo publishes the paper PDF under CC BY 4.0 at [DOI 10.5281/zenodo.23332590](https://doi.org/10.5281/zenodo.23332590). Other repository and supplementary material retains the separate rights stated above.

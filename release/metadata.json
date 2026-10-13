@@ -1,6 +1,6 @@
 {
   "prepared_date": "2026-10-12",
-  "record_status": "not_submitted",
+  "record_status": "published",
   "resource_type": "publication-preprint",
   "title": "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems",
   "creators": [
@@ -33,11 +33,20 @@
   },
   "rights_status": "Paper licensed under CC BY 4.0; other supplementary material retains the separate rights specified in RIGHTS.md",
   "files": [
-    "paper.pdf",
-    "orchestrator-lifecycle-0.2.9-source.zip"
+    "paper.pdf"
   ],
-  "doi": null,
-  "format_note": "Manual Zenodo UI field guide, not a deposit API payload",
+  "doi": "10.5281/zenodo.23332590",
+  "format_note": "Local publication metadata verified against the Zenodo UI; not a deposit API payload.",
   "funding_statement": "This research received no external funding.",
-  "competing_interests": "The author writes and publishes The Orchestrator book series, to which this paper is related. The author declares no additional competing interests."
+  "competing_interests": "The author writes and publishes The Orchestrator book series, to which this paper is related. The author declares no additional competing interests.",
+  "publication_date": "2026-10-12",
+  "record_url": "https://zenodo.org/records/23332590",
+  "concept_doi": "10.5281/zenodo.23332589",
+  "supplementary_source_archive": "orchestrator-lifecycle-0.2.9-source.zip",
+  "supplementary_source_location": "Public GitHub repository; not uploaded to this Zenodo record.",
+  "published_pdf": {
+    "bytes": 183294,
+    "md5": "b169135ce58886670d2ec7030b8749f5",
+    "sha256": "efeffe9da2e8500dbd01b52c903b0f7d60be7f9dbd72ae17eb03ca7e97f91cae"
+  }
 }

@@ -1,41 +1,21 @@
-# Zenodo upload package
+# Zenodo publication record
 
-Prepared 12 October 2026 for **manual author upload**. No record was created, no DOI was reserved, and no Zenodo publication occurred.
+Version **0.2.9** was published as a public preprint on **12 October 2026**.
 
-Upload `paper.pdf` as the primary article, licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**. Optionally upload `orchestrator-lifecycle-0.2.9-source.zip` as supplementary source. The source archive contains the manuscript, standalone LaTeX, architecture documents, schemas, build scripts, and conceptual mapping to the books; `RIGHTS.md` specifies the paper license and the separate rights of other material, as described in that rights statement. Preserve that scope notice in the record description if uploading the archive. `SHA256SUMS` identifies the primary PDF and source archive.
+- Record: [https://zenodo.org/records/23332590](https://zenodo.org/records/23332590)
+- Version DOI: [10.5281/zenodo.23332590](https://doi.org/10.5281/zenodo.23332590)
+- All-versions DOI: [10.5281/zenodo.23332589](https://doi.org/10.5281/zenodo.23332589)
+- Author: Timothy O'Brien; [ORCID 0009-0001-2589-347X](https://orcid.org/0009-0001-2589-347X); no affiliation listed.
+- License: **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
+- Deposited file: `paper.pdf`, 183294 bytes, MD5 `b169135ce58886670d2ec7030b8749f5`.
+- Supporting source: [the public repository](https://github.com/prosessleder/orchestrator-lifecycle), linked from the record as supplementary material.
 
-## Record fields
+The deposited PDF is the reviewed version 0.2.9. Its checksum matches the repository PDF. The source archive is available in this repository and was not uploaded to Zenodo. `RIGHTS.md` retains the separate rights of supplementary material. No private research notes or third-party reference copies were uploaded.
 
-| Field | Prepared value |
-|---|---|
-| Resource type | Publication / Preprint |
-| Title | The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems |
-| Creator | O'Brien, Timothy |
-| Publication date | 2026-10-12 (change if the public release uses another date) |
-| Version | 0.2.9 |
-| Language | English |
-| Description | Use the abstract in `metadata.json` or `paper.md` |
-| Keywords | Agentic systems; ontology evolution; self-adaptive systems; semantic contracts; delegated intelligence; lifecycle governance |
-| Related work | The Orchestrator Series, https://readorchestrator.com |
-| Related source | https://github.com/prosessleder/orchestrator-lifecycle (public) |
-| License | Creative Commons Attribution 4.0 International (CC BY 4.0); identifier `cc-by-4.0` |
-| License scope | Paper and its original embedded diagrams. Supplementary archive includes material with separate rights; see `RIGHTS.md`. |
-| File access | Choose the desired Zenodo access setting when depositing; the GitHub repository is public |
-| ORCID | https://orcid.org/0009-0001-2589-347X |
-| Affiliation | Omitted at the author’s request |
-| Funding | No external funding |
-| Competing interests | Authorship and publication of The Orchestrator book series; no additional competing interests |
-| DOI | Leave empty until Zenodo assigns/reserves one; do not reuse another work's DOI |
+`metadata.json` records the published identifiers, abstract, creator, keywords, license, and deposited-file checksums. It is local publication metadata, not a Zenodo API response or deposit payload. The PDF includes the author's funding, competing-interest, AI-assistance, artifact-availability, and license declarations.
 
-## Upload
+## Future revisions
 
-1. Sign in to Zenodo and create a new upload.
-2. Upload the primary PDF and the selected supplementary source files. Check `SHA256SUMS` if transferring the files through another service.
-3. Enter the prepared fields and select **Creative Commons Attribution 4.0 International (CC BY 4.0)** for the paper. Select the desired file-access setting. If uploading the source archive, use Zenodo's mixed-license options to declare its separate supplementary rights as well, adding a custom rights statement when needed. Include the scope notice: "The paper and its original embedded diagrams are licensed under CC BY 4.0. Supplementary material retains the separate rights specified in the archive's RIGHTS.md."
-4. Save the draft and inspect the metadata and preview. If reserving a DOI, add that exact DOI to the manuscript and citation metadata, then regenerate and replace files before publishing.
-5. Publish only when the author has accepted the manuscript and declarations. This package does not publish automatically.
-6. After publication, update `CITATION.cff`, the manuscript artifact statement, and repository links with the actual record DOI. Make a new version when changing published files.
+Use **New version** on this existing Zenodo record for substantive manuscript revisions. Each published version receives its own DOI; cite the version DOI when referring to a specific text. The all-versions DOI identifies the work across revisions. Update repository citation metadata after verifying publication, and retain the exact deposited PDF bytes and their checksum.
 
-`metadata.json` is a prepared **UI field guide**, not a promise of API-schema conformance or a submission response. It records the author's CC BY 4.0 choice for the paper. No automated deposit configuration is supplied; the supplementary archive's separate rights are described explicitly for manual upload.
-
-Zenodo's [quick start](https://help.zenodo.org/docs/get-started/quickstart/) explains upload, describe, and publish; its [licenses guide](https://help.zenodo.org/docs/deposit/describe-records/licenses/) explains standard/custom licenses; [record versioning](https://help.zenodo.org/docs/deposit/manage-versions/) describes later file revisions. These pages were checked 9 October 2026.
+Metadata corrections can be made by editing the existing record. If supplementary material is deposited in a later version, preserve its separate license scope explicitly. See [Zenodo versioning](https://help.zenodo.org/docs/deposit/manage-versions/) and [license guidance](https://help.zenodo.org/docs/deposit/describe-records/licenses/).
