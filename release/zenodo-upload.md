@@ -10,9 +10,9 @@ Version **0.2.9** was published as a public preprint on **12 October 2026**.
 - Deposited file: `paper.pdf`, 183294 bytes, MD5 `b169135ce58886670d2ec7030b8749f5`.
 - Supporting source: [the public repository](https://github.com/prosessleder/orchestrator-lifecycle), linked from the record as supplementary material.
 
-The deposited PDF is the reviewed version 0.2.9. Its checksum matches the repository PDF. The source archive is available in this repository and was not uploaded to Zenodo. `RIGHTS.md` retains the separate rights of supplementary material. No private research notes or third-party reference copies were uploaded.
+The deposited PDF is the reviewed version 0.2.9. The current repository PDF is an unpublished citation revision, version 0.2.10, and has different bytes. The original source archive, `orchestrator-lifecycle-0.2.9-source.zip`, is retained unchanged; it was not uploaded to Zenodo. The current source archive is `orchestrator-lifecycle-0.2.10-source.zip`. `RIGHTS.md` retains the separate rights of supplementary material. No private research notes or third-party reference copies were uploaded.
 
-`metadata.json` records the published identifiers, abstract, creator, keywords, license, and deposited-file checksums. It is local publication metadata, not a Zenodo API response or deposit payload. The PDF includes the author's funding, competing-interest, AI-assistance, artifact-availability, and license declarations.
+`metadata.json` describes the unpublished working revision and retains the preceding published identifiers and deposited-file checksums under `published_record`. It is local publication metadata, not a Zenodo API response or deposit payload. The PDF includes the author's funding, competing-interest, AI-assistance, artifact-availability, and license declarations.
 
 ## Future revisions
 

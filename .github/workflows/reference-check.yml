@@ -1,0 +1,36 @@
+name: Build and check references
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  paper-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install build and reference-check dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes pandoc
+          python -m pip install -r requirements-refchecker.txt
+      - name: Test bibliography extraction and audit failure handling
+        run: python scripts/test_reference_check.py
+      - name: Build LaTeX and audit all manuscript references
+        run: python scripts/build_paper.py
+      - name: Retain reference report for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reference-check
+          path: tmp/refchecker/
+          if-no-files-found: warn
+          retention-days: 14

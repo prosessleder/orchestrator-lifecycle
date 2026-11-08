@@ -2,8 +2,9 @@
 title: 'The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems'
 author: "Timothy O'Brien"
 orcid: 'https://orcid.org/0009-0001-2589-347X'
-version: '0.2.9'
-date: '12 October 2026'
+version: '0.2.10'
+date: '15 October 2026'
+publication-status: 'Unpublished citation revision'
 lang: en-US
 abstract: |
   Agentic systems that perform delegated work also need a controlled way to change the concepts and capabilities on which that work depends. This paper proposes a reference architecture organized around DEVELOP, OPERATE, and IMPROVE, coordinated by a durable orchestration layer. Its central unit of deployment is an immutable operating bundle binding executable capabilities to a versioned semantic snapshot, authority policy, evaluation suite, and state compatibility contract. Operational observations challenge the approved model through discrepancy reports, candidate ontology branches, capability development, independent validation, and explicit promotion. The architecture specifies lifecycle transitions, typed handoff contracts, semantic impact obligations, and deployment fencing. A worked example shows how an ontology change can broaden an action's eligibility without changing policy text, while an independent action gate blocks the prohibited effect. Drawing on autonomic computing, runtime models, ontology evolution, and governed capability deployment, the paper connects semantic release identity to authority review and distributed action enforcement. A conditional invariant argument characterizes release integrity, action coherence, and proposal isolation under stated trust assumptions. The contribution is an architectural synthesis supported by illustrative schemas and a falsifiable evaluation design; operational effectiveness and the additional value of ontology-based controls remain unevaluated.
@@ -150,7 +151,7 @@ Orchestration in this paper includes maintaining an explicit relationship among 
 - **Epistemic scope:** the domains and conditions within which claims may support decisions, the admissible evidence sources, and the requirements for accepting or revising those claims. An observation, a model-generated hypothesis, and a verified fact can warrant different uses. Missing evidence or an unfamiliar situation may require deferral rather than an unsupported inference that expands the task.
 - **Task and action scope:** the delegated objectives, named systems and targets, permitted operations, and applicable budgets, time limits, and approval conditions. Establishing a relationship between two assets does not itself extend a delegation to both assets.
 
-These boundaries operationalize concerns already present in AI risk governance. NIST's AI Risk Management Framework calls for documenting intended purposes and deployment contexts (MAP 1.1), supported tasks (MAP 2.1), and knowledge limits and human oversight (MAP 2.2). The proposed architecture binds such constraints to identified instructions, semantic snapshots, evidence-admission policies, grants, and evaluation criteria. Epistemic scope here governs which claims may justify decisions; it neither establishes the truth of every admitted claim nor directly constrains every internal computation of a language model. [NIST (2023)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf).
+These boundaries operationalize concerns already present in AI risk governance. NIST's AI Risk Management Framework calls for documenting intended purposes and deployment contexts (MAP 1.1), supported tasks (MAP 2.1), and knowledge limits and human oversight (MAP 2.2). The proposed architecture binds such constraints to identified instructions, semantic snapshots, evidence-admission policies, grants, and evaluation criteria. Epistemic scope here governs which claims may justify decisions; it neither establishes the truth of every admitted claim nor directly constrains every internal computation of a language model. [Tabassi (2023)](https://doi.org/10.6028/NIST.AI.100-1).
 
 ## Scope expansion as a security concern
 
@@ -455,6 +456,8 @@ The proposed controls establish conditional coherence at the release and action 
 
 **AI assistance.** OpenAI Codex assisted with literature discovery, source comparison, architecture drafting, adversarial review, schema preparation, and manuscript editing. The author retains responsibility for the scientific claims, source attribution, and final manuscript.
 
+**Acknowledgements.** Reference metadata and links were checked with Mark Russinovich's [RefChecker](https://github.com/markrussinovich/refchecker), version 3.1.6. Automated findings were reviewed against primary sources.
+
 **Artifact and data availability.** The manuscript, architecture companion, illustrative interface schemas, fixtures, and conceptual mapping to the books are publicly available in [the paper repository](https://github.com/prosessleder/orchestrator-lifecycle). The fixtures are constructed examples. No new experimental dataset is reported.
 
 **License.** Copyright 2026 Timothy O'Brien. This paper and its original embedded diagrams are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Supplementary material retains the separate rights described in `RIGHTS.md`.
@@ -499,8 +502,6 @@ Lemkin, J. (2025). Replit's New Release Addressed Most of The Challenges We Hit 
 
 Lynch, A., Wright, B., Larson, C., Troy, K. K., Ritchie, S. J., Mindermann, S., Perez, E., and Hubinger, E. (2025). Agentic Misalignment: How LLMs Could Be Insider Threats. Anthropic Research, 20 June. [Research report](https://www.anthropic.com/research/agentic-misalignment).
 
-National Institute of Standards and Technology (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1, January. [Official framework](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf).
-
 Object Management Group (2013). *Business Process Model and Notation (BPMN)*, version 2.0.2. Document formal/2013-12-09, December. [Specification](https://www.omg.org/spec/BPMN/2.0.2/PDF).
 
 O'Brien, T. (2026). *The Orchestrator Series*: Orchestrator: Your Next Job Title; Delegated Intelligence; Orchestrating Organizations. Discursive. [Series reader](https://readorchestrator.com). Manuscript working copies consulted for integration.
@@ -524,6 +525,8 @@ Stanford Center for Biomedical Informatics Research. *Protégé and WebProtégé
 Stardog. *Stardog Documentation*. [Product documentation](https://docs.stardog.com/). Accessed 9 October 2026.
 
 Stojanovic, L., Maedche, A., Motik, B., and Stojanovic, N. (2002). User-Driven Ontology Evolution Management. *EKAW 2002*, LNAI 2473, 285-300. <https://doi.org/10.1007/3-540-45810-7_27>.
+
+Tabassi, E. (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. National Institute of Standards and Technology, NIST AI 100-1, 26 January. <https://doi.org/10.6028/NIST.AI.100-1>.
 
 Tang, Y., Zhou, C., Wang, L., Ding, K., Zhang, Q., and Chen, H. (2026). SciToolAgent-Evo: An Ontology-Aware Self-Evolving Agent for Open-World Scientific Tool Acquisition. Preprint, 30 July. [arXiv:2607.28692v1](https://arxiv.org/abs/2607.28692v1).
 

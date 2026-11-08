@@ -1,6 +1,6 @@
 {
-  "prepared_date": "2026-10-12",
-  "record_status": "published",
+  "prepared_date": "2026-10-15",
+  "record_status": "unpublished-revision",
   "resource_type": "publication-preprint",
   "title": "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems",
   "creators": [
@@ -10,7 +10,7 @@
       "orcid": "0009-0001-2589-347X"
     }
   ],
-  "version": "0.2.9",
+  "version": "0.2.10",
   "language": "eng",
   "description": "Agentic systems that perform delegated work also need a controlled way to change the concepts and capabilities on which that work depends. This paper proposes a reference architecture organized around DEVELOP, OPERATE, and IMPROVE, coordinated by a durable orchestration layer. Its central unit of deployment is an immutable operating bundle binding executable capabilities to a versioned semantic snapshot, authority policy, evaluation suite, and state compatibility contract. Operational observations challenge the approved model through discrepancy reports, candidate ontology branches, capability development, independent validation, and explicit promotion. The architecture specifies lifecycle transitions, typed handoff contracts, semantic impact obligations, and deployment fencing. A worked example shows how an ontology change can broaden an action's eligibility without changing policy text, while an independent action gate blocks the prohibited effect. Drawing on autonomic computing, runtime models, ontology evolution, and governed capability deployment, the paper connects semantic release identity to authority review and distributed action enforcement. A conditional invariant argument characterizes release integrity, action coherence, and proposal isolation under stated trust assumptions. The contribution is an architectural synthesis supported by illustrative schemas and a falsifiable evaluation design; operational effectiveness and the additional value of ontology-based controls remain unevaluated.",
   "keywords": [
@@ -35,18 +35,28 @@
   "files": [
     "paper.pdf"
   ],
-  "doi": "10.5281/zenodo.23332590",
-  "format_note": "Local publication metadata verified against the Zenodo UI; not a deposit API payload.",
+  "format_note": "Local metadata for an unpublished revision, including identifiers and checksums of the preceding published version. Not a Zenodo API response or deposit payload.",
   "funding_statement": "This research received no external funding.",
   "competing_interests": "The author writes and publishes The Orchestrator book series, to which this paper is related. The author declares no additional competing interests.",
-  "publication_date": "2026-10-12",
-  "record_url": "https://zenodo.org/records/23332590",
   "concept_doi": "10.5281/zenodo.23332589",
-  "supplementary_source_archive": "orchestrator-lifecycle-0.2.9-source.zip",
+  "supplementary_source_archive": "orchestrator-lifecycle-0.2.10-source.zip",
   "supplementary_source_location": "Public GitHub repository; not uploaded to this Zenodo record.",
-  "published_pdf": {
-    "bytes": 183294,
-    "md5": "b169135ce58886670d2ec7030b8749f5",
-    "sha256": "efeffe9da2e8500dbd01b52c903b0f7d60be7f9dbd72ae17eb03ca7e97f91cae"
+  "published_record": {
+    "version": "0.2.9",
+    "doi": "10.5281/zenodo.23332590",
+    "record_url": "https://zenodo.org/records/23332590",
+    "publication_date": "2026-10-12",
+    "published_pdf": {
+      "bytes": 183294,
+      "md5": "b169135ce58886670d2ec7030b8749f5",
+      "sha256": "efeffe9da2e8500dbd01b52c903b0f7d60be7f9dbd72ae17eb03ca7e97f91cae"
+    },
+    "source_archive": "orchestrator-lifecycle-0.2.9-source.zip",
+    "source_archive_sha256": "35dde798d556509ea30623689fa134eb4a22b531e39cf39e09dacf0183aea06c"
+  },
+  "prepared_pdf": {
+    "bytes": 183599,
+    "sha256": "84229b6064f17f8051bf1b66a94f9ec3483763354d2d7d2c71b27330361698d0",
+    "status": "unpublished citation revision"
   }
 }

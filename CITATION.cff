@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "This repository contains manuscript and research artifacts. Please cite the published architectural preprint using preferred-citation."
 type: dataset
 title: "The Orchestrator: A Lifecycle Architecture for Self-Developing, Self-Operating, and Self-Improving Agentic Systems"
-version: 0.2.9
+version: 0.2.10
 authors:
   - family-names: "O'Brien"
     given-names: Timothy

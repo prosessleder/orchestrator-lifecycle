@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Generate a self-contained LaTeX source; optionally export PDF with installed Tectonic."""
+"""Audit references and generate LaTeX; optionally export PDF with installed Tectonic."""
 from pathlib import Path
 import argparse
 import json
 import re
 import subprocess
+import sys
+
+sys.dont_write_bytecode = True
+from check_references import run_reference_check
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGURES = [r'''
@@ -65,8 +69,19 @@ FIGURES = [r'''
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--pdf', action='store_true', help='Export with already-installed Tectonic after generating source')
+    parser.add_argument('--skip-reference-check', action='store_true', help='Explicitly skip the online audit for an offline rendering build')
+    parser.add_argument('--reference-report-dir', type=Path, default=ROOT / 'tmp/refchecker', help='Directory for reference audit inputs, JSON report, and provenance')
+    parser.add_argument('--strict-references', action='store_true', help='Also fail the build on reference errors, warnings, or unverified entries')
     args = parser.parse_args()
+    if args.skip_reference_check and args.strict_references:
+        parser.error('--strict-references cannot be combined with --skip-reference-check')
     source = (ROOT / 'paper.md').read_text()
+    if args.skip_reference_check:
+        print('Reference audit explicitly skipped (offline rendering build).')
+    else:
+        run_reference_check(ROOT / 'paper.md', args.reference_report_dir, args.strict_references)
+    if source != (ROOT / 'paper.md').read_text():
+        raise RuntimeError('Manuscript changed during reference verification; rerun the build')
     source = source.replace('# Declarations {.unnumbered}',
         '```{=latex}\n\\Needspace{16\\baselineskip}\n```\n\n# Declarations {.unnumbered}')
     source = source.replace('# References {.unnumbered}',

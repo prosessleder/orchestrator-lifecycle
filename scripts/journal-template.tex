@@ -39,7 +39,7 @@ $endfor$
 \begin{frontmatter}
 \title{$title$\tnoteref{preprint}}
 \tnotetext[preprint]{Preprint; not peer reviewed.
-  Version $version$, $date$.}
+  Version $version$, $date$.$if(publication-status)$ $publication-status$.$endif$}
 $for(author)$
 \author{$author$\fnref{orcid}}
 $endfor$
